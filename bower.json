@@ -1,6 +1,6 @@
 {
-  "name": "dinner-planner",
-  "description": "A starter project for Interaction Programming course Lab5",
+  "name": "meeting-planner",
+  "description": "A starter project for Interaction Programming course project",
   "version": "0.0.0",
   "homepage": "https://github.com/kth-csc-iprog/dinnerplanner-html",
   "license": "MIT",
