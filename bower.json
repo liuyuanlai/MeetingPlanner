@@ -13,6 +13,8 @@
     "angular-route": "1.3.x",
     "angular-resource": "1.3.x",
     "angular-animate": "1.3.x",
-    "angular-cookies": "1.3.x"
+    "angular-cookies": "1.3.x",
+    "firebase": "2.2.4",
+    "angularfire": "1.2.0"
   }
 }
