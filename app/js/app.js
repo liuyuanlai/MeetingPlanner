@@ -1,4 +1,4 @@
-var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource']);
+var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource','ngCookies']);
 
 meetingPlannerApp.config(['$routeProvider',
   function($routeProvider) {
