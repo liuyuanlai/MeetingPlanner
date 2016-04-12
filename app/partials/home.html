@@ -1,35 +1,90 @@
-
 <!-- <div class="container">
 	<ng-include src="'partials/title.html'" ng-controller='TitleCtrl'></ng-include>
 </div> -->
 
-	<ng-include src="'partials/navbar.html'" ng-controller="NavbarCtrl"></ng-include>
+<!-- <ng-include src="'partials/navbar.html'" ng-controller="NavbarCtrl"></ng-include> -->
 
-<div class="container">
-	<div class="col-xs-6">
-		<h3>A Home Meeting Service</h3>
-		<p>quick start</p>
-
-
-		<!-- testing message -->
-		<!-- <pre><p>{{users | json}}</p></pre> -->
-
-		Email: <input type="text" ng-model="email"><br>
-		Password: <input type="password" ng-model="password">
+		<!-- email: <input type="text" ng-model="email"><br>
+		password: <input type="password" ng-model="password">
 		<br><br>
 
-		<button ng-click="createUser()">Create User</button>
+		<button ng-click="createuser()">create user</button>
 		<br><br>
 
-		<p ng-if="message">Message: <strong>{{message}}</strong></p>
-		<p ng-if="error">Error: <strong>{{error}}</strong></p>
+		<p ng-if="message">message: <strong>{{message}}</strong></p>
+		<p ng-if="error">error: <strong>{{error}}</strong></p>
 
-		<p>Extra message: {{auth.getAuth()}}</p>
+		<p>extra message: {{auth.getauth()}}</p> -->
 
 		<!-- <p>{{meeting}}</p> -->
 
 		<!-- end of testing codes -->
 
-		<a href="#/create" class="btn btn-primary">Create new Meeting</a>
-	</div>
+<div class="front-bg">
+	<img class="front-image" src="//abs.twimg.com/b/front_page/v1/EU_6.jpg" alt="Error when loading this image." style="display: block;">
 </div>
+
+<div class="front-card">
+	<div class="front-welcome">
+		<div class="front-welcome-text">
+			<h1>Ready to plan your meeting?</h1>
+		</div>
+	</div>
+
+	<!-- <div class="front-signin">
+		<form class="signin" method="post">
+			<div class="field">
+				<div class="field">
+					<input type="text" id="signin-email" class="text-input" placeholder="email">
+				</div>
+				<table class="flex-table table">
+					<tbody>
+						<tr>
+							<td class="field-primary">
+								<div class="password">
+									<input type="password" id="signin-password" class="text-input" placeholder="password">
+								</div>
+							</td>
+							<td class="table-secondary">
+								<button type="submit" class="submit btn btn-primary">log in</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div> -->
+
+	<div class="front-signin">
+		<form class="signin" method="post">
+			<div class="field">
+				<input type="text" class="text-input" maxlength="20" placeholder="Your email">
+			</div>
+			<div class="field">
+				<input type="password" class="text-input" placeholder="Your password">
+			</div>
+			<button type="submit" class="btn btn-primary" style="float: right;">Log in</button>
+		</form>
+	</div>
+
+	<div class="front-signup">
+		<h2>
+			<strong>New here?</strong>
+			Sign up
+		</h2>
+		<form class="signup" method="post">
+			<div class="field">
+				<input type="text" class="text-input" maxlength="20" placeholder="Email address">
+			</div>
+			<div class="field">
+				<input type="password" class="text-input" maxlength="20" placeholder="Password">
+			</div>
+			<button type="submit" class="btn btn-primary" style="float: right;">Sign up</button>
+		</form>
+	</div>
+
+
+
+</div>
+
+
