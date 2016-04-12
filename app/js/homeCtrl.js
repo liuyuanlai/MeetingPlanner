@@ -1,5 +1,5 @@
 meetingPlannerApp.controller('HomeCtrl',
-	 function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
+	 function ($scope, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
 		var rootRef = new Firebase("https://meetingagenda.firebaseio.com");
 
 		// testing purpose
@@ -15,18 +15,34 @@ meetingPlannerApp.controller('HomeCtrl',
 		var auth = $firebaseAuth(rootRef.child("test"));
 		$scope.auth = auth;
 
+		$scope.authWithPassword = function(){
+			console.log($scope.signinEmail);
+			console.log($scope.signinPassword);
+
+			auth.$authWithPassword({
+				email: $scope.signinEmail,
+				password: $scope.signinPassword
+			}).then(function(authData){
+				console.log("Logged in as: ", authData.uid);
+				$location.path("/afterLogin");
+			}).catch(function(error) {
+				console.log("Authentication failed: ", error);
+			})
+		}
+
 		$scope.createUser = function(){
-			$scope.message = null;
-			$scope.error = null;
+			console.log($scope.signupEmail);
+			console.log($scope.signupPassword);
 
 			auth.$createUser({
-				email: $scope.email,
-				password: $scope.password
+				email: $scope.signupEmail,
+				password: $scope.signupPassword
 			}).then(function(userdata) {
 				$scope.message = "user created with uid " + userdata.uid;
+				console.log("Signed up as: ", userdata.uid);
 			}).catch(function(error){
 				// $scope.error = error;
-				$scope.error = error;
+				console.log("Failed signing up: ", error);
 			});
 		};
 

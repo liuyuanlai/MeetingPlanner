@@ -20,51 +20,32 @@
 
 		<!-- end of testing codes -->
 
+<!-- <<<<<<< HEAD -->
 <div class="front-bg">
 	<img class="front-image" src="//abs.twimg.com/b/front_page/v1/EU_6.jpg" alt="Error when loading this image." style="display: block;">
 </div>
 
 <div class="front-card">
+
 	<div class="front-welcome">
 		<div class="front-welcome-text">
 			<h1>Ready to plan your meeting?</h1>
 		</div>
 	</div>
 
-	<!-- <div class="front-signin">
-		<form class="signin" method="post">
-			<div class="field">
-				<div class="field">
-					<input type="text" id="signin-email" class="text-input" placeholder="email">
-				</div>
-				<table class="flex-table table">
-					<tbody>
-						<tr>
-							<td class="field-primary">
-								<div class="password">
-									<input type="password" id="signin-password" class="text-input" placeholder="password">
-								</div>
-							</td>
-							<td class="table-secondary">
-								<button type="submit" class="submit btn btn-primary">log in</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</form>
-	</div> -->
-
 	<div class="front-signin">
 		<form class="signin" method="post">
 			<div class="field">
-				<input type="text" class="text-input" maxlength="20" placeholder="Your email">
+				<input type="text" class="text-input" maxlength="20" placeholder="Your email" ng-model="signinEmail">
 			</div>
 			<div class="field">
-				<input type="password" class="text-input" placeholder="Your password">
+				<input type="password" class="text-input" placeholder="Your password" ng-model="signinPassword">
 			</div>
-			<button type="submit" class="btn btn-primary" style="float: right;">Log in</button>
+			<button class="btn btn-primary" style="float: right;" ng-click="authWithPassword()">Log in</button>
 		</form>
+<!-- ======= -->
+		<a href="#/manage" class="btn btn-primary">Create new Meeting</a>
+<!-- >>>>>>> 6b2fa6e380867705a67de2d2f14a6c8897af6987 -->
 	</div>
 
 	<div class="front-signup">
@@ -74,12 +55,12 @@
 		</h2>
 		<form class="signup" method="post">
 			<div class="field">
-				<input type="text" class="text-input" maxlength="20" placeholder="Email address">
+				<input type="text" class="text-input" maxlength="20" placeholder="Email address" ng-model="signupEmail">
 			</div>
 			<div class="field">
-				<input type="password" class="text-input" maxlength="20" placeholder="Password">
+				<input type="password" class="text-input" maxlength="20" placeholder="Password" ng-model="signupPassword">
 			</div>
-			<button type="submit" class="btn btn-primary" style="float: right;">Sign up</button>
+			<button class="btn btn-primary" style="float: right;" ng-click="createUser()">Sign up</button>
 		</form>
 	</div>
 

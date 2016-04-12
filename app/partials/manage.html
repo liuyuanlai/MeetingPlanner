@@ -1,0 +1,29 @@
+
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+
+<div class="container">
+	<ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
+</div>
+
+<div class="container">
+	<ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
+	<div>
+		<ng-include src="'partials/datepicker.html'" ng-controller='DatepickerDemoCtrl'></ng-include>
+	</div>
+</div>
+
+<div class="container">
+	<ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
+</div>
+
