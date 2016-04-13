@@ -1,0 +1,174 @@
+body {
+	background: #fff;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.front-bg {
+	position: fixed;
+	width: 200%;
+	height: 200%;
+	left: -50%;
+	background: #000;
+}
+
+.front-bg .front-image {
+	display: block;
+}
+
+.front-bg img {
+	display: none;
+	margin: auto;
+	min-width: 50%;
+	min-height: 50%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+img {
+	border: 0;
+}
+
+.front-card {
+	height: 410px;
+	margin: -154px 0 0 -418px;
+	top: 50%;
+	width: 838px;
+}
+
+.front-card {
+	left: 50%;
+	position: absolute;
+}
+
+input {
+	display: inline-block;
+	width: 210px;
+	padding: 4px;
+	margin: 0;
+	outline: 0;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+.front-card .text-input {
+	height: 30px;	
+}
+
+.front-welcome {
+	height: 410px;
+	background: 0;
+	box-shadow: none;
+	border-radius: 4px;
+	display: block;
+	float: left;
+	width: 520px;
+}
+
+.front-welcome h1 {
+	color: #fff;
+	font-size: 38px;
+	line-height: 44px;
+	margin-bottom: 30px;
+	text-shadow: none;
+}
+
+.front-signin {
+	border: 1px solid #ele8ed;
+	background: white;
+	box-shadow: none;
+	border-radius: 4px;
+	height: 146px;
+	float: right;
+	margin-bottom: 11px;
+	width: 300px;
+}
+
+.front-signup {
+	border: 1px solid #6fa3c4;
+	background: white;
+	box-shadow: none;
+	border-radius: 4px;
+	height: 180px;
+	float: right;
+	width: 300px;
+}
+
+.front-signup h2 {
+	margin-top: 0;
+	border-bottom: 1px solid #ele8ed;
+	box-shadow: 0 1px 0 #fff;
+	color: #66757f;
+	display: block;
+	font-size: 16px;
+	font-weight: 300;
+	padding: 16px 12px;
+	position: relative;
+}
+
+.front-signup h2 strong {
+	color: #292f23;
+	font-weight: 500;
+}
+
+.front-signup .signup {
+	margin: 12px 12px 6px;
+	padding: 0;
+}
+
+.front-signin .signin {
+	margin: 12px 12px 6px;
+}
+
+.front-signin .field {
+	display: block;
+	margin: 6px auto;
+	width: 276px;
+	height: 30px;
+}
+
+.front-signup .field {
+	display: block;
+	margin: 6px auto;
+	width: 276px;
+	height: 30px;
+}
+
+.front-signin .text-input, .front-signup .text-input {
+	border: 1px solid #ccd6dd;
+	width: 266px;
+}
+
+.table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	display: table;
+}
+
+.signin .field {
+	margin-bottom: 15px;
+}
+
+.t1-form {
+	font-size: 12px;
+	margin-bottom: 0;
+}
+
+.front-signin .username {
+	position: relative;
+	top: auto;
+	left: auto;
+	right: auto;
+}
+
+.flex-table-primary {
+	width: 99%;
+	padding-right: 5px;
+	vertical-align: auto;
+}
+
+.flew-table {
+	width: 100%;
+}

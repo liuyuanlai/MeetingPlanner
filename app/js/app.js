@@ -13,6 +13,10 @@ meetingPlannerApp.config(['$routeProvider',
         // this controller is set here only for testing purpose
         //controller: 'ManageCtrl'
       }).
+      when('/afterLogin', {
+        templateUrl: 'partials/afterLogin.html',
+        controller: 'AfterLoginCtrl'
+      }).
 
       otherwise({
         redirectTo: '/home'
