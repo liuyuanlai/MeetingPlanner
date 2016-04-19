@@ -10,6 +10,7 @@ meetingPlannerApp.config(['$routeProvider',
       }).
       when('/manage', {
         templateUrl: 'partials/manage.html',
+        controller: 'HomeCtrl'
         // this controller is set here only for testing purpose
         //controller: 'ManageCtrl'
       }).
