@@ -17,7 +17,6 @@ meetingPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/afterLogin.html',
         controller: 'AfterLoginCtrl'
       }).
-
       otherwise({
         redirectTo: '/home'
       });
