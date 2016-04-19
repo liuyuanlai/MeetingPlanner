@@ -13,19 +13,30 @@
 </style>
 
 <div class="container">
-	<ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
+  <div class="col-xs-3" style="height:500px;border: 1px solid #00ffff;">
+    <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
+  </div>
+  <div class="col-xs-9">
+    <ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
+  </div>
+	
+  
 </div>
 
 <div class="container">
-	<ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
+  <ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
 </div>
 
-<div class="container">
+<!-- <div class="container">
+  <ng-include src="'partials/addmeeting.html'" ng-controller='AddactivityCtrl'></ng-include>
+</div> -->
+
+<!-- <div class="container">
 	<ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
 	<div>
 		<ng-include src="'partials/datepicker.html'" ng-controller='DatepickerDemoCtrl'></ng-include>
 	</div>
-</div>
+</div> -->
 
 <div class="container">
 	<ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>

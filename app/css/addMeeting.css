@@ -1,0 +1,13 @@
+.addMeeting{
+	padding: 4%;
+}
+
+.addMeeting .btn-default{
+	float: right;
+	margin-right: 2%;
+	margin-top: 2%;
+}
+
+.addMeeting .time{
+	margin-top: 5%;
+}

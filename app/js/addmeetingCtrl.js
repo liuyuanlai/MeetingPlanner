@@ -1,9 +1,10 @@
-meetingPlannerApp.controller('AddmeetingCtrl', function ($scope,$routeParams,User) {
+// meetingPlannerApp.controller('AddmeetingCtrl', function ($scope,$routeParams,User) {
 
 
-});
+// });
 
-meetingPlannerApp.controller('DatepickerDemoCtrl', function ($scope, $routeParams) {
+meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, $routeParams, User) {
+  // Date Picker
   $scope.today = function() {
     $scope.dt = new Date();
   };
@@ -29,9 +30,9 @@ meetingPlannerApp.controller('DatepickerDemoCtrl', function ($scope, $routeParam
 
   // Disable weekend selection
   function disabled(data) {
-    var date = data.date,
-      mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    // var date = data.date,
+    //   mode = data.mode;
+    // return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
   }
 
   $scope.toggleMin = function() {
@@ -97,4 +98,43 @@ meetingPlannerApp.controller('DatepickerDemoCtrl', function ($scope, $routeParam
 
     return '';
   }
+//Date Picker
+
+// Time Picker
+$scope.mytime = new Date();
+
+  $scope.hstep = 1;
+  $scope.mstep = 1;
+
+  $scope.options = {
+    hstep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 00],
+    mstep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+    49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 00]
+  };
+
+  $scope.ismeridian = true;
+  $scope.toggleMode = function() {
+    $scope.ismeridian = ! $scope.ismeridian;
+  };
+
+  $scope.update = function() {
+    var d = new Date();
+    d.setHours( 14 );
+    d.setMinutes( 0 );
+    $scope.mytime = d;
+  };
+
+  $scope.changed = function () {
+    $log.log('Time changed to: ' + $scope.mytime);
+  };
+
+  $scope.clear = function() {
+    $scope.mytime = null;
+  };
+
+// Time Picker
+
+
+
 });
