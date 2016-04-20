@@ -3,9 +3,18 @@
 }
 
 .addMeeting .btn-default{
-	float: right;
+	/*float: right;*/
 	margin-right: 2%;
 	margin-top: 2%;
+}
+
+.backBTN{
+	margin-left: 19%;
+	float: left;
+}
+
+.creatBTN{
+	float: right;
 }
 
 .addMeeting .time{

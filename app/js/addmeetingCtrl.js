@@ -1,15 +1,16 @@
 meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, $routeParams, User) {
   //Create Meeting
-  $scope.createMeeting = function (name, time, tag, members, description){
+  $scope.createMeeting = function (name, place, time, tag, members, description){
     var meeting = {
       mName: name,
+      MPlace: place,
       mTime: time,
       mTag: tag,
       mMembers: members,
       mDescript: description
     };
-    console.log(meeting);
-    console.log("create meeting");
+    // console.log(meeting);
+    // console.log("create meeting");
   }
 
   // Date Picker
@@ -142,7 +143,5 @@ $scope.mytime = new Date();
   };
 
 // Time Picker
-
-
 
 });
