@@ -1,0 +1,43 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/siyudu/workspace/Github/MeetingPlan/MeetingPlanner',
+5 verbose install   [ 'http-server', 'bower' ] ]
+6 info preinstall meeting-planner@0.0.0
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping http-server@^0.6.1 /Users/siyudu/workspace/Github/MeetingPlan/MeetingPlanner
+9 verbose already installed skipping bower@^1.3.1 /Users/siyudu/workspace/Github/MeetingPlan/MeetingPlanner
+10 silly resolved []
+11 info build /Users/siyudu/workspace/Github/MeetingPlan/MeetingPlanner
+12 verbose linkStuff [ false,
+12 verbose linkStuff   false,
+12 verbose linkStuff   false,
+12 verbose linkStuff   '/Users/siyudu/workspace/Github/MeetingPlan' ]
+13 info linkStuff meeting-planner@0.0.0
+14 verbose linkBins meeting-planner@0.0.0
+15 verbose linkMans meeting-planner@0.0.0
+16 verbose rebuildBundles meeting-planner@0.0.0
+17 verbose rebuildBundles [ '.bin', 'bower', 'http-server' ]
+18 info install meeting-planner@0.0.0
+19 info postinstall meeting-planner@0.0.0
+20 verbose unsafe-perm in lifecycle true
+21 info meeting-planner@0.0.0 Failed to exec postinstall script
+22 error meeting-planner@0.0.0 postinstall: `bower install`
+22 error Exit status 1
+23 error Failed at the meeting-planner@0.0.0 postinstall script.
+23 error This is most likely a problem with the meeting-planner package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     bower install
+23 error You can get their info via:
+23 error     npm owner ls meeting-planner
+23 error There is likely additional logging output above.
+24 error System Darwin 14.3.0
+25 error command "node" "/usr/local/bin/npm" "install"
+26 error cwd /Users/siyudu/workspace/Github/MeetingPlan/MeetingPlanner
+27 error node -v v0.10.35
+28 error npm -v 1.4.28
+29 error code ELIFECYCLE
+30 verbose exit [ 1, true ]
