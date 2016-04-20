@@ -1,4 +1,4 @@
-var meetingPlannerApp = angular.module('meetingPlanner', ['firebase','ngRoute','ngResource','ngCookies','ui.bootstrap']);
+var meetingPlannerApp = angular.module('meetingPlanner', ['firebase','ngRoute','ngResource','ngCookies','ui.bootstrap','ngTagsInput']);
 
 meetingPlannerApp.config(['$routeProvider',
   function($routeProvider) {
