@@ -22,11 +22,13 @@ meetingPlannerApp.controller('HomeCtrl',
 		var userArray = $firebaseArray(userRef);
 		var meetingObject = $firebaseObject(meetingRef);
 
+		var auth = $firebaseAuth(rootRef);
+
 		$scope.users = userArray;
 		meetingObject.$bindTo($scope, "meeting");
 
-		var auth = $firebaseAuth(rootRef.child("test"));
-		$scope.auth = auth;
+		// var auth = $firebaseAuth(rootRef.child("test"));
+		// $scope.auth = auth;
 
 		$scope.authWithPassword = function(){
 			console.log($scope.signinEmail);
