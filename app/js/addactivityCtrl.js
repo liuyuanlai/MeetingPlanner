@@ -1,12 +1,16 @@
 meetingPlannerApp.controller('AddactivityCtrl', 
 
-	function ($scope, Ref, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
-	// function ($scope, Ref, $location, $firebaseArray, $routeParams) {
+	// function ($scope, Ref, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
+	function ($scope, Auth, $location, $firebaseAuth, $firebaseArray, $routeParams) {
 		// get path in the firebase
-		var rootRef = Ref.rootRef;
-		var activityRef = Ref.rootRef.child("activities");
+		var rootRef = Auth.rootRef;
+		var activityRef = Auth.rootRef.child("activities");
 
-		var activities = $firebaseArray(activityRef);
+		// get the auth info about the current user
+		var user_auth = rootRef.getAuth();
+
+		var activities = $firebaseArray(activityRef.child(user_auth.uid));
+		// var activities = $firebaseArray(activityRef);
 
 		$scope.testmessage = "hehe";
 
@@ -15,8 +19,10 @@ meetingPlannerApp.controller('AddactivityCtrl',
 							length: $scope.newAct_length,
 							type: $scope.newAct_type,
 							description: $scope.newAct_description,
+			// activities.$add(newAct);
+			}
 			activities.$add(newAct);
 		}
 
-
 	});
+

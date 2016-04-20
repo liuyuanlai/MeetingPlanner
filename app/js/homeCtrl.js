@@ -1,19 +1,19 @@
 meetingPlannerApp.controller('HomeCtrl',
-	 function ($scope, Ref, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
+	 function ($scope, Auth, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
 		// var rootRef = new Firebase("https://meetingagenda.firebaseio.com");
-		var rootRef = Ref.rootRef;
+		var rootRef = Auth.rootRef;
 
-		var activityRef = Ref.rootRef.child("activities");
+		var activityRef = Auth.rootRef.child("activities");
 
-		var userRef = Ref.rootRef.child("users");
+		var userRef = Auth.rootRef.child("users");
 
-		var meetingRef = Ref.rootRef.child("meetings");
+		var meetingRef = Auth.rootRef.child("meetings");
 
 		var users = $firebaseArray(userRef);
 
 		// testing message
 		// $scope.msg = Ref.rootRef;
-		$scope.userObject = $firebaseObject(Ref.rootRef.child("meetings"));
+		$scope.userObject = $firebaseObject(Auth.rootRef.child("meetings"));
 
 		// testing purpose
 		// var userRef = rootRef.child("users");
