@@ -1,9 +1,17 @@
-// meetingPlannerApp.controller('AddmeetingCtrl', function ($scope,$routeParams,User) {
-
-
-// });
-
 meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, $routeParams, User) {
+  //Create Meeting
+  $scope.createMeeting = function (name, time, tag, members, description){
+    var meeting = {
+      mName: name,
+      mTime: time,
+      mTag: tag,
+      mMembers: members,
+      mDescript: description
+    };
+    console.log(meeting);
+    console.log("create meeting");
+  }
+
   // Date Picker
   $scope.today = function() {
     $scope.dt = new Date();
