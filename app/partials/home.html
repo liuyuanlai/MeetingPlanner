@@ -1,26 +1,3 @@
-<!-- <div class="container">
-	<ng-include src="'partials/title.html'" ng-controller='TitleCtrl'></ng-include>
-</div> -->
-
-<!-- <ng-include src="'partials/navbar.html'" ng-controller="NavbarCtrl"></ng-include> -->
-
-		<!-- email: <input type="text" ng-model="email"><br>
-		password: <input type="password" ng-model="password">
-		<br><br>
-
-		<button ng-click="createuser()">create user</button>
-		<br><br>
-
-		<p ng-if="message">message: <strong>{{message}}</strong></p>
-		<p ng-if="error">error: <strong>{{error}}</strong></p>
-
-		<p>extra message: {{auth.getauth()}}</p> -->
-
-		<!-- <p>{{meeting}}</p> -->
-
-		<!-- end of testing codes -->
-
-<!-- <<<<<<< HEAD -->
 <div class="front-bg">
 	<img class="front-image" src="//abs.twimg.com/b/front_page/v1/EU_6.jpg" alt="Error when loading this image." style="display: block;">
 </div>
@@ -30,6 +7,7 @@
 	<div class="front-welcome">
 		<div class="front-welcome-text">
 			<h1>Ready to plan your meeting?</h1>
+			<p>{{userObject}}</p>
 		</div>
 	</div>
 
@@ -43,9 +21,6 @@
 			</div>
 			<button class="btn btn-primary" style="float: right;" ng-click="authWithPassword()">Log in</button>
 		</form>
-<!-- ======= -->
-		<a href="#/manage" class="btn btn-primary">Create new Meeting</a>
-<!-- >>>>>>> 6b2fa6e380867705a67de2d2f14a6c8897af6987 -->
 	</div>
 
 	<div class="front-signup">

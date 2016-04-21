@@ -11,23 +11,57 @@
     color: black;
   }
 </style>
-
-<div class="container">
-	<ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
+<div class="container" >
+  <div class="panel panel-success" >
+    <div class="panel-heading" style="height:80px;">
+      Meeting Agenda
+    </div>
+  </div>
 </div>
-
 <div class="container">
-	<ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
-</div>
+  <div class="col-xs-3 panel panel-default" style="height:550px;">
+    <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
+  </div>
+  <div class="col-xs-9 panel panel-default addMeeting" style="height:550px;">
+    <ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
+  </div>
+  <div class="col-xs-3 panel panel-default" tyle="height:550px;">
+    <ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
+  </div>
+  <div class="col-xs-9 panel panel-success mlContainer" tyle="height:550px;">
+    <ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
+  </div>
 
-<div class="container">
-	<ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
-	<div>
-		<ng-include src="'partials/datepicker.html'" ng-controller='DatepickerDemoCtrl'></ng-include>
-	</div>
-</div>
+  <!-- test of drag & drop -->
+  <div class="col-xs-12 simpleDemo" ng-controller='SimpleDemoController'>
+    <!-- Activity List -->
+        <div class="row">
+            <div ng-repeat="(listName, list) in models.lists" class="col-md-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">List {{listName}}</h3>
+                    </div>
+                    <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
+                    <div class="panel-body" >
+                        <ul dnd-list="list">
+   
+                            <li ng-repeat="item in list"
+                                dnd-draggable="item"
+                                dnd-moved="list.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="models.selected = item"
+                                ng-class="{'selected': models.selected === item}"
+                                >
+                                {{item.label}}
+                            </li>
+                        </ul>
 
-<div class="container">
-	<ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Activity List -->
+  </div>
+  <!-- test of drag and drop -->
 
+</div>

@@ -1,4 +1,4 @@
-var meetingPlannerApp = angular.module('meetingPlanner', ['firebase','ngRoute','ngResource','ngCookies','ui.bootstrap']);
+var meetingPlannerApp = angular.module('meetingPlanner', ['firebase','ngRoute','ngResource','ngCookies','ui.bootstrap','ngTagsInput','dndLists']);
 
 meetingPlannerApp.config(['$routeProvider',
   function($routeProvider) {
@@ -10,6 +10,7 @@ meetingPlannerApp.config(['$routeProvider',
       }).
       when('/manage', {
         templateUrl: 'partials/manage.html',
+        controller: 'HomeCtrl'
         // this controller is set here only for testing purpose
         //controller: 'ManageCtrl'
       }).
@@ -17,7 +18,6 @@ meetingPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/afterLogin.html',
         controller: 'AfterLoginCtrl'
       }).
-
       otherwise({
         redirectTo: '/home'
       });
