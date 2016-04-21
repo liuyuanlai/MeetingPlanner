@@ -44,9 +44,8 @@
                     <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
                     <div class="panel-body" >
                         <ul dnd-list="list">
-   
                             <li ng-repeat="item in list"
-                                dnd-draggable="item"
+                                dnd-draggable="item" 
                                 dnd-moved="list.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 dnd-selected="models.selected = item"

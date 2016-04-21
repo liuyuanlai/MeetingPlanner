@@ -1,0 +1,115 @@
+<div> -->
+<section id="cd-timeline">
+	<div class="col-xs-4">
+		<div class="circle"></div>
+		<div class="square"></div>
+		  <!-- test of drag & drop -->
+		  <div class="col-xs-12 simpleDemo" ng-controller='SimpleDemoController'>
+		    <!-- Activity List -->
+		        <div class="row">
+		            <div ng-repeat="(listName, list) in models.lists" class="col-md-3">
+		                <div class="panel panel-info">
+		                    <div class="panel-heading">
+		                        <h3 class="panel-title">List {{listName}}</h3>
+		                    </div>
+		                    <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
+		                    <div class="panel-body" >
+		                        <ul dnd-list="list">
+		                            <!-- 负责drag功能 -->
+		                            <li ng-repeat="item in list"
+		                                dnd-draggable="item" 
+		                                dnd-moved="list.splice($index, 1)"
+		                                dnd-effect-allowed="move"
+		                                dnd-selected="models.selected = item"
+		                                ng-class="{'selected': models.selected === item}"
+		                                >
+		                                {{item.label}}
+		                            </li>
+		                        </ul>
+
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    <!-- Activity List -->
+		  </div>
+	</div>
+
+	<div class="col-xs-4">
+		<div class="circle"></div>
+		<div class="square"></div>
+		<div class="meetingPanel">
+		
+			<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
+					Start Time : 8:00 <br>
+					End Time : 9:10 <br>
+					Total Length : 70 min <br>
+				</h5>
+			</div>
+
+			<div ng-controller="ProgressDemoCtrl">
+
+			    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+			</div>
+
+
+			<div>
+			<uib-accordion close-others="oneAtATime" >
+
+			<!-- need an edit button -->
+			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      <p>Desciption of the activity</p>
+			    </uib-accordion-group>
+
+			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      <p>Desciption of the activity</p>
+			    </uib-accordion-group>
+
+		 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+		      		<p>Desciption of the activity</p>
+		    	</uib-accordion-group>
+			</uib-accordion>
+			</div>
+		
+		</div>
+	</div>
+
+	<div class="col-xs-4">
+		<div class="circle"></div>
+		<div class="square"></div>
+		<div class="meetingPanel">
+		
+			<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
+					Start Time : 8:00 <br>
+					End Time : 9:10 <br>
+					Total Length : 70 min <br>
+				</h5>
+			</div>
+
+
+			<div ng-controller="ProgressDemoCtrl">
+
+			    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+			</div>
+
+
+			<div>
+			<uib-accordion close-others="oneAtATime" >
+
+			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      <p>Desciption of the activity</p>
+			    </uib-accordion-group>
+
+			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      <p>Desciption of the activity</p>
+			    </uib-accordion-group>
+
+		 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+		      		<p>Desciption of the activity</p>
+		    	</uib-accordion-group>
+			</uib-accordion>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- </div>

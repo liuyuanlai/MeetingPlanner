@@ -1,7 +1,54 @@
 meetingPlannerApp.controller('MeetinglistCtrl', function ($scope,$routeParams,User) {
+    $scope.meetingInfo = [
+        {
+                "name" : "TEST",
+                "place" : "KTH",
+                "mytime" : 8.00,
+                "tag" : "DH2642"
+
+            },{
+                "name" : "TEST",
+                "place" : "KTH",
+                "mytime" : 9.00,
+                "tag" : "DH2642"
+            },{            
+                "name" : "TEST",
+                "place" : "KTH",
+                "mytime" : 10.00,
+                "tag" : "DH2642"
+            },{
+                "name" : "TEST",
+                "place" : "KTH",
+                "mytime" : 8.00,
+                "tag" : "DH2642"
+            }
+        ];
+
+
+
+
+  $scope.getEndTime = function() {
+    var activity1 = 30;
+    var activity2 = 40;
+    var activity3 = 60;
+
+    
+
+
+
+    };
+    
+
+
 
 
 });
+
+
+
+
+
+
 
 meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) {
 $scope.max = 200;
