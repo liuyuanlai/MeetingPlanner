@@ -1,5 +1,5 @@
 meetingPlannerApp.controller('SimpleDemoController', function ($scope) {
-	  $scope.models = {
+	$scope.models = {
         selected: null,
         lists: {"Activities": [], "Meeting1": [], "Meeting2": [], "Meeting3": []}
     };

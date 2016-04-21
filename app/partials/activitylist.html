@@ -1,10 +1,10 @@
 
-<div class="panel-heading">
+<!-- <div class="panel-heading">
 		<p class="text-center">Activity List</p>
 </div>
 <div class="panel-body">
 	<div>
-		<button class="btn btn-default btn-block"> 120 min Make the prototype</button>
+		<button class="btn btn-default btn-block"> 120 min Make the prototype</button>    
 	</div>
 	<div>
 		<button class="btn btn-default btn-block"> 20 min Assign the work</button>
@@ -15,23 +15,75 @@
 	<div style="position: relative;bottom:-300px">
 		<button class="btn btn-info btn-block" >Add Activity</button>
 	</div>
-</div>
-<!-- </div> -->
+</div> -->
 
-<!-- The dnd-list directive allows to drop elements into it.
- The dropped data will be added to the referenced list -->
- <ul dnd-list="list">
-<!-- The dnd-draggable directive makes an element draggable and will
-     transfer the object that was assigned to it. If an element was
-     dragged away, you have to remove it from the original list
-     yourself using the dnd-moved attribute -->
-    <li ng-repeat="item in list"
-        dnd-draggable="item"
-        dnd-moved="list.splice($index, 1)"
-        dnd-effect-allowed="move"
-        dnd-selected="models.selected = item"
-        ng-class="{'selected': models.selected === item}"
-        >
-        {{item.label}}
-    </li>
-</ul>
+<div ng-show="activitylistshow">
+	<div class="row simpleDemo" style="text-align: center;">
+		<div ng-repeat="(listName, list) in models.lists" >
+		    <div class="panel panel-info">
+		        <div class="panel-heading">
+		            <h3 class="panel-title">{{listName}}</h3>
+		        </div>
+		        <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
+		        <div class="panel-body" >
+		            <ul dnd-list="list">
+
+		                <li ng-repeat="item in list"
+		                    dnd-draggable="item"
+		                    dnd-moved="list.splice($index, 1)"
+		                    dnd-effect-allowed="move"
+		                    dnd-selected="models.selected = item"
+		                    ng-class="{'selected': models.selected === item}"
+		                    >
+		                    {{item.name}}
+		                </li>
+		            </ul>
+
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div style="position: absolute;bottom:10px;width: 100%">
+		<button class="btn btn-info btn-block" ng-click="addactivity()">Add Activity</button>
+	</div>
+</div>
+
+<div ng-show="addactivityshow">
+	<form method="post" class="form-horizontal" style="height:500px;">
+<!-- 	<div class="form-group" style="height:500px;"> -->
+
+	<div class="panel panel-heading">
+		<div class="panel-heading">Add Activity</div>
+		<!-- <p class="text-center"></p> -->
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name">
+		</div>
+		<div class="form-group">
+			<div class="col-xs-9" style="padding: 0px">
+				<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
+			</div>
+			<label class="col-xs-3">min</label>
+		</div>
+        
+        <div class="form-group">
+		<select ng-model="$parent.newAct_type" class="form-control">
+		  <option value="presentation" select="selected">Presentation</option>
+		  <option value="group-work">Group Work</option>
+		  <option value="discussion">Discussion</option>
+		  <option value="break">Break</option>
+		</select>
+		</div>
+        
+        <div class="form-group">
+        	<textarea ng-model="$parent.newAct_description" class="form-control" rows="3" placeholder="Description"></textarea>	
+        </div>
+			
+		<div class="from-group">
+			<button ng-click="createActivitycancel()" type="submit" class="btn btn-danger">Cancel</button>
+			<button ng-click="createActivity()" class="btn btn-info creatBTN">Done</button>
+		</div>
+	</div>
+</form>
+</div>
