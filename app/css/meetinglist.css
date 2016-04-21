@@ -1,0 +1,50 @@
+.mlContainer{
+	height:500px;
+/*	border: 1px solid #00cc99; */
+	padding: 10px;
+}
+.meetingInfo{
+	border-bottom: 1px solid #00cc99;
+	padding: 10px; 
+}
+.meetingInfo h5{
+	margin: 10px;
+}
+.meetingPanel{
+	border: 1px solid #00cc99; 
+	padding:0px;
+	height: 400px;
+	overflow: hidden;
+}
+.actList{
+	margin: 10px;
+}
+#cd-timeline { 
+  position: relative; 
+  padding: 0 2em; 
+/*  margin-left: 2em; 
+  margin-right: 2em; */
+}
+#cd-timeline::before { 
+  content: ''; 
+  position: absolute; 
+  top: 10px; 
+  left: 0px; 
+  height: 4px; 
+  width: 100%; 
+  background: #00cc99; 
+} 
+.circle {
+     width: 20px;
+     height: 20px;
+     background: #00cc99;
+     -moz-border-radius: 50px;
+     -webkit-border-radius: 50px;
+     border-radius: 50px;
+ }
+.square {
+     width: 5px;
+     height: 20px;
+     margin: 0px 7.5px ; 
+     background: #00cc99;
+ }

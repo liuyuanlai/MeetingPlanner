@@ -9,8 +9,28 @@ meetingPlannerApp.controller('HomeCtrl',
 
 		var users = $firebaseArray(userRef);
 
+
+		// testing message
+		// $scope.msg = Ref.rootRef;
+		// $scope.userObject = $firebaseObject(Auth.rootRef.child("meetings"));
+
+		// // testing purpose
+		// // var userRef = rootRef.child("users");
+		// // var meetingRef = rootRef.child("meetings");
+
+		// var userArray = $firebaseArray(userRef);
+		// var meetingObject = $firebaseObject(meetingRef);
+
+		// $scope.users = userArray;
+		// meetingObject.$bindTo($scope, "meeting");
+
+		// // var auth = $firebaseAuth(rootRef.child("test"));
+		// // $scope.auth = auth;
+		// var auth = $firebaseAuth(rootRef);
+
 		// only for testing usage
 		$scope.userObject = $firebaseObject(userRef);
+
 
 		$scope.authWithPassword = function(){
 			console.log($scope.signinEmail);

@@ -11,35 +11,24 @@
     color: black;
   }
 </style>
-
+<div class="container" >
+  <div class="panel panel-success" >
+    <div class="panel-heading" style="height:80px;">
+      Meeting Agenda
+    </div>
+  </div>
+</div>
 <div class="container">
-  <div class="col-xs-3 panel panel-default" style="height:500px;">
-  <!-- <div class="col-xs-3 panel panel-default" style="height:600px;"> -->
+  <div class="col-xs-3 panel panel-default" style="height:550px;">
     <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
   </div>
-  <div class="col-xs-9">
+  <div class="col-xs-9 panel panel-default addMeeting" style="height:550px;">
     <ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
   </div>
-	
-  
+  <div class="col-xs-3 panel panel-default" tyle="height:550px;">
+    <ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
+  </div>
+  <div class="col-xs-9 panel panel-success mlContainer" tyle="height:550px;">
+    <ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
+  </div>
 </div>
-
-<div class="container">
-  <ng-include src="'partials/addactivity.html'" ng-controller='AddactivityCtrl'></ng-include>
-</div>
-
-<!-- <div class="container">
-  <ng-include src="'partials/addmeeting.html'" ng-controller='AddactivityCtrl'></ng-include>
-</div> -->
-
-<!-- <div class="container">
-	<ng-include src="'partials/addmeeting.html'" ng-controller='AddmeetingCtrl'></ng-include>
-	<div>
-		<ng-include src="'partials/datepicker.html'" ng-controller='DatepickerDemoCtrl'></ng-include>
-	</div>
-</div> -->
-
-<div class="container">
-	<ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
-</div>
-
