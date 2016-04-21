@@ -1,123 +1,187 @@
-<!-- <div> -->
-<section id="cd-timeline">
-	<div class="col-xs-4">
-		<div class="circle"></div>
-		<div class="square"></div>
-		<div class="meetingPanel">
-		
-			<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-					Start Time : 8:00 <br>
-					End Time : 9:10 <br>
-					Total Length : 70 min <br>
-				</h5>
-			</div>
+
+<div ng-show="meetinglistshow">
+	<section id="cd-timeline">
+		<div class="col-xs-4">
+			<div class="circle"></div>
+			<div class="square"></div>
+			<div class="meetingPanel">
+			
+				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
+						Start Time : 8:00 <br>
+						End Time : 9:10 <br>
+						Total Length : 70 min <br>
+					</h5>
+				</div>
 
 
-			<div ng-controller="ProgressDemoCtrl">
+				<div ng-controller="ProgressDemoCtrl">
 
-			    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-			</div>
-			<div>
-			<uib-accordion close-others="oneAtATime" >
+				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+				</div>
+				<div>
+				<uib-accordion close-others="oneAtATime" >
 
-			<!-- need an edit button -->
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
+				<!-- need an edit button -->
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
 
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
 
-			    <uib-accordion-group heading="Delete account" template-url="uib/template/accordion/accordion-group.html">
-			      <p>Please, to delete your account, click the button below</p>
-			      <button class="btn btn-danger">Delete</button>
-			    </uib-accordion-group>
+				    <uib-accordion-group heading="Delete account" template-url="uib/template/accordion/accordion-group.html">
+				      <p>Please, to delete your account, click the button below</p>
+				      <button class="btn btn-danger">Delete</button>
+				    </uib-accordion-group>
 
-		 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-		      		<p>Desciption of the activity</p>
-		    	</uib-accordion-group>
-			</uib-accordion>
-			</div>
-		
-		</div>
-	</div>
-
-	<div class="col-xs-4">
-		<div class="circle"></div>
-		<div class="square"></div>
-		<div class="meetingPanel">
-		
-			<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-					Start Time : 8:00 <br>
-					End Time : 9:10 <br>
-					Total Length : 70 min <br>
-				</h5>
-			</div>
-
-			<div ng-controller="ProgressDemoCtrl">
-
-			    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-			</div>
-
-
-			<div>
-			<uib-accordion close-others="oneAtATime" >
-
-			<!-- need an edit button -->
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
-
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
-
-		 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-		      		<p>Desciption of the activity</p>
-		    	</uib-accordion-group>
-			</uib-accordion>
-			</div>
-		
-		</div>
-	</div>
-
-	<div class="col-xs-4">
-		<div class="circle"></div>
-		<div class="square"></div>
-		<div class="meetingPanel">
-		
-			<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-					Start Time : 8:00 <br>
-					End Time : 9:10 <br>
-					Total Length : 70 min <br>
-				</h5>
-			</div>
-
-
-			<div ng-controller="ProgressDemoCtrl">
-
-			    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-			</div>
-
-
-			<div>
-			<uib-accordion close-others="oneAtATime" >
-
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
-
-			    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      <p>Desciption of the activity</p>
-			    </uib-accordion-group>
-
-		 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-		      		<p>Desciption of the activity</p>
-		    	</uib-accordion-group>
-			</uib-accordion>
+			 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      		<p>Desciption of the activity</p>
+			    	</uib-accordion-group>
+				</uib-accordion>
+				</div>
+			
 			</div>
 		</div>
+
+		<div class="col-xs-4">
+			<div class="circle"></div>
+			<div class="square"></div>
+			<div class="meetingPanel">
+			
+				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
+						Start Time : 8:00 <br>
+						End Time : 9:10 <br>
+						Total Length : 70 min <br>
+					</h5>
+				</div>
+
+				<div ng-controller="ProgressDemoCtrl">
+
+				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+				</div>
+
+
+				<div>
+				<uib-accordion close-others="oneAtATime" >
+
+				<!-- need an edit button -->
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
+
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
+
+			 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      		<p>Desciption of the activity</p>
+			    	</uib-accordion-group>
+				</uib-accordion>
+				</div>
+			
+			</div>
+		</div>
+
+		<div class="col-xs-4">
+			<div class="circle"></div>
+			<div class="square"></div>
+			<div class="meetingPanel">
+			
+				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
+						Start Time : 8:00 <br>
+						End Time : 9:10 <br>
+						Total Length : 70 min <br>
+					</h5>
+				</div>
+
+
+				<div ng-controller="ProgressDemoCtrl">
+
+				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+				</div>
+
+
+				<div>
+				<uib-accordion close-others="oneAtATime" >
+
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
+
+				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+				      <p>Desciption of the activity</p>
+				    </uib-accordion-group>
+
+			 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
+			      		<p>Desciption of the activity</p>
+			    	</uib-accordion-group>
+				</uib-accordion>
+				</div>
+			</div>
+		</div>
+	</section>	
+	<div style="position: absolute;bottom:10px;width: 60%">
+		<button class="btn btn-info btn-block" ng-click="addmeeting()">Add Meeting</button>
 	</div>
-</section>
-<!-- </div> -->
+</div>
+
+<div ng-show="addmeetingshow">
+	<form class="form-horizontal panel-body">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Name</label>
+	    <div class="col-sm-10"><input class="form-control" id="" placeholder="" ng-model="mName" required></div>
+	  </div>
+
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label time">Date</label>
+		    <div class="col-sm-4 time">
+		        <p class="input-group">
+		          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+		          <span class="input-group-btn">
+		            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+		          </span>
+		        </p>
+			 </div>
+
+        <label class="col-sm-2 control-label time">Start Time</label>
+	    <div class="col-sm-4">
+	    	<uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+	    </div>
+	   </div>
+
+	   <div class="form-group">
+	    <label class="col-sm-2 control-label">Location</label>
+	    <div class="col-sm-10"><input class="form-control" ng-model="MPlace"></div>
+	  </div>
+
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Tag</label>
+	    <div class="col-sm-10">
+	    	<tags-input ng-model="tags">
+		        <auto-complete source="loadTags($query)"></auto-complete>
+		    </tags-input>
+		</div>
+	  </div>
+
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Participants</label>
+	    <div class="col-sm-10">
+	    	<tags-input ng-model="Mmembers" placeholder="Add Email Address of Participants">
+		        <auto-complete source="loadTags($query)" ></auto-complete
+		    </tags-input>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Description</label>
+	    <div class="col-sm-10"><textarea class="form-control" rows="3" ng-model="Mdescript"></textarea></div>
+	  </div>
+	  <div class="form-group">
+	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
+	  	<button type="submit" class="btn btn-default creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="createMeeting(mName,MPlace, dt,tags,Mmembers,Mdescript)">Create</button>
+	  </div>
+
+	</form>
+</div>
+
