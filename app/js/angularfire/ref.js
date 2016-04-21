@@ -7,5 +7,5 @@ meetingPlannerApp.factory('Ref', function ($resource){
 
 	// this.activityRef = rootRef.child("activities");
 
-	return this;
+	return this.rootRef;
 })
