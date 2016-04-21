@@ -1,7 +1,16 @@
-meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, $routeParams, User) {
+meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams, User) {
+
+  // get root ref of firebase 
+  var meetingRef = Ref.child("meetings");
+
+  // get the auth infomation about the current user
+  var user_data = Auth.$getAuth();
+
+  var meetings = $firebaseArray(meetingRef.child(user_data.uid));
+
   //Create Meeting
   $scope.createMeeting = function (name, place, time, tag, members, description){
-    var meeting = {
+    var new_meeting = {
       mName: name,
       MPlace: place,
       mTime: time,
@@ -9,6 +18,9 @@ meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, $routeParams, U
       mMembers: members,
       mDescript: description
     };
+    console.log("creating new meeting");
+    console.log(new_meeting);
+    meetings.$add(new_meeting);
     // console.log(meeting);
     // console.log("create meeting");
   }
