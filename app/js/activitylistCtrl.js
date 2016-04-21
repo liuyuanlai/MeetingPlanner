@@ -16,5 +16,6 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope,$routeParams,U
     }, true);
 
 
+
 });
   

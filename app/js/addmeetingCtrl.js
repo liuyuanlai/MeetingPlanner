@@ -1,13 +1,12 @@
-meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Auth, $firebaseArray, $routeParams, User) {
+meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams, User) {
 
-  // get path and auth infomation in the service Auth
-  var rootRef = Auth.rootRef;
-  var meetingRef = Auth.rootRef.child("meetings");
+  // get root ref of firebase 
+  var meetingRef = Ref.child("meetings");
 
   // get the auth infomation about the current user
-  var user_auth = rootRef.getAuth();
+  var user_data = Auth.$getAuth();
 
-  var meetings = $firebaseArray(meetingRef.child(user_auth.uid));
+  var meetings = $firebaseArray(meetingRef.child(user_data.uid));
 
   //Create Meeting
   $scope.createMeeting = function (name, place, time, tag, members, description){
