@@ -17,7 +17,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         selected: null,
         lists: {"Activities": []}
     };
-    
+
   activities.$loaded(function(){
 
       for(var i = 0; i < activities.length; i++){
@@ -25,6 +25,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
 
   })
+  console.log($scope.models);
   
 
 

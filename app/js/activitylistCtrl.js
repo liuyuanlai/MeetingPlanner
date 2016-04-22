@@ -28,6 +28,8 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
     	}
 
 	})
+
+	console.log($scope.models);
 	
 
     // Generate initial model
