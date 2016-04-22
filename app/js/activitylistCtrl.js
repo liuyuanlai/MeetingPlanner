@@ -28,6 +28,12 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.models.lists.Activities.splice(index,1);
 	}
 
+	$scope.dragactivity = function(index){
+		console.log(index);
+		//$scope.list.splice($index, 1);
+		console.log($scope.models);
+	}
+
 	$scope.models = {
         selected: null,
         lists: {"Activities": []}
@@ -41,7 +47,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 	})
 
-	console.log($scope.models);
+	
 	
 
     // Generate initial model
