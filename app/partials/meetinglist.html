@@ -16,9 +16,9 @@
 			</div>
 
 
-			<div ng-controller="ProgressDemoCtrl">
+			<div>
 
-				    <uib-progress><uib-bar ng-repeat="bar in Activity" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+				    <uib-progress><uib-bar ng-repeat="bar in ActivityType" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span>{{bar.value}}%</span></uib-bar></uib-progress>
 			</div>
 				<!-- <div>
 				<uib-accordion close-others="oneAtATime" >
@@ -55,8 +55,8 @@
 				                    >
 				                    <div class="row">
 		                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
-		                                <div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min</div>
-		                                <div class="col-xs-8">{{item.name}}</div>
+			                                <div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min</div>
+			                                <div class="col-xs-8">{{item.name}}</div>
 		                                </div>
 
 
