@@ -18,7 +18,7 @@
 
 				<div ng-controller="ProgressDemoCtrl">
 
-				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+				    <uib-progress><uib-bar ng-repeat="bar in Activity" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
 				</div>
 				<div>
 				<uib-accordion close-others="oneAtATime" >

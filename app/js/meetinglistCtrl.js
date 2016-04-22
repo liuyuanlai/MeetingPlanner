@@ -278,7 +278,8 @@ meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) 
     {
             "name" : "Break",
             "type" : "warning",
-            "value" : 24
+            "value" : 24,
+            "class" : null
         },{
             "name" : "Introduction",
             "type" : "danger",
@@ -298,12 +299,16 @@ meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) 
      var breakTypeValue = breakType.value;
 
      if (breakTypeValue < 30) {
+      
+      $scope.Activity[0].class = "warningBreak";
+
 
      };
 
   };
 
   $scope.showPercentage();
+
 
 
 });
