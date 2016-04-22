@@ -10,16 +10,38 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 	$scope.activitylistshow = true;
 	$scope.addactivityshow = false;
+	$scope.editactivityshow = false;
 	
 	$scope.addactivity = function(){
 		$scope.activitylistshow = false;
+		$scope.editactivityshow = false;
 		$scope.addactivityshow = true;	
 	}
 
-	$scope.editActivity = function(){
+	$scope.editActivity = function(index){
 		$scope.activitylistshow = false;
-		$scope.addactivityshow = true;
-		// console.log("hello edit");
+		$scope.addactivityshow = false;
+		$scope.editactivityshow = true;
+        
+        var editAct = activities[index];
+        $scope.eAct = {};
+        $scope.eAct.name = editAct.name;
+        $scope.eAct.length = editAct.length;
+        $scope.eAct.type = editAct.type;
+        $scope.eAct.description = editAct.description;
+        $scope.index = index;
+	}
+
+	$scope.saveChange = function(index){
+        $scope.activitylistshow = true;
+		$scope.addactivityshow = false;
+		$scope.editactivityshow = false;
+
+		activities[index].name = $scope.eAct.name;
+		activities[index].length = $scope.eAct.length;
+		activities[index].type = $scope.eAct.type;
+		activities[index].description = $scope.eAct.description;
+		activities.$save(index);
 	}
 
 	$scope.removeActivity = function(index){
@@ -52,9 +74,6 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
     $scope.createActivity = function(){
 
-    	    var index = activities.length;
-            var Aid = index + 1;
-
 			var newAct = {	
 				            name: $scope.newAct_name,
 							length: $scope.newAct_length,
@@ -71,6 +90,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 	$scope.createActivitycancel = function(){
 		$scope.activitylistshow = true;
 		$scope.addactivityshow = false;
+		$scope.editactivityshow = false;
 	}
 
 
