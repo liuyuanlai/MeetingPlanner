@@ -49,6 +49,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
   //Show meetinglist test
+
     
   //Create Meeting
   $scope.createMeeting = function (name, place, time, tag, members, description){
@@ -59,10 +60,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       mTag: tag,
       mMembers: members,
       mDescript: description
+
     };
 
     meetings.$add(new_meeting);
     // $scope.models.lists.Activities.push(newAct);
+
 
     $scope.meeting.push(new_meeting);
     // $scope.meeting.push(new_meeting);
@@ -70,7 +73,77 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
 
+
   }
+
+
+
+  $scope.showPercentage = function() {
+
+    $scope.ActivityType = [
+    {
+            "name" : "Break",
+            "type" : "warning",
+            "value" : 0,
+            "class" : null
+        },{
+            "name" : "Introduction",
+            "type" : "danger",
+            "value" : 0
+        },{            
+          "name" : "Presentation",
+          "type" : "info",
+            "value" : 0
+        },{
+          "name" : "Group Work",
+          "type" : "success",
+            "value" : 0
+        }
+    ];
+
+    $scope.addActType = function(){
+
+    };
+    $scope.addActType();
+    $scope.testAct = [];
+
+    var types = ['Break', 'Introduction', 'Presentation', 'Group Work'];
+    for (var i = 0; i < 5; i++) {
+      var index = Math.floor(Math.random() * 4);
+      var actType = $scope.ActivityType;
+      $scope.testAct.push({  
+                      name: i+6,
+                      length: 5*i+1,
+                      type: types[index],
+                      description: "yeyeye",
+                      });
+
+      if ($scope.testAct[i].type == 'Break') {
+        $scope.ActivityType[0].value += $scope.testAct[i].length;
+      }else if($scope.testAct[i].type == 'Introduction'){
+        $scope.ActivityType[1].value += $scope.testAct[i].length;
+      }else if($scope.testAct[i].type == 'Presentation'){
+        $scope.ActivityType[2].value += $scope.testAct[i].length;
+      }else if($scope.testAct[i].type == 'Group Work'){
+        $scope.ActivityType[3].value += $scope.testAct[i].length;
+      };
+
+    }
+    // var breakType = $scope.ActivityType[0];
+    // var breakTypeValue = breakType.value;
+
+     if ($scope.ActivityType[0].value < 30) {     
+      $scope.ActivityType[0].class = "warningBreak";
+     };
+
+  };
+
+  $scope.showPercentage();
+
+
+
+
+
 
 
   $scope.removeActivity = function(index){
@@ -223,76 +296,3 @@ $scope.mytime = new Date();
 });
 
 
-
-
-
-
-
-meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) {
-
-
-  $scope.max = 200;
-
-  $scope.random = function() {
-    var value = 35;
-    var type;
-
-    if (value < 25) {
-      type = 'success';
-    } else if (value < 50) {
-      type = 'info';
-    } else if (value < 75) {
-      type = 'warning';
-    } else {
-      type = 'danger';
-    }
-
-    $scope.showWarning = type === 'danger' || type === 'warning';
-
-    $scope.dynamic = value;
-    $scope.type = type;
-  };
-
-  $scope.random();
-
-
-
-  $scope.showPercentage = function() {
-    $scope.Activity = [
-    {
-            "name" : "Break",
-            "type" : "warning",
-            "value" : 24,
-            "class" : null
-        },{
-            "name" : "Introduction",
-            "type" : "danger",
-            "value" : 25
-        },{            
-        	"name" : "Presentation",
-        	"type" : "info",
-            "value" : 20
-        },{
-        	"name" : "Group Work",
-        	"type" : "success",
-            "value" : 30
-        }
-    ];
-    // var types = ['success', 'info', 'warning', 'danger'];   
-     var breakType = $scope.Activity[0];
-     var breakTypeValue = breakType.value;
-
-     if (breakTypeValue < 30) {
-      
-      $scope.Activity[0].class = "warningBreak";
-
-
-     };
-
-  };
-
-  $scope.showPercentage();
-
-
-
-});
