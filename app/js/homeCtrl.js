@@ -74,4 +74,10 @@ meetingPlannerApp.controller('HomeCtrl',
 			});
 		};
 
+
+		$scope.logoutUser = function() {
+			Auth.$unauth();
+			$location.path("/home");
+		}
+
 });

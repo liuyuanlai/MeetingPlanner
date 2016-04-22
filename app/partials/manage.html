@@ -1,23 +1,16 @@
-
-<style>
-  .full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-  }
-</style>
 <div class="container" >
-  <div class="panel panel-success" >
-    <div class="panel-heading" style="height:80px;">
-      Meeting Agenda
+  <div class="panel panel-info nav-bar" >
+    <div class="panel-heading">
+      <h3 class="nav-bar-h3"><strong>MEETING AGENDA</strong></h3>
+      <div class="nav-bar-profile">
+        <span class="glyphicon glyphicon-user"></span>
+        <span class="nav-bar-profile-username">User name</span>
+        <button class="btn btn-primary btn-sm" ng-click="logoutUser()">Log out</button>
+      </div>
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="col-xs-3 panel panel-default" style="height:550px;">
     <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>

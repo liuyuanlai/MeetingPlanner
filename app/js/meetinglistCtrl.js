@@ -2,12 +2,29 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   $scope.meetinglistshow = true;
   $scope.addmeetingshow = false;
 
-  var meetingRef = Ref.child("meetings");
 
   // get the auth infomation about the current user
   var user_data = Auth.$getAuth();
 
+
+  var meetingRef = Ref.child("meetings");
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
+
+  var activityRef = Ref.child("activities");
+  var activities = $firebaseArray(activityRef.child(user_data.uid));
+
+  $scope.models = {
+        selected: null,
+        lists: {"Activities": []}
+    };
+    
+  activities.$loaded(function(){
+
+      for(var i = 0; i < activities.length; i++){
+        $scope.models.lists.Activities.push(activities[i]);
+      }
+
+  })
   
 
 
@@ -40,6 +57,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   //Show meetinglist test
 
   $scope.createMeetingTest = function (){
+
+
     // var meetinglist =  
 
     var meetingInfo = {
@@ -102,6 +121,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     console.log("creating new meeting");
     console.log(new_meeting);
     meetings.$add(new_meeting);
+    $scope.meetinglistshow = true;
+    $scope.addmeetingshow = false;
     // console.log(meeting);
     // console.log("create meeting");
   }

@@ -1,8 +1,7 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow">
 	<section id="cd-timeline">
-
-		<div ng-repeat="x in meeting" class="col-xs-4">
+		<div ng-repeat="x in models.lists" class="col-xs-4">
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
@@ -20,10 +19,9 @@
 
 				    <uib-progress><uib-bar ng-repeat="bar in Activity" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
 				</div>
-				<div>
+				<!-- <div>
 				<uib-accordion close-others="oneAtATime" >
 
-				<!-- need an edit button -->
 				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
 				      <p>Desciption of the activity</p>
 				    </uib-accordion-group>
@@ -41,7 +39,26 @@
 			      		<p>Desciption of the activity</p>
 			    	</uib-accordion-group>
 				</uib-accordion>
-				</div>
+				</div> -->
+				<div class="row simpleDemo" style="text-align: center;">
+					<div ng-repeat="(listName, list) in models.lists">
+						<div class="panel-body" >
+				            <ul dnd-list="list">
+
+				                <li ng-repeat="item in list"
+				                    dnd-draggable="item"
+				                    dnd-moved="list.splice($index, 1)"
+				                    dnd-effect-allowed="move"
+				                    dnd-selected="models.selected = item"
+				                    ng-class="{'selected': models.selected === item}"
+				                    >
+				                    {{item.name}}
+				                </li>
+				            </ul>
+
+				        </div>
+			        </div>
+		        </div>
 			
 			</div>
 		</div>
@@ -109,7 +126,7 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Description</label>
+	    <label class="col-s	m-2 control-label">Description</label>
 	    <div class="col-sm-10"><textarea class="form-control" rows="3" ng-model="Mdescript"></textarea></div>
 	  </div>
 	  <div class="form-group">
