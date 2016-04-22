@@ -1,7 +1,7 @@
 meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams,User) {
   $scope.meetinglistshow = true;
   $scope.addmeetingshow = false;
-
+  $scope.editmeetingshow = false;
 
   // get the auth infomation about the current user
   var user_data = Auth.$getAuth();
@@ -38,7 +38,34 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   
   
   $scope.editMeeting = function(index){
+    $scope.meetinglistshow = false;
+    $scope.addmeetingshow = false;
+    $scope.editmeetingshow = true;
+    
+    var editMeeting = meetings[index];
+    $scope.eMeeting = {};
+    $scope.eMeeting.mName = editMeeting.mName;
+    $scope.eMeeting.place = editMeeting.MPlace;
+    // $scope.eMeeting.mTime = editMeeting.mTime;
+    $scope.eMeeting.tag = editMeeting.mTag;
+    $scope.eMeeting.members = editMeeting.mMembers;
+    $scope.eMeeting.descript = editMeeting.mDescript;
+    $scope.eMindex = index;
+  }
 
+  $scope.saveEditM = function(index){
+    $scope.meetinglistshow = true;
+    $scope.addmeetingshow = false;
+    $scope.editmeetingshow = false;
+    
+    meetings[index].mName = $scope.eMeeting.mName;
+    meetings[index].MPlace = $scope.eMeeting.place;
+    meetings[index].mTime = $scope.dt;
+    meetings[index].mTag = $scope.eMeeting.tag;
+    meetings[index].mMembers = $scope.eMeeting.members;
+    meetings[index].mDescript = $scope.eMeeting.descript;
+    meetings.$save(index);
+    console.log(meetings[index]);
   }
 
   $scope.removeMeeting = function(index){
@@ -46,6 +73,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.meeting.splice(index,1);
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
+    $scope.editmeetingshow = false;
   }
 
   //Show meetinglist test
@@ -72,6 +100,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
    
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
+    $scope.editmeetingshow = false;
 
 
   }
@@ -147,7 +176,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
   $scope.removeActivity = function(index){
-    // console.log(index);
     activities.$remove(index);
     $scope.models.lists.Activities.splice(index,1);
   }
@@ -156,11 +184,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   $scope.addmeeting = function(){
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = true;
+    $scope.editmeetingshow = false;
   }
 
   $scope.goback = function(){
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
+    $scope.editmeetingshow = false;
   }
 
   // Date Picker
