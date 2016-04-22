@@ -1,0 +1,28 @@
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+  .nav-bar-h3 {
+    line-height: 1.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+
+  .nav-bar-profile {
+    display: inline;
+    float: right;
+    clear: right;
+  }
+
+  .nav-bar-profile-username {
+  	margin-left: 5px;
+  	margin-right: 5px;
+  }
