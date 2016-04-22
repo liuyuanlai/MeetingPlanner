@@ -18,8 +18,8 @@ meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $fir
       mMembers: members,
       mDescript: description
     };
-    console.log("creating new meeting");
-    console.log(new_meeting);
+    // console.log("creating new meeting");
+    // console.log(new_meeting);
     meetings.$add(new_meeting);
     // console.log(meeting);
     // console.log("create meeting");
