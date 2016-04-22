@@ -29,31 +29,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   
 
 
-  //Show meetinglist test
-  // $scope.createMeeting = function (){
-  //   $scope.meetingInfo = [
-  //           {
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 8.00,
-  //                   "tag" : "DH2642"
-
-  //               },{
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 9.00,
-  //                   "tag" : "DH2642"
-  //               },{            
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 10.00,
-  //                   "tag" : "DH2642"
-  //               }
-  //           ];
-  // }
-  // $scope.createMeeting();
-    
-
 
   //Show meetinglist test
 
@@ -95,6 +70,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
   $scope.createMeetingTest();
 
+
+  $scope.removeActivity = function(index){
+    // console.log(index);
+    activities.$remove(index);
+    $scope.models.lists.Activities.splice(index,1);
+  }
 
 
 
@@ -300,7 +281,8 @@ meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) 
     {
             "name" : "Break",
             "type" : "warning",
-            "value" : 24
+            "value" : 24,
+            "class" : null
         },{
             "name" : "Introduction",
             "type" : "danger",
@@ -320,12 +302,16 @@ meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) 
      var breakTypeValue = breakType.value;
 
      if (breakTypeValue < 30) {
+      
+      $scope.Activity[0].class = "warningBreak";
+
 
      };
 
   };
 
   $scope.showPercentage();
+
 
 
 });

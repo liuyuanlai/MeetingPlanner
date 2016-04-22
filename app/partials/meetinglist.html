@@ -1,13 +1,14 @@
 <!-- meetinglist view -->
-<div ng-show="meetinglistshow">
+<div ng-show="meetinglistshow" class="meetinglist">
 	<section id="cd-timeline">
-		<div ng-repeat="x in models.lists" class="col-xs-4">
+		<div ng-repeat="x in meeting" class="col-xs-4">
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
 
 			
-			<div nclass="meetingInfo"><h5>Meeting: {{x[0].mName}}<br>
+			<div class="meetingInfo">
+				<h5>Meeting: {{x[0].mName}}<br>
 					Start Time: {{x[0].MPlace}} <br>
 					End Time: {{x[0].mTime}} <br>
 					Total Length: {{x[0].mTag}} <br>
@@ -15,10 +16,10 @@
 			</div>
 
 
-				<div ng-controller="ProgressDemoCtrl">
+			<div ng-controller="ProgressDemoCtrl">
 
-				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-				</div>
+				    <uib-progress><uib-bar ng-repeat="bar in Activity" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+			</div>
 				<!-- <div>
 				<uib-accordion close-others="oneAtATime" >
 
@@ -40,9 +41,9 @@
 			    	</uib-accordion-group>
 				</uib-accordion>
 				</div> -->
-				<div class="row simpleDemo" style="text-align: center;">
+				<div class="row simpleDemo" style="text-align: center">
 					<div ng-repeat="(listName, list) in models.lists">
-						<div class="panel-body" >
+						<div class="panel-body">
 				            <ul dnd-list="list">
 
 				                <li ng-repeat="item in list"
@@ -52,7 +53,20 @@
 				                    dnd-selected="models.selected = item"
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
-				                    {{item.name}}
+				                    <div class="row">
+		                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
+		                                <div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min</div>
+		                                <div class="col-xs-8">{{item.name}}</div>
+		                                </div>
+
+
+
+				                    	<div class="cos-xs-2">
+		                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;"></span>
+
+				                       </div>
+				                  
+				                    </div>
 				                </li>
 				            </ul>
 
@@ -78,7 +92,7 @@
 
 
 <!-- add meeting view -->
-<div ng-show="addmeetingshow">
+<div ng-show="addmeetingshow" class="addMeeting">
 	<form class="form-horizontal panel-body">
 	  <div class="form-group">
 	    <label class="col-sm-2 control-label">Name</label>
