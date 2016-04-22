@@ -31,9 +31,24 @@
   top: 10px; 
   left: 0px; 
   height: 4px; 
-  width: 100%; 
+  width: 98%; 
   background: #00cc99; 
 } 
+.addBtn{
+   position: absolute;
+   right:40px;
+   top: 35px;
+   width: 40px;
+   height: 40px;
+   background: #00cc99;
+   padding: 6px 6px 6px 7px;
+   border:5px solid #cef4ea;
+   -moz-border-radius: 100px;
+   -webkit-border-radius: 100px;
+
+}
+
+
 .circle {
      width: 20px;
      height: 20px;

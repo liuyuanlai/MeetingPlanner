@@ -1,17 +1,18 @@
-
+<!-- meetinglist view -->
 <div ng-show="meetinglistshow">
 	<section id="cd-timeline">
-		<div class="col-xs-4">
+		<div ng-repeat="x in models.lists" class="col-xs-4">
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
+
 			
-				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-						Start Time : 8:00 <br>
-						End Time : 9:10 <br>
-						Total Length : 70 min <br>
-					</h5>
-				</div>
+			<div nclass="meetingInfo"><h5>Meeting: {{x[0].mName}}<br>
+					Start Time: {{x[0].MPlace}} <br>
+					End Time: {{x[0].mTime}} <br>
+					Total Length: {{x[0].mTag}} <br>
+				</h5>
+			</div>
 
 
 				<div ng-controller="ProgressDemoCtrl">
@@ -44,88 +45,21 @@
 			</div>
 		</div>
 
-		<div class="col-xs-4">
-			<div class="circle"></div>
-			<div class="square"></div>
-			<div class="meetingPanel">
-			
-				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-						Start Time : 8:00 <br>
-						End Time : 9:10 <br>
-						Total Length : 70 min <br>
-					</h5>
-				</div>
-
-				<div ng-controller="ProgressDemoCtrl">
-
-				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-				</div>
 
 
-				<div>
-				<uib-accordion close-others="oneAtATime" >
-
-				<!-- need an edit button -->
-				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-				      <p>Desciption of the activity</p>
-				    </uib-accordion-group>
-
-				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-				      <p>Desciption of the activity</p>
-				    </uib-accordion-group>
-
-			 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      		<p>Desciption of the activity</p>
-			    	</uib-accordion-group>
-				</uib-accordion>
-				</div>
-			
-			</div>
-		</div>
-
-		<div class="col-xs-4">
-			<div class="circle"></div>
-			<div class="square"></div>
-			<div class="meetingPanel">
-			
-				<div class="meetingInfo"><h5>Meeting : 1st Brainstorming <br>
-						Start Time : 8:00 <br>
-						End Time : 9:10 <br>
-						Total Length : 70 min <br>
-					</h5>
-				</div>
+	</section>
 
 
-				<div ng-controller="ProgressDemoCtrl">
-
-				    <uib-progress><uib-bar ng-repeat="bar in Activity" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
-				</div>
-
-
-				<div>
-				<uib-accordion close-others="oneAtATime" >
-
-				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-				      <p>Desciption of the activity</p>
-				    </uib-accordion-group>
-
-				    <uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-				      <p>Desciption of the activity</p>
-				    </uib-accordion-group>
-
-			 		<uib-accordion-group heading="60 min |  Discuss the idea" class="actList">
-			      		<p>Desciption of the activity</p>
-			    	</uib-accordion-group>
-				</uib-accordion>
-				</div>
-			</div>
-		</div>
-	</section>	
-	<div style="position: absolute;bottom:10px;width: 60%">
-		<button class="btn btn-info btn-block" ng-click="addmeeting()">Add Meeting</button>
+	<div >
+		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus" style="color:white"></span></button>
 	</div>
-</div>
 
+
+</div>
+<!-- meetinglist view -->
+
+
+<!-- add meeting view -->
 <div ng-show="addmeetingshow">
 	<form class="form-horizontal panel-body">
 	  <div class="form-group">
@@ -184,4 +118,5 @@
 
 	</form>
 </div>
+<!-- add meeting view -->
 
