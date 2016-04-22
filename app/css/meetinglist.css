@@ -13,7 +13,14 @@
 }
 .meetingInfo h5{
 	margin: 10px;
+  color:#31708f;
 }
+.editMeeting{
+  float: right;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
 .meetingPanel{
 	border: 1px solid #ddd; 
   border-radius: 5px;
