@@ -11,6 +11,7 @@ meetingPlannerApp.controller('SimpleDemoController', function ($scope) {
         $scope.models.lists.Meeting2.push({label: "60 min Activity" + i});
         $scope.models.lists.Meeting3.push({label: "80 min Activity" + i});
     }
+    console.log($scope.models.lists);
 
     // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
