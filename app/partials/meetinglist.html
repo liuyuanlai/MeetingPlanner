@@ -54,7 +54,13 @@
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
 				                    <div class="row">
-		                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">{{item.name}}</div>
+		                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
+		                                <div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min</div>
+		                                <div class="col-xs-8">{{item.name}}</div>
+		                                </div>
+
+
+
 				                    	<div class="cos-xs-2">
 		                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;"></span>
 
