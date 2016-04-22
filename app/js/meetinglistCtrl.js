@@ -13,6 +13,16 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
 
+  $scope.meeting = [];
+
+  meetings.$loaded(function(){
+
+    for(var i = 0; i < meetings.length; i++){
+      $scope.meeting.push(meetings[i]);
+    }
+
+  })
+
   $scope.models = {
         selected: null,
         lists: {"Activities": []}
@@ -23,45 +33,49 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       for(var i = 0; i < activities.length; i++){
         $scope.models.lists.Activities.push(activities[i]);
       }
-
   })
   
+  
+  $scope.editMeeting = function(index){
 
+  }
 
+  $scope.removeMeeting = function(index){
+    console.log("meeting index is" + index);
+    meetings.$remove(index);
+    $scope.meeting.Meetings.splice(index,1);
+    $scope.meetinglistshow = true;
+    $scope.addmeetingshow = false;
+    console.log(meetings);
+  }
 
   //Show meetinglist test
 
-  $scope.createMeetingTest = function (){
+    
+  //Create Meeting
+  $scope.createMeeting = function (name, place, time, tag, members, description){
+    var new_meeting = {
+      mName: name,
+      MPlace: place,
+      mTime: time,
+      mTag: tag,
+      mMembers: members,
+      mDescript: description
 
-
-    // var meetinglist =  
-
-    var meetingInfo = {
-      mName: "test",
-      MPlace: "place",
-      mTime: "time",
-      mTag: "tag",
-      mMembers: "members",
     };
 
-    $scope.meeting = {
-        "Meetings": [],
-    };
+    meetings.$add(new_meeting);
+    // $scope.models.lists.Activities.push(newAct);
 
 
-    $scope.addNewMeeting = function(){
-        for(var i = 0; i < 3; i++){
-        $scope.meeting.Meetings.push(meetingInfo);
-      }
-    }
+    $scope.meeting.push(new_meeting);
+    // $scope.meeting.push(new_meeting);
+   
+    $scope.meetinglistshow = true;
+    $scope.addmeetingshow = false;
 
-    $scope.addNewMeeting();
-
-    $scope.meetingInfo = meetingInfo;
 
   }
-    
-  $scope.createMeetingTest();
 
 
 
@@ -140,8 +154,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
 
-
-
   $scope.addmeeting = function(){
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = true;
@@ -150,25 +162,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   $scope.goback = function(){
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
-  }
-
-  //Create Meeting
-  $scope.createMeeting = function (name, place, time, tag, members, description){
-    var new_meeting = {
-      mName: name,
-      MPlace: place,
-      mTime: time,
-      mTag: tag,
-      mMembers: members,
-      mDescript: description
-    };
-    console.log("creating new meeting");
-    console.log(new_meeting);
-    meetings.$add(new_meeting);
-    $scope.meetinglistshow = true;
-    $scope.addmeetingshow = false;
-    // console.log(meeting);
-    // console.log("create meeting");
   }
 
   // Date Picker
