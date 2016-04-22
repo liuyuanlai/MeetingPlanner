@@ -32,6 +32,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     console.log("creating new meeting");
     console.log(new_meeting);
     meetings.$add(new_meeting);
+    $scope.meetinglistshow = true;
+    $scope.addmeetingshow = false;
     // console.log(meeting);
     // console.log("create meeting");
   }
