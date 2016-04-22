@@ -1,4 +1,3 @@
-
 meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams,User) {
   $scope.meetinglistshow = true;
   $scope.addmeetingshow = false;
@@ -9,6 +8,77 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   var user_data = Auth.$getAuth();
 
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
+  
+
+
+  //Show meetinglist test
+  // $scope.createMeeting = function (){
+  //   $scope.meetingInfo = [
+  //           {
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 8.00,
+  //                   "tag" : "DH2642"
+
+  //               },{
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 9.00,
+  //                   "tag" : "DH2642"
+  //               },{            
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 10.00,
+  //                   "tag" : "DH2642"
+  //               }
+  //           ];
+  // }
+  // $scope.createMeeting();
+    
+
+
+  //Show meetinglist test
+
+  $scope.createMeetingTest = function (){
+    // var meetinglist =  
+
+    var meetingInfo = {
+      mName: "test",
+      MPlace: "place",
+      mTime: "time",
+      mTag: "tag",
+      mMembers: "members",
+    };
+
+    $scope.models = {
+        selected: null,
+        lists: {"Meetings": []}
+    };
+
+
+    $scope.addNewMeeting = function(){
+        for(var i = 0; i < 3; i++){
+        $scope.models.lists.Meetings.push(meetingInfo);
+      }
+    }
+    $scope.hello = $scope.models.lists.Meetings;
+
+    $scope.addNewMeeting();
+
+    $scope.meetingInfo = meetingInfo;
+    console.log($scope.models.lists.Meetings);
+    console.log($scope.models.lists.Meetings[0]);
+
+    // meetings.$add(meetingInfo);
+    // console.log(meeting);
+    // console.log("create meeting");
+  }
+    
+  $scope.createMeetingTest();
+
+
+
+
 
   $scope.addmeeting = function(){
     $scope.meetinglistshow = false;
@@ -165,7 +235,6 @@ $scope.mytime = new Date();
   $scope.clear = function() {
     $scope.mytime = null;
   };
->>>>>>> master
 
 
 });
