@@ -16,6 +16,18 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.addactivityshow = true;	
 	}
 
+	$scope.editActivity = function(){
+		$scope.activitylistshow = false;
+		$scope.addactivityshow = true;
+		// console.log("hello edit");
+	}
+
+	$scope.removeActivity = function(index){
+		// console.log(index);
+		activities.$remove(index);
+		$scope.models.lists.Activities.splice(index,1);
+	}
+
 	$scope.models = {
         selected: null,
         lists: {"Activities": []}
@@ -42,12 +54,17 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
     $scope.createActivity = function(){
 
-			var newAct = {	name: $scope.newAct_name,
+    	    var index = activities.length;
+            var Aid = index + 1;
+
+			var newAct = {	
+				            name: $scope.newAct_name,
 							length: $scope.newAct_length,
 							type: $scope.newAct_type,
 							description: $scope.newAct_description,
 			}
-			activities.$add(newAct);
+            
+            activities.$add(newAct);
 			$scope.models.lists.Activities.push(newAct);
 			$scope.activitylistshow = true;
 			$scope.addactivityshow = false;
