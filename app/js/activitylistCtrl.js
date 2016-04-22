@@ -8,6 +8,12 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 	var activities = $firebaseArray(activityRef.child(user_data.uid));
 
+
+	// only for printing out the array data from firebase
+	$scope.test = function() {
+		console.log(activities);
+	}
+
 	$scope.activitylistshow = true;
 	$scope.addactivityshow = false;
 	

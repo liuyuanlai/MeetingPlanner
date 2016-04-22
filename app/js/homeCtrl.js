@@ -8,28 +8,29 @@ meetingPlannerApp.controller('HomeCtrl',
 		var meetingRef = Ref.child("meetings");
 
 		var users = $firebaseArray(userRef);
+		
 
+		$scope.userUsername = "John Doe";
 
-		// testing message
-		// $scope.msg = Ref.rootRef;
-		// $scope.userObject = $firebaseObject(Auth.rootRef.child("meetings"));
+		Auth.$onAuth(function(authdata) {
+			if(authdata) {
+				var userKey = authdata.uid;
+				var test = $firebaseObject(userRef.child(userKey)) 
+				var currentUser = $firebaseObject(userRef.child(userKey));
+				currentUser.$loaded()
+					.then(function(data){
+						$scope.userUsername = data.username;
+					})
+					.catch(function(error) {
+						console.log("Error: ", error);
+					});
+				console.log($firebaseObject(userRef.child(userKey)));
+				console.log("haha");
+			} else {
+				console.log("Logged out");
+			}
+		});
 
-		// // testing purpose
-		// // var userRef = rootRef.child("users");
-		// // var meetingRef = rootRef.child("meetings");
-
-		// var userArray = $firebaseArray(userRef);
-		// var meetingObject = $firebaseObject(meetingRef);
-
-		// $scope.users = userArray;
-		// meetingObject.$bindTo($scope, "meeting");
-
-		// // var auth = $firebaseAuth(rootRef.child("test"));
-		// // $scope.auth = auth;
-		// var auth = $firebaseAuth(rootRef);
-
-		// only for testing usage
-		$scope.userObject = $firebaseObject(userRef);
 
 
 		$scope.authWithPassword = function(){
@@ -55,7 +56,14 @@ meetingPlannerApp.controller('HomeCtrl',
 				email: $scope.signupEmail,
 				password: $scope.signupPassword
 			}).then(function(userdata) {
-				users.$add({email: $scope.signupEmail, password: $scope.signupPassword});
+				var userObj = $firebaseObject(userRef.child(userdata.uid));
+				userObj.email = $scope.signupEmail;
+				userObj.username = $scope.signupUsername;
+				userObj.password = $scope.signupPassword;
+
+				userObj.$save();
+
+				// users.$add({email: $scope.signupEmail, password: $scope.signupPassword});
 				$scope.message = "user created with uid " + userdata.uid;
 				console.log("Signed up as: ", userdata.uid);
 
