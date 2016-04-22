@@ -26,14 +26,17 @@
 		        </div>
 		        <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
 		        <div class="panel-body" >
-		            <ul dnd-list="list">
+		            <ul dnd-list="list"
+		            	dnd-inserted="insertactivity(item)"
+		            	>
 
 		                <li ng-repeat="item in list"
 		                    dnd-draggable="item"
-		                    dnd-moved="dragactivity($index)"
+		                    dnd-moved="dragactivity($index)" 
 		                    dnd-effect-allowed="move"
 		                    dnd-selected="models.selected = item"
 		                    ng-class="{'selected': models.selected === item}"
+		                    ng-if="item.homeless"
 		                    >
 		                    <div class="row">
                                 <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">

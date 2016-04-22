@@ -52,8 +52,25 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 	$scope.dragactivity = function(index){
 		console.log(index);
+		activities[index].homeless = false;
+		activities.$save(index);
+		//console.log(activities);
+		$scope.models.lists.Activities[index] = false;
 		//$scope.list.splice($index, 1);
-		console.log($scope.models);
+		//console.log($scope.models);
+	}
+
+	$scope.insertactivity = function(item){
+		//console.log(item)
+		for (var i = activities.length - 1; i >= 0; i--) {
+			if(activities[i].$id == item.$id){
+				activities[i].homeless = true;
+				activities.$save(i);
+				$scope.models.lists.Activities[i].homeless = true;
+
+
+			}
+		}
 	}
 
 	$scope.models = {
@@ -87,6 +104,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 							length: $scope.newAct_length,
 							type: $scope.newAct_type,
 							description: $scope.newAct_description,
+							homeless: true,
 			}
             
             activities.$add(newAct);
