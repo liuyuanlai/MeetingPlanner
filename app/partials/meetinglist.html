@@ -1,8 +1,7 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow">
 	<section id="cd-timeline">
-
-		<div ng-repeat="x in meeting" class="col-xs-4">
+		<div ng-repeat="x in models.lists" class="col-xs-4">
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
@@ -41,20 +40,24 @@
 			    	</uib-accordion-group>
 				</uib-accordion>
 				</div> -->
-				<div class="panel-body" >
-		            <ul dnd-list="list">
+				<div class="row simpleDemo" style="text-align: center;">
+					<div ng-repeat="(listName, list) in models.lists">
+						<div class="panel-body" >
+				            <ul dnd-list="list">
 
-		                <li ng-repeat="item in activity.list"
-		                    dnd-draggable="item"
-		                    dnd-moved="list.splice($index, 1)"
-		                    dnd-effect-allowed="move"
-		                    dnd-selected="models.selected = item"
-		                    ng-class="{'selected': models.selected === item}"
-		                    >
-		                    {{item.name}}
-		                </li>
-		            </ul>
+				                <li ng-repeat="item in list"
+				                    dnd-draggable="item"
+				                    dnd-moved="list.splice($index, 1)"
+				                    dnd-effect-allowed="move"
+				                    dnd-selected="models.selected = item"
+				                    ng-class="{'selected': models.selected === item}"
+				                    >
+				                    {{item.name}}
+				                </li>
+				            </ul>
 
+				        </div>
+			        </div>
 		        </div>
 			
 			</div>
