@@ -20,7 +20,7 @@
 <div ng-show="activitylistshow">
 	<div class="row simpleDemo" style="text-align: center;">
 		<div ng-repeat="(listName, list) in models.lists" >
-		    <div class="panel panel-info">
+		    <div class="panel panel-info" style="height:550px;">
 		        <div class="panel-heading">
 		            <h3 class="panel-title">{{listName}}</h3>
 		        </div>
@@ -35,56 +35,112 @@
 		                    dnd-selected="models.selected = item"
 		                    ng-class="{'selected': models.selected === item}"
 		                    >
-		                    {{item.name}}
+		                    <div class="row">
+                                <div class="col-xs-10" uib-popover={{item.description}} popover-trigger="mouseenter" style="cursor: hand;cursor: pointer;">
+                                	<div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min
+                                	</div>
+			                         <div class="col-xs-8">{{item.name}}</div>
+                                </div>
+                              <!--   <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">{{item.name}}</div> -->
+
+		                    	<div class="cos-xs-2">
+		                    		<!-- <button type="button" class="btn btn-default btn-sm"> -->
+		                    			<span class="glyphicon glyphicon-pencil" ng-click="editActivity($index)" style="cursor: hand;cursor: pointer;"></span>
+		                    		<!-- </button>
+		                    		<button type="button" class="btn btn-default"> -->
+		                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;"></span>
+		                    	<!-- 	</button> -->
+		                       </div>
+		                  
+		                    </div>
+		                    
+		                    
+		                   <!--  <div class="cos-xs-3"></div> -->
 		                </li>
 		            </ul>
-
 		        </div>
 		    </div>
+		    <div style="position: absolute;bottom:10px; margin-left:22.5%; margin-bottom: 10%;width: 50%;">
+			<button class="btn btn-info btn-block" ng-click="addactivity()">Add Activity</button>
+			</div>
 		</div>
 	</div>
+
 	<div style="position: absolute;bottom:10px;width: 100%">
 		<button class="btn btn-info btn-block" ng-click="addactivity()">Add Activity</button>
-		<button class="btn btn-info btn-block" ng-click="test()">Test</button>
 	</div>
+
 </div>
 
 <div ng-show="addactivityshow">
-	<form method="post" class="form-horizontal" style="height:500px;">
-<!-- 	<div class="form-group" style="height:500px;"> -->
-
-	<div class="panel panel-heading">
-		<div class="panel-heading">Add Activity</div>
-		<!-- <p class="text-center"></p> -->
-	</div>
-	<div class="panel-body">
-		<div class="form-group">
-			<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name">
+		<form method="post" class="form-horizontal" style="height:550px;" >
+		<div class="panel panel-heading">
+			<div class="panel-heading">Add Activity</div>
 		</div>
-		<div class="form-group">
-			<div class="col-xs-9" style="padding: 0px">
-				<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
+		<div class="panel-body">
+			<div class="form-group">
+				<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name" required>
 			</div>
-			<label class="col-xs-3">min</label>
+			<div class="form-group">
+				<div class="col-xs-9" style="padding: 0px">
+					<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
+				</div>
+				<label class="col-xs-3">min</label>
+			</div>
+	        
+	        <div class="form-group">
+			<select ng-model="$parent.newAct_type" class="form-control">
+			  <option value="presentation" select="selected">Presentation</option>
+			  <option value="group-work">Group Work</option>
+			  <option value="discussion">Discussion</option>
+			  <option value="break">Break</option>
+			</select>
+			</div>
+	        
+	        <div class="form-group">
+	        	<textarea ng-model="$parent.newAct_description" class="form-control" rows="3" placeholder="Description" required></textarea>	
+	        </div>
+				
+			<div class="from-group">
+				<button ng-click="createActivitycancel()" type="submit" class="btn btn-danger">Cancel</button>
+				<button ng-click="createActivity()" class="btn btn-info creatBTN">Done</button>
+			</div>
 		</div>
-        
-        <div class="form-group">
-		<select ng-model="$parent.newAct_type" class="form-control">
-		  <option value="presentation" select="selected">Presentation</option>
-		  <option value="group-work">Group Work</option>
-		  <option value="discussion">Discussion</option>
-		  <option value="break">Break</option>
-		</select>
+    </form>
+</div>
+
+<div ng-show="editactivityshow">
+	<form method="post" class="form-horizontal" style="height:500px;">
+		<div class="panel panel-heading">
+			<div class="panel-heading">Edit Activity</div>
 		</div>
-        
-        <div class="form-group">
-        	<textarea ng-model="$parent.newAct_description" class="form-control" rows="3" placeholder="Description"></textarea>	
-        </div>
-			
-		<div class="from-group">
-			<button ng-click="createActivitycancel()" type="submit" class="btn btn-danger">Cancel</button>
-			<button ng-click="createActivity()" class="btn btn-info creatBTN">Done</button>
+		<div class="panel-body">
+			<div class="form-group">
+				<input class="form-control" placeholder="" ng-model="eAct.name" required>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-9" style="padding: 0px">
+					<input ng-model="eAct.length" class="form-control" placeholder="Length" type="number" min="0">
+				</div>
+				<label class="col-xs-3">min</label>
+			</div>
+	        
+	        <div class="form-group">
+			<select ng-model="eAct.type" class="form-control">
+			  <option value="presentation">Presentation</option>
+			  <option value="group-work">Group Work</option>
+			  <option value="discussion">Discussion</option>
+			  <option value="break">Break</option>
+			</select>
+			</div>
+	        
+	        <div class="form-group">
+	        	<textarea ng-model="eAct.description" class="form-control" rows="3" placeholder="Description" required></textarea>	
+	        </div>
+				
+			<div class="from-group">
+				<button ng-click="saveChange(index)" class="btn btn-info creatBTN">Done</button>
+			</div>
 		</div>
-	</div>
-</form>
+    </form>
 </div>
