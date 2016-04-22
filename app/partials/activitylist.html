@@ -64,40 +64,73 @@
 
 <div ng-show="addactivityshow">
 	<form method="post" class="form-horizontal" style="height:500px;">
-<!-- 	<div class="form-group" style="height:500px;"> -->
-
-	<div class="panel panel-heading">
-		<div class="panel-heading">Add Activity</div>
-		<!-- <p class="text-center"></p> -->
-	</div>
-	<div class="panel-body">
-		<div class="form-group">
-			<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name" required>
+		<div class="panel panel-heading">
+			<div class="panel-heading">Add Activity</div>
 		</div>
-		<div class="form-group">
-			<div class="col-xs-9" style="padding: 0px">
-				<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
+		<div class="panel-body">
+			<div class="form-group">
+				<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name" required>
 			</div>
-			<label class="col-xs-3">min</label>
+			<div class="form-group">
+				<div class="col-xs-9" style="padding: 0px">
+					<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
+				</div>
+				<label class="col-xs-3">min</label>
+			</div>
+	        
+	        <div class="form-group">
+			<select ng-model="$parent.newAct_type" class="form-control">
+			  <option value="presentation" select="selected">Presentation</option>
+			  <option value="group-work">Group Work</option>
+			  <option value="discussion">Discussion</option>
+			  <option value="break">Break</option>
+			</select>
+			</div>
+	        
+	        <div class="form-group">
+	        	<textarea ng-model="$parent.newAct_description" class="form-control" rows="3" placeholder="Description" required></textarea>	
+	        </div>
+				
+			<div class="from-group">
+				<button ng-click="createActivitycancel()" type="submit" class="btn btn-danger">Cancel</button>
+				<button ng-click="createActivity()" class="btn btn-info creatBTN">Done</button>
+			</div>
 		</div>
-        
-        <div class="form-group">
-		<select ng-model="$parent.newAct_type" class="form-control">
-		  <option value="presentation" select="selected">Presentation</option>
-		  <option value="group-work">Group Work</option>
-		  <option value="discussion">Discussion</option>
-		  <option value="break">Break</option>
-		</select>
+    </form>
+</div>
+
+<div ng-show="editactivityshow">
+	<form method="post" class="form-horizontal" style="height:500px;">
+		<div class="panel panel-heading">
+			<div class="panel-heading">Edit Activity</div>
 		</div>
-        
-        <div class="form-group">
-        	<textarea ng-model="$parent.newAct_description" class="form-control" rows="3" placeholder="Description" required></textarea>	
-        </div>
-			
-		<div class="from-group">
-			<button ng-click="createActivitycancel()" type="submit" class="btn btn-danger">Cancel</button>
-			<button ng-click="createActivity()" class="btn btn-info creatBTN">Done</button>
+		<div class="panel-body">
+			<div class="form-group">
+				<input class="form-control" placeholder="" ng-model="eAct.name" required>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-9" style="padding: 0px">
+					<input ng-model="eAct.length" class="form-control" placeholder="Length" type="number" min="0">
+				</div>
+				<label class="col-xs-3">min</label>
+			</div>
+	        
+	        <div class="form-group">
+			<select ng-model="eAct.type" class="form-control">
+			  <option value="presentation">Presentation</option>
+			  <option value="group-work">Group Work</option>
+			  <option value="discussion">Discussion</option>
+			  <option value="break">Break</option>
+			</select>
+			</div>
+	        
+	        <div class="form-group">
+	        	<textarea ng-model="eAct.description" class="form-control" rows="3" placeholder="Description" required></textarea>	
+	        </div>
+				
+			<div class="from-group">
+				<button ng-click="saveChange(index)" class="btn btn-info creatBTN">Done</button>
+			</div>
 		</div>
-	</div>
-</form>
+    </form>
 </div>
