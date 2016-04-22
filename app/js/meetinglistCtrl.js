@@ -28,31 +28,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   
 
 
-  //Show meetinglist test
-  // $scope.createMeeting = function (){
-  //   $scope.meetingInfo = [
-  //           {
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 8.00,
-  //                   "tag" : "DH2642"
-
-  //               },{
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 9.00,
-  //                   "tag" : "DH2642"
-  //               },{            
-  //                   "name" : "TEST",
-  //                   "place" : "KTH",
-  //                   "mytime" : 10.00,
-  //                   "tag" : "DH2642"
-  //               }
-  //           ];
-  // }
-  // $scope.createMeeting();
-    
-
 
   //Show meetinglist test
 
@@ -94,6 +69,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
   $scope.createMeetingTest();
 
+
+  $scope.removeActivity = function(index){
+    // console.log(index);
+    activities.$remove(index);
+    $scope.models.lists.Activities.splice(index,1);
+  }
 
 
 
