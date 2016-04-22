@@ -12,16 +12,27 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
+  var index = 0;
+  var slideWindow = 3;
 
   $scope.meeting = [];
 
+  // meetings.$loaded(function(){
+
+  //   for(var i = 0; i < meetings.length; i++){
+  //     $scope.meeting.push(meetings[i]);
+  //   }
+
+  // })
+
   meetings.$loaded(function(){
 
-    for(var i = 0; i < meetings.length; i++){
-      $scope.meeting.push(meetings[i]);
+    for(var i = 0; i < slideWindow; i++){
+      $scope.meeting.push(meetings[index + i]);
     }
 
   })
+
 
   $scope.models = {
         selected: null,
@@ -36,6 +47,16 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   })
   console.log($scope.models);
   
+  $scope.slide = function(){
+    index = index + 1;
+    if (index > meetings.length ) {
+      index = meetings.length;
+    };
+    for(var i = 0; i < slideWindow; i++){
+      $scope.meeting[i] = meetings[index + i];
+    }
+
+  }
   
   $scope.editMeeting = function(index){
     $scope.meetinglistshow = false;
@@ -69,6 +90,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
   $scope.removeMeeting = function(index){
+    console.log(index);
     meetings.$remove(index);
     $scope.meeting.splice(index,1);
     $scope.meetinglistshow = true;
