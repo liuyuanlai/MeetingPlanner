@@ -27,13 +27,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         selected: null,
         lists: {"Activities": []}
     };
-    
+
   activities.$loaded(function(){
 
       for(var i = 0; i < activities.length; i++){
         $scope.models.lists.Activities.push(activities[i]);
       }
   })
+  console.log($scope.models);
   
   
   $scope.editMeeting = function(index){
@@ -41,12 +42,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
   $scope.removeMeeting = function(index){
-    console.log("meeting index is" + index);
     meetings.$remove(index);
-    $scope.meeting.Meetings.splice(index,1);
+    $scope.meeting.splice(index,1);
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
-    console.log(meetings);
   }
 
   //Show meetinglist test
