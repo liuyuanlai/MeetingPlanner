@@ -1,17 +1,22 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
 	<section id="cd-timeline">
-		<div ng-repeat="x in meeting" class="col-xs-4">
+		<div ng-repeat="item in meeting" class="col-xs-4">
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
-
-			
+ 
+            <div class="editMeeting">
+            	<span class="glyphicon glyphicon-pencil" ng-click="editMeeting($index)" style="cursor: hand;cursor: pointer;"></span>
+            	<span class="glyphicon glyphicon-trash" ng-click="removeMeeting($index)" style="cursor: hand;cursor: pointer;"></span>
+            </div>
+    	
 			<div class="meetingInfo">
-				<h5>Meeting: {{x[0].mName}}<br>
-					Start Time: {{x[0].MPlace}} <br>
-					End Time: {{x[0].mTime}} <br>
-					Total Length: {{x[0].mTag}} <br>
+				<h5>Meeting: {{item.mName}}<br>
+					Location: {{item.MPlace}}<br>
+					Start Time: {{item.mTime}}<br>
+					End Time:  <br>
+					Total Length: <br>
 				</h5>
 			</div>
 
@@ -55,15 +60,14 @@
 				                    >
 				                    <div class="row">
 		                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
-		                                <div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min</div>
-		                                <div class="col-xs-8">{{item.name}}</div>
+			                                <div class="col-xs-2" style="border-right:1px solid #ddd; padding:0px 0px 0px 0px">{{item.length}}min
+			                                </div>
+			                                <div class="col-xs-10">{{item.name}}</div>
 		                                </div>
 
-
-
 				                    	<div class="cos-xs-2">
-		                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;"></span>
-
+			                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;">
+			                    			</span>
 				                       </div>
 				                  
 				                    </div>
@@ -73,7 +77,6 @@
 				        </div>
 			        </div>
 		        </div>
-			
 			</div>
 		</div>
 

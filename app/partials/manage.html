@@ -4,7 +4,7 @@
       <h3 class="nav-bar-h3"><strong>MEETING AGENDA</strong></h3>
       <div class="nav-bar-profile">
         <span class="glyphicon glyphicon-user"></span>
-        <span class="nav-bar-profile-username">User name</span>
+        <span class="nav-bar-profile-username">{{userUsername}}</span>
         <button class="btn btn-primary btn-sm" ng-click="logoutUser()">Log out</button>
       </div>
     </div>
@@ -12,7 +12,7 @@
 </div>
 
 <div class="container">
-  <div class="col-xs-3 panel panel-default" style="height:550px;">
+  <div class="col-xs-3 panel panel-info" style="height:550px;">
     <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
   </div>
   <div class="col-xs-9 panel panel-default" style="height:550px;">
