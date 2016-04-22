@@ -8,6 +8,76 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   var user_data = Auth.$getAuth();
 
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
+  
+
+
+  //Show meetinglist test
+  // $scope.createMeeting = function (){
+  //   $scope.meetingInfo = [
+  //           {
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 8.00,
+  //                   "tag" : "DH2642"
+
+  //               },{
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 9.00,
+  //                   "tag" : "DH2642"
+  //               },{            
+  //                   "name" : "TEST",
+  //                   "place" : "KTH",
+  //                   "mytime" : 10.00,
+  //                   "tag" : "DH2642"
+  //               }
+  //           ];
+  // }
+  // $scope.createMeeting();
+    
+
+
+  //Show meetinglist test
+
+  $scope.createMeetingTest = function (){
+    // var meetinglist =  
+
+    var meetingInfo = {
+      mName: "test",
+      MPlace: "place",
+      mTime: "time",
+      mTag: "tag",
+      mMembers: "members",
+    };
+
+    $scope.meeting = {
+        "Meetings": [],
+
+    };
+
+
+    $scope.addNewMeeting = function(){
+        for(var i = 0; i < 3; i++){
+        $scope.meeting.Meetings.push(meetingInfo);
+      }
+    }
+
+    $scope.addNewMeeting();
+
+    $scope.meetingInfo = meetingInfo;
+    console.log($scope.meeting.Meetings);
+    console.log($scope.meeting.Meetings[0]);
+
+    // meetings.$add(meetingInfo);
+    // console.log(meeting);
+    // console.log("create meeting");
+  }
+    
+  $scope.createMeetingTest();
+
+
+
+
 
   $scope.addmeeting = function(){
     $scope.meetinglistshow = false;
@@ -167,6 +237,12 @@ $scope.mytime = new Date();
 
 
 });
+
+
+
+
+
+
 
 meetingPlannerApp.controller('ProgressDemoCtrl', function ($scope,$routeParams) {
 
