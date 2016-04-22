@@ -50,24 +50,23 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       mMembers: "members",
     };
 
-    $scope.models = {
-        selected: null,
-        lists: {"Meetings": []}
+    $scope.meeting = {
+        "Meetings": [],
+
     };
 
 
     $scope.addNewMeeting = function(){
         for(var i = 0; i < 3; i++){
-        $scope.models.lists.Meetings.push(meetingInfo);
+        $scope.meeting.Meetings.push(meetingInfo);
       }
     }
-    $scope.hello = $scope.models.lists.Meetings;
 
     $scope.addNewMeeting();
 
     $scope.meetingInfo = meetingInfo;
-    console.log($scope.models.lists.Meetings);
-    console.log($scope.models.lists.Meetings[0]);
+    console.log($scope.meeting.Meetings);
+    console.log($scope.meeting.Meetings[0]);
 
     // meetings.$add(meetingInfo);
     // console.log(meeting);
