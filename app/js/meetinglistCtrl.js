@@ -20,6 +20,28 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
     }
+    console.log("test");
+
+    activities.$loaded(function(){
+      console.log("test");
+      for (var i = 0; i < meetings.length; i++) {
+        if (meetings[i].hasOwnProperty("activities")) {
+          activities_temp = [];
+          for (var j = 0; j < meetings[i].activities.length; j++) {
+            for (var k = 0; k < activities.length; k++) {
+              if (activities[k].$id == meetings[i].activities[j]) {
+                activities_temp.push(activities[k]);
+              }
+            }
+          }
+          $scope.models.lists.Activities.push(activities_temp);
+          //console.log($scope.models.lists.Activities);
+        }else{
+          $scope.models.lists.Activities.push([]);
+        }
+        
+      }
+  })
 
   })
 
@@ -28,15 +50,57 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         lists: {"Activities": []}
     };
 
-  activities.$loaded(function(){
 
-      for(var i = 0; i < activities.length; i++){
-        $scope.models.lists.Activities.push(activities[i]);
+  //console.log($scope.models);
+  
+  $scope.insertactivity = function(item, index){
+    //console.log(item.$id);
+    //console.log(index);
+    if (meetings[index].hasOwnProperty("activities")) {
+
+      meetings[index].activities.push(item.$id);
+      meetings.$save(index);
+      //console.log(meetings);
+      //$scope.meeting[index].activities.push(item.$id);
+      //console.log($scope.models.lists.Activities);
+      //$scope.models.lists.Activities[index].push(item);
+
+    }else{
+      meetings[index]["activities"] = [item.$id];
+      console.log(meetings);
+      meetings.$save(index);
+      $scope.meeting[index]["activities"] = [item.$id];
+    }
+
+    for (var i = 0; i < activities.length; i++) {
+      if (activities[i].$id == item.$id) {
+        activities[i].homeless = false;
+        activities.$save(i);
       }
-  })
-  console.log($scope.models);
-  
-  
+        
+    }
+    console.log($scope.meeting);
+
+    
+  }
+
+  $scope.dragactivity = function(activityindex, meetingindex){
+    console.log(activityindex);
+    console.log(meetingindex);
+    meetings[meetingindex].activities.splice(activityindex, 1);
+    //meetings[meetingindex].activities.$save(activityindex);
+    meetings.$save(meetingindex);
+    //$scope.meeting[meeetingindex].activities.splice(activityindex, 1);
+    $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
+    //$scope.models.lists.Activities[0].pop(0); 
+    //console.log($scope.models.lists.Activities);
+  }
+
+  // Model to JSON for demo purpose
+  // $scope.$watch('models', function(model) {
+  //     $scope.modelAsJson = angular.toJson(model, true);
+  // }, true);
+
   $scope.editMeeting = function(index){
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = false;
@@ -87,11 +151,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       mTime: time,
       mTag: tag,
       mMembers: members,
-      mDescript: description
+      mDescript: description,
 
     };
 
     meetings.$add(new_meeting);
+    console.log(meetings);
     // $scope.models.lists.Activities.push(newAct);
 
 

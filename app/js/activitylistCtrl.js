@@ -8,6 +8,17 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 	var activities = $firebaseArray(activityRef.child(user_data.uid));
 
+	activities.$loaded(function(){
+
+    	for(var i = 0; i < activities.length; i++){
+    		if (activities[i].homeless == true) {
+    			$scope.models.lists.Activities.push(activities[i]);
+    		}
+    		
+    	}
+
+	});
+
 
 	// only for printing out the array data from firebase
 	$scope.test = function() {
@@ -57,11 +68,12 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 	}
 
 	$scope.dragactivity = function(index){
-		console.log(index);
-		activities[index].homeless = false;
-		activities.$save(index);
+		//console.log(index);
+		//activities[index].homeless = false;
+		//activities.$save(index);
 		//console.log(activities);
-		$scope.models.lists.Activities[index] = false;
+		//$scope.models.lists.Activities[index].homeless = false;
+		$scope.models.lists.Activities.splice(index, 1);
 		//$scope.list.splice($index, 1);
 		//console.log($scope.models);
 	}
@@ -72,7 +84,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 			if(activities[i].$id == item.$id){
 				activities[i].homeless = true;
 				activities.$save(i);
-				$scope.models.lists.Activities[i].homeless = true;
+				//$scope.models.lists.Activities[i].homeless = true;
 
 
 			}
@@ -84,13 +96,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
         lists: {"Activities": []}
     };
 
-	activities.$loaded(function(){
-
-    	for(var i = 0; i < activities.length; i++){
-    		$scope.models.lists.Activities.push(activities[i]);
-    	}
-
-	})
+	
 
 	
 	
@@ -114,7 +120,11 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 			}
             
             activities.$add(newAct);
-			$scope.models.lists.Activities.push(newAct);
+            activities.$loaded(function(){
+            	$scope.models.lists.Activities.push(activities[activities.length-1]);
+            })
+            //console.log(activities);
+			//
 			$scope.activitylistshow = true;
 			$scope.addactivityshow = false;
 		}

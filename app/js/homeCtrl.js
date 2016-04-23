@@ -24,8 +24,8 @@ meetingPlannerApp.controller('HomeCtrl',
 					.catch(function(error) {
 						console.log("Error: ", error);
 					});
-				console.log($firebaseObject(userRef.child(userKey)));
-				console.log("haha");
+				//console.log($firebaseObject(userRef.child(userKey)));
+				//console.log("haha");
 			} else {
 				console.log("Logged out");
 			}
