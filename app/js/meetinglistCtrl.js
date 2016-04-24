@@ -119,7 +119,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       meetings[index]["activities"] = [item.$id];
       console.log(meetings);
       meetings.$save(index);
-      $scope.meeting[index]["activities"] = [item.$id];
+      //$scope.meeting[index]["activities"] = [item.$id];
     }
 
     for (var i = 0; i < activities.length; i++) {
@@ -216,6 +216,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
     $scope.meeting.push(new_meeting);
+    $scope.models.lists.Activities.push([]);
+    //$scope.models.lists.Activities.push([]);
     // $scope.meeting.push(new_meeting);
 
     if(meetings.length <= 3) {
