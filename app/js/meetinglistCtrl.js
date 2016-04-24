@@ -23,7 +23,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.meeting = [];
 
+
   meetings.$loaded(function(){
+
+
+    
+    console.log("test");
+
     activities.$loaded(function(){
       console.log("test");
       for (var i = 0; i < meetings.length; i++) {
@@ -67,10 +73,40 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
     }
 
+    //console.log($scope.meetingShow);
+
+
+
+    
+    // console.log("the num of meetings" + meetings.length);
+    // if (meetings.length <= 3) {
+    //    for(var i = 0; i < meetings.length; i++){
+    //      $scope.meeting.push(meetings[index + i]);
+    //    }
+    //    Max_M_Pos = 0;
+    // }else {
+    //   for(var i = 0; i < slideWindowSize; i++){
+    //   $scope.meeting.push(meetings[index + i]);
+    //   }      
+    //    Max_M_Pos = meetings.length - 3;
+    // };
+  })
+// end of loaded function
+
+
   $scope.models = {
         selected: null,
-        lists: {"Activities": []}
+        lists: {"Activities": []} 
   };
+
+
+
+  //   for(var i = 0; i < activities.length; i++){
+  //     $scope.models.lists.Activities.push(activities[i]);
+  //   }
+  // })
+
+  //console.log($scope.models);
   
   $scope.Forward = function(){
     if (offSet + 3 >= meetings.length) {
@@ -78,7 +114,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet + 1;
       $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
-    //  console.log($scope.meetingShow);
+      console.log($scope.meetingShow);
     }
   }
 
@@ -88,7 +124,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
-     // console.log($scope.meetingShow);
+      console.log($scope.meetingShow);
     }
   }
 
