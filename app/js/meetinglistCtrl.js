@@ -217,7 +217,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.eMeeting = {};
     $scope.eMeeting.mName = editMeeting.mName;
     $scope.eMeeting.place = editMeeting.MPlace;
-    // $scope.eMeeting.mTime = editMeeting.mTime;
+    $scope.eMeeting.date = new Date(editMeeting.mDate);
+
+    var dt = editMeeting.mDateTime;
+    var date = new Date(dt);    
+    $scope.eMeeting.mtime = new Date(date);
+    
     $scope.eMeeting.tag = editMeeting.mTag;
     $scope.eMeeting.members = editMeeting.mMembers;
     $scope.eMeeting.descript = editMeeting.mDescript;
@@ -258,13 +263,17 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
+    //console.log("the format of time " + mytime);
+    var M_date = dt.toLocaleDateString();
+    var M_time = dt.toLocaleTimeString();
+    //console.log(mytime);
+    
    var date = dt.getDate();
    var year = dt.getFullYear();
    var month = dt.getMonth();
    var hours = mytime.getHours();
    var min = mytime.getMinutes();
 
-   //Set the date
    var month = new Array();
     month[0] = "January";
     month[1] = "February";
@@ -280,7 +289,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     month[11] = "December";
     var m = month[dt.getMonth()];
     var M_date = date + "-" + m + "-" + year;
-    
+
     // Set the start time
     var M_time = "";
     var M_hours = mytime.getHours();
@@ -294,11 +303,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     };
     
     M_time = M_hours + ':' + M_min;
-    console.log("M getMinutes" + M_time);
 
+    var M_DateTime = M_date + " " + M_time;
+    console.log(M_DateTime);
+ 
     var new_meeting = {
       mName: name,
       MPlace: place,
+      mDateTime: M_DateTime,
       mDate: M_date,
       mTime: M_time,
       mTag: tag,
@@ -310,11 +322,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     };
     
-    
+   //console.log(new_meeting.mTime); 
    
     meetings.$add(new_meeting);
-   // console.log(meetings);
-
 
     $scope.meeting.push(new_meeting);
     // $scope.meeting.push(new_meeting);
