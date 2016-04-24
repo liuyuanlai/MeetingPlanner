@@ -41,7 +41,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
             }
           }
           $scope.models.lists.Activities.push(activities_temp);
-          //console.log($scope.models.lists.Activities);
+
         }else{
           $scope.models.lists.Activities.push([]);
         }
@@ -54,6 +54,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
+      $scope.meeting[i].mLength = $scope.getMeetingLength(i);
+
 
     }
 
@@ -136,21 +138,43 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
           return activities[key].length;
         };
       }
+
   }
+  $scope.addActType = function(index){
+    var actlist = meetings[index].activities;
 
-  $scope.getEndTime = function (index,length,count) {
+    for (key in actlist) {
+      console.log(actlist[key].type);
+      // if (actlist[key].type == 'Break') {
+      //   $scope.ActivityType[0].value += $scope.testAct[i].length;
+      // }else if($scope.testAct[i].type == 'Introduction'){
+      //   $scope.ActivityType[1].value += $scope.testAct[i].length;
+      // }else if($scope.testAct[i].type == 'Presentation'){
+      //   $scope.ActivityType[2].value += $scope.testAct[i].length;
+      // }else if($scope.testAct[i].type == 'Group Work'){
+      //   $scope.ActivityType[3].value += $scope.testAct[i].length;
+      // };
 
-    if (count == 1) {
-      $scope.meeting[index].mLength += length;
+        };
 
+  };
 
-    } else if (count ==0){
-      $scope.meeting[index].mLength -= length;
-      // $scope.meeting[index].mEndTime -= length;
+  $scope.getMeetingLength = function (index) {
+    var actlist = meetings[index].activities;
+    var meetL = 0;
+
+    $scope.meeting[index].mLength = 0;
+    
+    for (key in actlist) {
+      meetL += $scope.getActLength(actlist[key]);
+
     };
-
-    $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + $scope.meeting[index].mLength;
+    $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + meetL;
+    $scope.meeting[index].mLength = meetL;
+        console.log(activities);
+    return meetL;
   }
+
 
 
   $scope.insertactivity = function(item, index){
@@ -180,23 +204,24 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         
     }
     // console.log($scope.models.lists.Activities[index]);
-    // console.log(meetings[index].activities);
+    console.log("meetings[index].activities"+meetings[index].activities);
+    $scope.getMeetingLength(index);
 
-    $scope.getEndTime(index,item.length,1);
+    // $scope.getEndTime(index,item.length,1);
 
 
   }
 
   $scope.dragactivity = function(activityindex, meetingindex){
 
-    var actLength = $scope.getActLength(meetings[meetingindex].activities[activityindex]);
+
     meetings[meetingindex].activities.splice(activityindex, 1);
     //meetings[meetingindex].activities.$save(activityindex);
     meetings.$save(meetingindex);
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
+    $scope.getMeetingLength(activityindex);
 
-    $scope.getEndTime(meetingindex,actLength,0);
 
   }
 
@@ -316,10 +341,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
     ];
 
-    $scope.addActType = function(){
-    };
 
-    $scope.addActType();
+
+
     $scope.testAct = [];
 
     var types = ['Break', 'Introduction', 'Presentation', 'Group Work'];
