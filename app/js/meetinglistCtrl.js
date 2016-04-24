@@ -264,10 +264,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
     ];
 
-    $scope.addActType = function(){
-    };
-
-    $scope.addActType();
     $scope.testAct = [];
 
     var types = ['Break', 'Introduction', 'Presentation', 'Group Work'];

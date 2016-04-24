@@ -45,6 +45,8 @@
 				                    dnd-moved="dragactivity($index, $parent.$parent.$index)"
 				                    dnd-effect-allowed="move"
 				                    dnd-selected="models.selected = item"
+				                    class="activity-item"
+				                    ng-class="item.type"
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
 				                    <div class="row">
