@@ -1,0 +1,24 @@
+.activity-item {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	border-radius: 8px!important;
+	background-clip: padding-box!important;
+	box-sizing: border-box;
+}
+
+.presentation {
+	background-color: #5bc0de!important;
+	background-clip: padding-box;
+}
+
+.group-work {
+	background: #d9534f!important;
+}
+
+.discussion {
+	background: #5cb85c!important;
+}
+
+.break {
+	background: #f0ad4e!important;
+}

@@ -52,6 +52,8 @@
 				                    dnd-moved="dragactivity($index, $parent.$parent.$index)"
 				                    dnd-effect-allowed="move"
 				                    dnd-selected="models.selected = item"
+				                    class="activity-item"
+				                    ng-class="item.type"
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
 				                    <div class="row">
@@ -148,7 +150,7 @@
 
 	</form>
 </div>
-<!-- add meeting view -->
+<!-- finishing add meeting view -->
 
 <!-- edit meeting view -->
 <div ng-show="editmeetingshow" class="addMeeting">
@@ -162,7 +164,7 @@
 	    <label class="col-sm-2 control-label time">Date</label>
 		    <div class="col-sm-4 time">
 		        <p class="input-group">
-		          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+		          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="eMeeting.date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
 		          <span class="input-group-btn">
 		            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
 		          </span>
@@ -171,7 +173,7 @@
 
         <label class="col-sm-2 control-label time">Start Time</label>
 	    <div class="col-sm-4">
-	    	<uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+	    	<uib-timepicker ng-model="eMeeting.mtime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 	    </div>
 	   </div>
 
