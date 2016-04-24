@@ -23,10 +23,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   meetings.$loaded(function(){
 
 
-    for(var i = 0; i < meetings.length; i++){
-      $scope.meeting.push(meetings[i]);
+    // for(var i = 0; i < meetings.length; i++){
+    //   $scope.meeting.push(meetings[i]);
 
-    }
+    // }
     console.log("test");
 
     activities.$loaded(function(){
@@ -48,7 +48,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
         
       }
-  })
+    })
 
     
     console.log("the num of meetings" + meetings.length);
@@ -63,23 +63,20 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }      
        Max_M_Pos = meetings.length - 3;
     };
-
-
-
   })
+// end of loaded function
 
 
   $scope.models = {
         selected: null,
         lists: {"Activities": []}
-    };
+      };
 
 
-
-      for(var i = 0; i < activities.length; i++){
-        $scope.models.lists.Activities.push(activities[i]);
-      }
-  })
+  //   for(var i = 0; i < activities.length; i++){
+  //     $scope.models.lists.Activities.push(activities[i]);
+  //   }
+  // })
 
   console.log($scope.models);
   
@@ -133,8 +130,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         
     }
     console.log($scope.meeting);
-
-    
   }
 
   $scope.dragactivity = function(activityindex, meetingindex){
@@ -268,8 +263,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     ];
 
     $scope.addActType = function(){
-
     };
+
     $scope.addActType();
     $scope.testAct = [];
 
@@ -408,8 +403,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   ];
 
   function getDayClass(data) {
-    var date = data.date,
-      mode = data.mode;
+    var date = data.date, mode = data.mode;
     if (mode === 'day') {
       var dayToCheck = new Date(date).setHours(0,0,0,0);
 
@@ -421,13 +415,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
       }
     }
-
     return '';
   }
 //Date Picker
 
 // Time Picker
-$scope.mytime = new Date();
+  $scope.mytime = new Date();
 
   $scope.hstep = 1;
   $scope.mstep = 1;
