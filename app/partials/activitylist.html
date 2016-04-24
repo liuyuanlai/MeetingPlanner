@@ -19,13 +19,13 @@
 
 <div ng-show="activitylistshow">
 	<div class="row simpleDemo" style="text-align: center;">
-		<div ng-repeat="(listName, list) in models.lists" >
-		    <div class="panel panel-info" style="height:550px;">
+		<div ng-repeat="(listName, list) in models.lists">
+		    <div class="panel panel-info" ng-class="listName.type" style="height:550px;">
 		        <div class="panel-heading">
 		            <h3 class="panel-title">{{listName}}</h3>
 		        </div>
-		        <!-- <div class="panel-body" ng-include="'simple/simple.html'"> -->
-		        <div class="panel-body" >
+
+		        <div class="panel-body">
 		            <ul dnd-list="list"
 		            	dnd-inserted="insertactivity(item)"
 		            	>
@@ -35,10 +35,12 @@
 		                    dnd-moved="dragactivity($index)" 
 		                    dnd-effect-allowed="move"
 		                    dnd-selected="models.selected = item"
-		                    ng-class="{'selected': models.selected === item}"
+		                    class="activity-item"
+		                    ng-class="item.type"
+		                    ng-class="{'background-clip: ,'selected': models.selected === item}"
 		                   
 		                    >
-		                    <div class="row">
+		                    <div class="row" ng-class="item.type">
                                 <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
                                 	<div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min
                                 	</div>

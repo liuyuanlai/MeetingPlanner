@@ -118,6 +118,8 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 							description: $scope.newAct_description,
 							homeless: true,
 			}
+
+			console.log(newAct);
             
             activities.$add(newAct);
             activities.$loaded(function(){
