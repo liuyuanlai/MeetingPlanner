@@ -1,14 +1,21 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
 
-	<button ng-click="Back()">Back</button>
-	<button ng-click="Forward()">Forward</button>
+	<button type="button" ng-click="Back()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
+	<button type="button" ng-click="Forward()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span>Forward</button>
+
+<!-- 	<div ng-controller="PagerDemoCtrl">
+	  <h4>Pager</h4>
+	  <pre>You are currently on page {{currentPage}}</pre>
+	  <uib-pager total-items="totalItems" ng-model="currentPage"></uib-pager>
+	</div> -->
 
 	<section id="cd-timeline">
 
 		<div ng-repeat="item in meeting" class="col-xs-4" ng-show="meetingShow[$index]">
 			<!-- <button ng-click="Forward($index)">Forward</button> -->
-			<div class="circle"></div>
+			<div class="circle" uib-popover={{item.mDate}} popover-trigger="mouseenter" style="cursor: hand;cursor: pointer;">
+			</div>
 			<div class="square"></div>
 			<div class="meetingPanel">
  
@@ -136,7 +143,7 @@
 	  </div>
 	  <div class="form-group">
 	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
-	  	<button type="submit" class="btn btn-default creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="createMeeting(mName,MPlace,dt,tags,Mmembers,Mdescript)">Create</button>
+	  	<button type="submit" class="btn btn-default creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="createMeeting(mName,MPlace,dt, mytime, tags,Mmembers,Mdescript)">Create</button>
 	  </div>
 
 	</form>

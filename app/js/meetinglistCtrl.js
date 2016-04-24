@@ -112,7 +112,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet + 1;
       $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
-      console.log($scope.meetingShow);
+     // console.log($scope.meetingShow);
     }
   }
 
@@ -122,7 +122,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
-      console.log($scope.meetingShow);
+     // console.log($scope.meetingShow);
     }
   }
 
@@ -167,7 +167,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     }else{
       meetings[index]["activities"] = [item.$id];
-      console.log(meetings);
+     // console.log(meetings);
       meetings.$save(index);
       $scope.meeting[index]["activities"] = [item.$id];
     }
@@ -236,12 +236,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings[index].mMembers = $scope.eMeeting.members;
     meetings[index].mDescript = $scope.eMeeting.descript;
     meetings.$save(index);
-    console.log(meetings[index]);
+    //console.log(meetings[index]);
   }
 
   $scope.removeMeeting = function(w_Index){
    // Get the index at the window, then get the actual index in the meeting array
-   console.log("first M position" + First_M_Pos);
+   //console.log("first M position" + First_M_Pos);
     meetings.$remove(First_M_Pos + w_Index);
     $scope.meeting.splice(First_M_Pos + w_Index,1);
     $scope.meetinglistshow = true;
@@ -257,11 +257,50 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     
   //Create Meeting
-  $scope.createMeeting = function (name, place, time, tag, members, description){
+  $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
+   var date = dt.getDate();
+   var year = dt.getFullYear();
+   var month = dt.getMonth();
+   var hours = mytime.getHours();
+   var min = mytime.getMinutes();
+
+   //Set the date
+   var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    var m = month[dt.getMonth()];
+    var M_date = date + "-" + m + "-" + year;
+    
+    // Set the start time
+    var M_time = "";
+    var M_hours = mytime.getHours();
+    var M_min = mytime.getMinutes();
+
+    if (hours < 10) {
+        M_hours = "0" + hours;
+    };
+    if (min < 10) {
+        M_min = "0" + min;
+    };
+    
+    M_time = M_hours + ':' + M_min;
+    console.log("M getMinutes" + M_time);
+
     var new_meeting = {
       mName: name,
       MPlace: place,
-      mTime: time,
+      mDate: M_date,
+      mTime: M_time,
       mTag: tag,
       mMembers: members,
       mDescript: description,
@@ -270,9 +309,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       mLength: 0,
 
     };
-
+    
+    
+   
     meetings.$add(new_meeting);
-    console.log(meetings);
+   // console.log(meetings);
 
 
     $scope.meeting.push(new_meeting);
@@ -486,7 +527,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 00]
   };
 
-  $scope.ismeridian = true;
+  $scope.ismeridian = false;
   $scope.toggleMode = function() {
     $scope.ismeridian = ! $scope.ismeridian;
   };
