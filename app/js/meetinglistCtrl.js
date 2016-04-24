@@ -205,7 +205,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }
     // console.log($scope.models.lists.Activities[index]);
     console.log("meetings[index].activities"+meetings[index].activities);
-    $scope.getMeetingLength(index);
+    $scope.meeting[index].mLength = $scope.getMeetingLength(index);
 
     // $scope.getEndTime(index,item.length,1);
 
@@ -220,7 +220,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings.$save(meetingindex);
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
-    $scope.getMeetingLength(activityindex);
+    $scope.meeting[activityindex].mLength = $scope.getMeetingLength(activityindex);
 
 
   }
