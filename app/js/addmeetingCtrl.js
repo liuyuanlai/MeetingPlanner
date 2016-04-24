@@ -10,6 +10,7 @@ meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $fir
 
   //Create Meeting
   $scope.createMeeting = function (name, place, time, tag, members, description){
+    console.log(time);
     var new_meeting = {
       mName: name,
       MPlace: place,
