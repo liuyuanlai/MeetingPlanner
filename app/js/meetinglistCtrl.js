@@ -206,14 +206,49 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     console.log(meetings[index]);
   }
 
-  $scope.removeMeeting = function(w_Index){
+  $scope.removeMeeting = function(index){
    // Get the index at the window, then get the actual index in the meeting array
-   console.log("first M position" + First_M_Pos);
-    meetings.$remove(First_M_Pos + w_Index);
-    $scope.meeting.splice(First_M_Pos + w_Index,1);
-    $scope.meetinglistshow = true;
-    $scope.addmeetingshow = false;
-    $scope.editmeetingshow = false;
+    meetings.$remove(index);
+    $scope.models.lists.Activities.splice(index, 1);
+    $scope.meeting.splice(index, 1);
+    var flag = true;
+    if (index + 1 < $scope.meetingShow.length) {
+      for (var i = index + 1; i < $scope.meetingShow.length; i++) {
+        if ($scope.meetingShow[i] == false) {
+          $scope.meetingShow[i] = true;
+          flag = false;
+          break;
+        }
+      }
+      if (flag && index > 0) {
+        for (var i = index - 1; i >= 0; i--) {
+          if ($scope.meetingShow[i] == false) {
+          $scope.meetingShow[i] = true;
+          flag = false;
+          if (offSet > 0) {
+            offSet = offSet -1;
+          }
+          break;
+          }
+        }
+      }
+    }else if (index > 0) {
+      for (var i = index - 1; i >= 0; i--) {
+          if ($scope.meetingShow[i] == false) {
+          $scope.meetingShow[i] = true;
+          flag = false;
+          if (offSet > 0) {
+            offSet = offSet -1;
+          }
+          break;
+          }
+      }
+    }
+  $scope.meetingShow.splice(index, 1);
+  //console.log("test");
+    // $scope.meetinglistshow = true;
+    // $scope.addmeetingshow = false;
+    // $scope.editmeetingshow = false;
   }
 
   // //Show meetinglist test
