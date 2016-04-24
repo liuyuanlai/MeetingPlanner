@@ -6,7 +6,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   // get the auth infomation about the current user
   var user_data = Auth.$getAuth();
 
-
   var meetingRef = Ref.child("meetings");
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
 
@@ -28,11 +27,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   meetings.$loaded(function(){
 
 
-    
-    console.log("test");
 
     activities.$loaded(function(){
-      console.log("test");
+
       for (var i = 0; i < meetings.length; i++) {
         if (meetings[i].hasOwnProperty("activities")) {
           activities_temp = [];
@@ -60,6 +57,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     }
 
+    
     if (meetings.length <= 3) {
       for (var i = 0; i < meetings.length; i++) {
         $scope.meetingShow.push(true);
@@ -96,8 +94,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.models = {
         selected: null,
-        lists: {"Activities": []}
-      };
+        lists: {"Activities": []} 
+  };
+
 
 
   //   for(var i = 0; i < activities.length; i++){
@@ -113,7 +112,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet + 1;
       $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
-      console.log($scope.meetingShow);
+     // console.log($scope.meetingShow);
     }
   }
 
@@ -123,11 +122,37 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
-      console.log($scope.meetingShow);
+     // console.log($scope.meetingShow);
     }
   }
 
-  
+
+  $scope.getActLength = function (id) {
+
+    for (key in activities) {
+      // console.log(activities[key].$id);
+        if(activities[key].$id == id){
+
+          return activities[key].length;
+        };
+      }
+  }
+
+  $scope.getEndTime = function (index,length,count) {
+
+    if (count == 1) {
+      $scope.meeting[index].mLength += length;
+
+
+    } else if (count ==0){
+      $scope.meeting[index].mLength -= length;
+      $scope.meeting[index].mEndTime -= length;
+    };
+
+    $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + $scope.meeting[index].mLength;
+  }
+
+
   $scope.insertactivity = function(item, index){
     //console.log(item.$id);
     //console.log(index);
@@ -142,9 +167,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     }else{
       meetings[index]["activities"] = [item.$id];
-      console.log(meetings);
+     // console.log(meetings);
       meetings.$save(index);
-      //$scope.meeting[index]["activities"] = [item.$id];
+      $scope.meeting[index]["activities"] = [item.$id];
     }
 
     for (var i = 0; i < activities.length; i++) {
@@ -154,20 +179,28 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
         
     }
-    console.log($scope.meeting);
+    // console.log($scope.models.lists.Activities[index]);
+    // console.log(meetings[index].activities);
+
+    $scope.getEndTime(index,item.length,1);
+
+
   }
 
   $scope.dragactivity = function(activityindex, meetingindex){
-    console.log(activityindex);
-    console.log(meetingindex);
+
+    var actLength = $scope.getActLength(meetings[meetingindex].activities[activityindex]);
     meetings[meetingindex].activities.splice(activityindex, 1);
     //meetings[meetingindex].activities.$save(activityindex);
     meetings.$save(meetingindex);
-    //$scope.meeting[meeetingindex].activities.splice(activityindex, 1);
+
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
-    //$scope.models.lists.Activities[0].pop(0); 
-    //console.log($scope.models.lists.Activities);
+
+    $scope.getEndTime(meetingindex,actLength,0);
+
   }
+
+
 
   // Model to JSON for demo purpose
   // $scope.$watch('models', function(model) {
@@ -203,7 +236,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings[index].mMembers = $scope.eMeeting.members;
     meetings[index].mDescript = $scope.eMeeting.descript;
     meetings.$save(index);
-    console.log(meetings[index]);
+    //console.log(meetings[index]);
   }
 
   $scope.removeMeeting = function(index){
@@ -259,25 +292,66 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     
   //Create Meeting
-  $scope.createMeeting = function (name, place, time, tag, members, description){
+  $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
+   var date = dt.getDate();
+   var year = dt.getFullYear();
+   var month = dt.getMonth();
+   var hours = mytime.getHours();
+   var min = mytime.getMinutes();
+
+   //Set the date
+   var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    var m = month[dt.getMonth()];
+    var M_date = date + "-" + m + "-" + year;
+    
+    // Set the start time
+    var M_time = "";
+    var M_hours = mytime.getHours();
+    var M_min = mytime.getMinutes();
+
+    if (hours < 10) {
+        M_hours = "0" + hours;
+    };
+    if (min < 10) {
+        M_min = "0" + min;
+    };
+    
+    M_time = M_hours + ':' + M_min;
+    console.log("M getMinutes" + M_time);
+
     var new_meeting = {
       mName: name,
       MPlace: place,
-      mTime: time,
+      mDate: M_date,
+      mTime: M_time,
       mTag: tag,
       mMembers: members,
       mDescript: description,
+      mStartTime: 0,
+      mEndTime: 0,
+      mLength: 0,
 
     };
-
+    
+    
+   
     meetings.$add(new_meeting);
-    console.log(meetings);
-    // $scope.models.lists.Activities.push(newAct);
+   // console.log(meetings);
 
 
     $scope.meeting.push(new_meeting);
-    $scope.models.lists.Activities.push([]);
-    //$scope.models.lists.Activities.push([]);
     // $scope.meeting.push(new_meeting);
 
     if ($scope.meeting.length < 3) {
@@ -488,7 +562,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 00]
   };
 
-  $scope.ismeridian = true;
+  $scope.ismeridian = false;
   $scope.toggleMode = function() {
     $scope.ismeridian = ! $scope.ismeridian;
   };
