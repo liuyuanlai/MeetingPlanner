@@ -374,16 +374,16 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
    
     meetings.$add(new_meeting);
    // console.log(meetings);
-
-
-    $scope.meeting.push(new_meeting);
-    // $scope.meeting.push(new_meeting);
-
-    if ($scope.meeting.length < 3) {
+   if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
     }else{
       $scope.meetingShow.push(false);
     }
+
+    $scope.meeting.push(new_meeting);
+    // $scope.meeting.push(new_meeting);
+
+    
    
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
