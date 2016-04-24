@@ -10,7 +10,7 @@ meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $fir
 
   //Create Meeting
   $scope.createMeeting = function (name, place, time, tag, members, description){
-    console.log(time);
+    //console.log(name);
     var new_meeting = {
       mName: name,
       MPlace: place,
@@ -19,11 +19,9 @@ meetingPlannerApp.controller('AddmeetingCtrl', function ($scope, Ref, Auth, $fir
       mMembers: members,
       mDescript: description
     };
-    // console.log("creating new meeting");
-    // console.log(new_meeting);
+
     meetings.$add(new_meeting);
-    // console.log(meeting);
-    // console.log("create meeting");
+     console.log(new_meeting.mTime);
   }
 
   // Date Picker
