@@ -15,11 +15,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.meeting = [];
 
+
   meetings.$loaded(function(){
 
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
+
     }
+
 
   })
 
@@ -34,9 +37,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         $scope.models.lists.Activities.push(activities[i]);
       }
   })
-  console.log($scope.models);
-  
-  
+
+
+
+
+
   $scope.editMeeting = function(index){
 
   }
@@ -48,7 +53,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.addmeetingshow = false;
   }
 
-  //Show meetinglist test
+  // //Show meetinglist test
+  // $scope.getMID = function(id){
+  //   console.log("hi");
+  //   console.log(id);
+  // }
 
     
   //Create Meeting
