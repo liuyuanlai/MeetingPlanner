@@ -1,8 +1,10 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
-	<button ng-click="slide()">button</button>
+	<button ng-click="Back()">Back</button>
+	<button ng-click="Forward()">Forward</button>
 	<section id="cd-timeline">
 		<div ng-repeat="item in meeting" class="col-xs-4">
+			<!-- <button ng-click="Forward($index)">Forward</button> -->
 			<div class="circle"></div>
 			<div class="square"></div>
 			<div class="meetingPanel">
