@@ -12,6 +12,11 @@ meetingPlannerApp.controller('HomeCtrl',
 
 		$scope.userUsername = "John Doe";
 
+		// initialize the error message content
+		$scope.signinError = "";
+		$scope.signupError = "";
+
+		// this part of code is responsible for displaying username
 		Auth.$onAuth(function(authdata) {
 			if(authdata) {
 				var userKey = authdata.uid;
@@ -22,6 +27,7 @@ meetingPlannerApp.controller('HomeCtrl',
 						$scope.userUsername = data.username;
 					})
 					.catch(function(error) {
+						$scope.error = error;
 						console.log("Error: ", error);
 					});
 				//console.log($firebaseObject(userRef.child(userKey)));
@@ -44,6 +50,7 @@ meetingPlannerApp.controller('HomeCtrl',
 				console.log("Logged in as: ", authData.uid);
 				$location.path("/manage");
 			}).catch(function(error) {
+				$scope.signinError = error;
 				console.log("Authentication failed: ", error);
 			})
 		}
@@ -75,9 +82,11 @@ meetingPlannerApp.controller('HomeCtrl',
 					console.log("Logged in as: ", authData.uid);
 					$location.path("/manage");
 				}).catch(function(error){
+					$scope.signinError = error;
 					console.log("Authentication failed: ", error);
 				})
 			}).catch(function(error){
+				$scope.signupError = error;
 				console.log("Failed signing up: ", error);
 			});
 		};

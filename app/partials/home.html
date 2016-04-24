@@ -19,7 +19,10 @@
 			<div class="field">
 				<input type="password" class="text-input" placeholder="Your password" ng-model="signinPassword">
 			</div>
-			<button class="btn btn-primary" style="float: right;" ng-click="authWithPassword()">Log in</button>
+			<div class="field has-error">
+				<p class="error-field help-block" ng-show="signinError"><strong>{{signinError.code}}</strong></p>
+				<button class="btn btn-primary" style="float: right;" ng-click="authWithPassword()">Log in</button>
+			</div>
 		</form>
 	</div>
 
@@ -38,7 +41,10 @@
 			<div class="field">
 				<input type="password" class="text-input" maxlength="20" placeholder="Password" ng-model="signupPassword">
 			</div>
-			<button class="btn btn-primary" style="float: right;" ng-click="createUser()">Sign up</button>
+			<div class="field has-error">
+				<p class="error-field help-block" ng-show="signupError"><strong>{{signupError.code}}</strong></p>
+				<button class="btn btn-primary" style="float: right;" ng-click="createUser()">Sign up</button>
+			</div>
 		</form>
 	</div>
 

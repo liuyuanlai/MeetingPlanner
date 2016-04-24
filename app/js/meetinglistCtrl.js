@@ -11,10 +11,15 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
-  var index = 0;
-  var slideWindowSize = 3;
-  var First_M_Pos = 0; // initial the position of the first retrive meeting
-  var Max_M_Pos = 0;
+
+  // var index = 0;
+  // var slideWindowSize = 3;
+  // var First_M_Pos = 0; // initial the position of the first retrive meeting
+  // var Max_M_Pos = 0;
+  //var meetingLength = 0;
+  //var slideLength = 0;
+  var offSet = 0;
+  $scope.meetingShow = [];
 
   $scope.meeting = [];
 
@@ -22,10 +27,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   meetings.$loaded(function(){
 
 
-    // for(var i = 0; i < meetings.length; i++){
-    //   $scope.meeting.push(meetings[i]);
-
-    // }
+    
     console.log("test");
 
     activities.$loaded(function(){
@@ -49,19 +51,45 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
     })
 
+    // meetingLength = meetings.length;
+    //slideLength = Math.min(meetingLength, 3);
+
+    for(var i = 0; i < meetings.length; i++){
+      $scope.meeting.push(meetings[i]);
+
+    }
+
+    
+    if (meetings.length <= 3) {
+      for (var i = 0; i < meetings.length; i++) {
+        $scope.meetingShow.push(true);
+      }
+    }else{
+      for (var i = 0; i < 3; i++) {
+        $scope.meetingShow.push(true);
+      }
+      for (var i = 3; i < meetings.length; i++) {
+        $scope.meetingShow.push(false);
+      }
+    }
+
+    //console.log($scope.meetingShow);
+
+
+
     
     // console.log("the num of meetings" + meetings.length);
-    if (meetings.length <= 3) {
-       for(var i = 0; i < meetings.length; i++){
-         $scope.meeting.push(meetings[index + i]);
-       }
-       Max_M_Pos = 0;
-    }else {
-      for(var i = 0; i < slideWindowSize; i++){
-      $scope.meeting.push(meetings[index + i]);
-      }      
-       Max_M_Pos = meetings.length - 3;
-    };
+    // if (meetings.length <= 3) {
+    //    for(var i = 0; i < meetings.length; i++){
+    //      $scope.meeting.push(meetings[index + i]);
+    //    }
+    //    Max_M_Pos = 0;
+    // }else {
+    //   for(var i = 0; i < slideWindowSize; i++){
+    //   $scope.meeting.push(meetings[index + i]);
+    //   }      
+    //    Max_M_Pos = meetings.length - 3;
+    // };
   })
 // end of loaded function
 
@@ -78,27 +106,25 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   //   }
   // })
 
-  console.log($scope.models);
+  //console.log($scope.models);
   
   $scope.Forward = function(){
-    First_M_Pos = First_M_Pos + 1;
-    if (First_M_Pos > Max_M_Pos) {
-       First_M_Pos = Max_M_Pos;
-    };
-
-    for(var i = 0; i < slideWindowSize; i++){
-      $scope.meeting[i] = meetings[First_M_Pos + i];
+    if (offSet + 3 >= meetings.length) {
+      return;
+    }else{
+      offSet = offSet + 1;
+      $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
+      console.log($scope.meetingShow);
     }
   }
 
   $scope.Back = function(){
-    First_M_Pos = First_M_Pos - 1;
-    if (First_M_Pos < 0) {
-       First_M_Pos = 0;
-    };
-    
-    for(var i = 0; i < slideWindowSize; i++){
-      $scope.meeting[i] = meetings[First_M_Pos + i];
+    if (offSet == 0) {
+      return ;
+    }else{
+      offSet = offSet - 1;
+      $scope.meetingShow.push($scope.meetingShow.shift());
+      console.log($scope.meetingShow);
     }
   }
 
@@ -256,17 +282,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     //$scope.models.lists.Activities.push([]);
     // $scope.meeting.push(new_meeting);
 
-    if(meetings.length <= 3) {
-       for(var i = 0; i < meetings.length; i++){
-         $scope.meeting.push(meetings[index + i]);
-       }
-       Max_M_Pos = 0;
-    }else {
-      for(var i = 0; i < slideWindowSize; i++){
-      $scope.meeting.push(meetings[index + i]);
-      }      
-       Max_M_Pos = meetings.length - 3;
-    };
+    if ($scope.meeting.length < 3) {
+      $scope.meetingShow.push(true);
+    }else{
+      $scope.meetingShow.push(false);
+    }
    
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
