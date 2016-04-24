@@ -39,7 +39,7 @@
 		                   
 		                    >
 		                    <div class="row">
-                                <div class="col-xs-10" uib-popover={{item.description}} popover-trigger="mouseenter" style="cursor: hand;cursor: pointer;">
+                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
                                 	<div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min
                                 	</div>
 			                         <div class="col-xs-8">{{item.name}}</div>
