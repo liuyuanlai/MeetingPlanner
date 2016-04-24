@@ -91,7 +91,7 @@ input {
 	background: white;
 	box-shadow: none;
 	border-radius: 4px;
-	height: 180px;
+	height: 210px;
 	float: right;
 	width: 300px;
 }
@@ -139,6 +139,13 @@ input {
 .front-signin .text-input, .front-signup .text-input {
 	border: 1px solid #ccd6dd;
 	width: 266px;
+}
+
+.error-field {
+	display: inline;
+	float: left;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 .table {
