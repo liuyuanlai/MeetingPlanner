@@ -12,10 +12,23 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
+  var index = 0;
+  var slideWindowSize = 3;
+  var First_M_Pos = 0; // initial the position of the first retrive meeting
+  var Max_M_Pos = 0;
 
   $scope.meeting = [];
 
+  // meetings.$loaded(function(){
+
+  //   for(var i = 0; i < meetings.length; i++){
+  //     $scope.meeting.push(meetings[i]);
+  //   }
+
+  // })
+
   meetings.$loaded(function(){
+
 
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
@@ -43,7 +56,23 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
   })
 
+    
+    console.log("the num of meetings" + meetings.length);
+    if (meetings.length <= 3) {
+       for(var i = 0; i < meetings.length; i++){
+         $scope.meeting.push(meetings[index + i]);
+       }
+       Max_M_Pos = 0;
+    }else {
+      for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting.push(meetings[index + i]);
+      }      
+       Max_M_Pos = meetings.length - 3;
+    };
+
+
   })
+
 
   $scope.models = {
         selected: null,
@@ -51,7 +80,35 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     };
 
 
-  //console.log($scope.models);
+
+      for(var i = 0; i < activities.length; i++){
+        $scope.models.lists.Activities.push(activities[i]);
+      }
+  })
+  console.log($scope.models);
+  
+  $scope.Forward = function(){
+    First_M_Pos = First_M_Pos + 1;
+    if (First_M_Pos > Max_M_Pos) {
+       First_M_Pos = Max_M_Pos;
+    };
+
+    for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting[i] = meetings[First_M_Pos + i];
+    }
+  }
+
+  $scope.Back = function(){
+    First_M_Pos = First_M_Pos - 1;
+    if (First_M_Pos < 0) {
+       First_M_Pos = 0;
+    };
+    
+    for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting[i] = meetings[First_M_Pos + i];
+    }
+  }
+
   
   $scope.insertactivity = function(item, index){
     //console.log(item.$id);
@@ -132,9 +189,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     console.log(meetings[index]);
   }
 
-  $scope.removeMeeting = function(index){
-    meetings.$remove(index);
-    $scope.meeting.splice(index,1);
+  $scope.removeMeeting = function(w_Index){
+   // Get the index at the window, then get the actual index in the meeting array
+   console.log("first M position" + First_M_Pos);
+    meetings.$remove(First_M_Pos + w_Index);
+    $scope.meeting.splice(First_M_Pos + w_Index,1);
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
@@ -162,6 +221,18 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     $scope.meeting.push(new_meeting);
     // $scope.meeting.push(new_meeting);
+
+    if(meetings.length <= 3) {
+       for(var i = 0; i < meetings.length; i++){
+         $scope.meeting.push(meetings[index + i]);
+       }
+       Max_M_Pos = 0;
+    }else {
+      for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting.push(meetings[index + i]);
+      }      
+       Max_M_Pos = meetings.length - 3;
+    };
    
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
