@@ -27,11 +27,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   meetings.$loaded(function(){
 
 
-    
-    //("test");
 
     activities.$loaded(function(){
-     // console.log("test");
+
       for (var i = 0; i < meetings.length; i++) {
         if (meetings[i].hasOwnProperty("activities")) {
           activities_temp = [];
@@ -171,7 +169,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       meetings[index]["activities"] = [item.$id];
      // console.log(meetings);
       meetings.$save(index);
-      //$scope.meeting[index]["activities"] = [item.$id];
+      $scope.meeting[index]["activities"] = [item.$id];
     }
 
     for (var i = 0; i < activities.length; i++) {
@@ -319,8 +317,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
     $scope.meeting.push(new_meeting);
-    $scope.models.lists.Activities.push([]);
-    //$scope.models.lists.Activities.push([]);
     // $scope.meeting.push(new_meeting);
 
     if ($scope.meeting.length < 3) {
