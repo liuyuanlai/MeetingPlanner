@@ -122,7 +122,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     } else if (count ==0){
       $scope.meeting[index].mLength -= length;
-      $scope.meeting[index].mEndTime -= length;
+      // $scope.meeting[index].mEndTime -= length;
     };
 
     $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + $scope.meeting[index].mLength;
