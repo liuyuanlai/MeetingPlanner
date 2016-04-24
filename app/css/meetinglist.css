@@ -1,5 +1,7 @@
 .meetinglist{
   padding: 20px;
+  height:550px;
+  overflow: hidden;
 }
 .mlContainer{
 	height:500px;
@@ -50,7 +52,7 @@
 .addBtn{
    position: absolute;
    right:40px;
-   top: 35px;
+   top: 12px;
    width: 40px;
    height: 40px;
    background: #00cc99;
@@ -149,3 +151,4 @@ to {
 to {
     background-position: 0 0;
 }
+

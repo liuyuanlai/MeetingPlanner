@@ -12,14 +12,21 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
+  var index = 0;
+  var slideWindowSize = 3;
+  var First_M_Pos = 0; // initial the position of the first retrive meeting
+  var Max_M_Pos = 0;
 
   $scope.meeting = [];
 
+
   meetings.$loaded(function(){
 
-    for(var i = 0; i < meetings.length; i++){
-      $scope.meeting.push(meetings[i]);
-    }
+
+    // for(var i = 0; i < meetings.length; i++){
+    //   $scope.meeting.push(meetings[i]);
+
+    // }
     console.log("test");
 
     activities.$loaded(function(){
@@ -41,17 +48,60 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
         
       }
-  })
+    })
 
+    
+    console.log("the num of meetings" + meetings.length);
+    if (meetings.length <= 3) {
+       for(var i = 0; i < meetings.length; i++){
+         $scope.meeting.push(meetings[index + i]);
+       }
+       Max_M_Pos = 0;
+    }else {
+      for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting.push(meetings[index + i]);
+      }      
+       Max_M_Pos = meetings.length - 3;
+    };
   })
+// end of loaded function
+
 
   $scope.models = {
         selected: null,
         lists: {"Activities": []}
+      };
+
+
+  //   for(var i = 0; i < activities.length; i++){
+  //     $scope.models.lists.Activities.push(activities[i]);
+  //   }
+  // })
+
+  console.log($scope.models);
+  
+  $scope.Forward = function(){
+    First_M_Pos = First_M_Pos + 1;
+    if (First_M_Pos > Max_M_Pos) {
+       First_M_Pos = Max_M_Pos;
     };
 
+    for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting[i] = meetings[First_M_Pos + i];
+    }
+  }
 
-  //console.log($scope.models);
+  $scope.Back = function(){
+    First_M_Pos = First_M_Pos - 1;
+    if (First_M_Pos < 0) {
+       First_M_Pos = 0;
+    };
+    
+    for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting[i] = meetings[First_M_Pos + i];
+    }
+  }
+
   
   $scope.insertactivity = function(item, index){
     //console.log(item.$id);
@@ -80,8 +130,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         
     }
     console.log($scope.meeting);
-
-    
   }
 
   $scope.dragactivity = function(activityindex, meetingindex){
@@ -100,6 +148,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   // $scope.$watch('models', function(model) {
   //     $scope.modelAsJson = angular.toJson(model, true);
   // }, true);
+
 
   $scope.editMeeting = function(index){
     $scope.meetinglistshow = false;
@@ -132,15 +181,21 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     console.log(meetings[index]);
   }
 
-  $scope.removeMeeting = function(index){
-    meetings.$remove(index);
-    $scope.meeting.splice(index,1);
+  $scope.removeMeeting = function(w_Index){
+   // Get the index at the window, then get the actual index in the meeting array
+   console.log("first M position" + First_M_Pos);
+    meetings.$remove(First_M_Pos + w_Index);
+    $scope.meeting.splice(First_M_Pos + w_Index,1);
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
   }
 
-  //Show meetinglist test
+  // //Show meetinglist test
+  // $scope.getMID = function(id){
+  //   console.log("hi");
+  //   console.log(id);
+  // }
 
     
   //Create Meeting
@@ -164,6 +219,18 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.models.lists.Activities.push([]);
     //$scope.models.lists.Activities.push([]);
     // $scope.meeting.push(new_meeting);
+
+    if(meetings.length <= 3) {
+       for(var i = 0; i < meetings.length; i++){
+         $scope.meeting.push(meetings[index + i]);
+       }
+       Max_M_Pos = 0;
+    }else {
+      for(var i = 0; i < slideWindowSize; i++){
+      $scope.meeting.push(meetings[index + i]);
+      }      
+       Max_M_Pos = meetings.length - 3;
+    };
    
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
@@ -198,8 +265,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     ];
 
     $scope.addActType = function(){
-
     };
+
     $scope.addActType();
     $scope.testAct = [];
 
@@ -338,8 +405,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   ];
 
   function getDayClass(data) {
-    var date = data.date,
-      mode = data.mode;
+    var date = data.date, mode = data.mode;
     if (mode === 'day') {
       var dayToCheck = new Date(date).setHours(0,0,0,0);
 
@@ -351,13 +417,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         }
       }
     }
-
     return '';
   }
 //Date Picker
 
 // Time Picker
-$scope.mytime = new Date();
+  $scope.mytime = new Date();
 
   $scope.hstep = 1;
   $scope.mstep = 1;
