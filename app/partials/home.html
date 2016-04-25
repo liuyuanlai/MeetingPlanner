@@ -7,7 +7,9 @@
 	<div class="front-welcome">
 		<div class="front-welcome-text">
 			<h1>Ready to plan your meeting?</h1>
-			<p>{{userObject}}</p>
+			<div class="container">
+				<ng-include src="'partials/forecast/forecast.html'" ng-controller="ForecastCtrl"></ng-include>
+			</div>
 		</div>
 	</div>
 
