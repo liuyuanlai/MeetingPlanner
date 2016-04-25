@@ -61,7 +61,56 @@
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
 
+
 }
+
+.addBtn{
+   position: absolute;
+   right:30px;
+   top: 8px;
+   width: 50px;
+   height: 50px;
+   background: #00cc99;
+   padding: 6px 6px 6px 7px;
+   border:5px solid #cef4ea;
+   -moz-border-radius: 100px;
+   -webkit-border-radius: 100px;
+   border-radius: 100px;
+
+}
+
+
+.backBtn{
+   position: absolute;
+   left:20px;
+   top: 12px;
+   width: 40px;
+   height: 40px;
+   background: #cef4ea;
+   padding: 6px 6px 6px 7px;
+   border:1px solid #cef4ea;
+   -moz-border-radius: 100px;
+   -webkit-border-radius: 100px;
+   border-radius: 100px;
+   z-index:1;
+
+}
+.forwardBtn{
+   position: absolute;
+   right:100px;
+   top: 12px;
+   width: 40px;
+   height: 40px;
+   background: #cef4ea;
+   padding: 6px 6px 6px 7px;
+   border:1px solid #cef4ea;
+   -moz-border-radius: 100px;
+   -webkit-border-radius: 100px;
+   border-radius: 100px;
+
+}
+
+
 
 
 .circle {
