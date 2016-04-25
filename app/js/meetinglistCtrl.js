@@ -275,18 +275,61 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
   $scope.saveEditM = function(index){
+
+   var dt = $scope.eMeeting.date;
+   var mytime = $scope.eMeeting.mtime;
+   var date = dt.getDate();
+   var year = dt.getFullYear();
+   var month = dt.getMonth();
+   var hours = mytime.getHours();
+   var min = mytime.getMinutes();
+
+   var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    var m = month[dt.getMonth()];
+    var M_date = date + "-" + m + "-" + year;
+
+    // Set the start time
+    var M_hours = mytime.getHours();
+    var M_min = mytime.getMinutes();
+
+    if (hours < 10) {
+        M_hours = "0" + hours;
+    };
+    if (min < 10) {
+        M_min = "0" + min;
+    };
+    
+    var M_time = M_hours + ':' + M_min;
+
+    var M_DateTime = M_date + " " + M_time;
+    //console.log(M_DateTime);
+ 
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
     
     meetings[index].mName = $scope.eMeeting.mName;
     meetings[index].MPlace = $scope.eMeeting.place;
-    meetings[index].mTime = $scope.dt;
+    meetings[index].mDateTime = M_DateTime;
+    meetings[index].mDate = M_date;
+    meetings[index].mTime = M_time;
     meetings[index].mTag = $scope.eMeeting.tag;
     meetings[index].mMembers = $scope.eMeeting.members;
     meetings[index].mDescript = $scope.eMeeting.descript;
     meetings.$save(index);
-    //console.log(meetings[index]);
+
   }
 
   $scope.removeMeeting = function(index){
@@ -343,10 +386,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
-    //console.log("the format of time " + mytime);
-    var M_date = dt.toLocaleDateString();
-    var M_time = dt.toLocaleTimeString();
-    //console.log(mytime);
     
    var date = dt.getDate();
    var year = dt.getFullYear();
@@ -371,7 +410,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     var M_date = date + "-" + m + "-" + year;
 
     // Set the start time
-    var M_time = "";
     var M_hours = mytime.getHours();
     var M_min = mytime.getMinutes();
 
@@ -382,7 +420,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         M_min = "0" + min;
     };
     
-    M_time = M_hours + ':' + M_min;
+    var M_time = M_hours + ':' + M_min;
 
     var M_DateTime = M_date + " " + M_time;
     console.log(M_DateTime);
@@ -402,10 +440,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     };
     
-   //console.log(new_meeting.mTime); 
-   
     meetings.$add(new_meeting);
-    // $scope.meeting.push(new_meeting);
 
     if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
@@ -414,10 +449,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }
 
     $scope.meeting.push(new_meeting);
-    // $scope.meeting.push(new_meeting);
-
-    
-   
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
