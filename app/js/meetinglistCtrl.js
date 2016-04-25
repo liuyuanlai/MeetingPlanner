@@ -474,9 +474,25 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
 
-  $scope.removeActivity = function(index){
-    activities.$remove(index);
-    $scope.models.lists.Activities.splice(index,1);
+  $scope.removeActivity = function(meetingindex, activityindex){
+
+    id = meetings[meetingindex].activities[activityindex].$id;
+    for (var i = 0; i < activities.length; i++) {
+      if (activities[i].$id == id) {
+        activities.$remove(i);
+      }
+    }
+    
+    meetings[meetingindex].activities.splice(activityindex, 1);
+    //meetings[meetingindex].activities.$save(activityindex);
+    meetings.$save(meetingindex);
+
+    $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
+
+    $scope.meeting[meetingindex].mLength = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mEndTime = $scope.meeting[meetingindex].mStartTime + $scope.meeting[meetingindex].mLength;
+
+
   }
 
 
