@@ -29,8 +29,8 @@
 					<h5>Meeting: {{item.mName}}<br>
 						Location: {{item.MPlace}}<br>
 						Start Time: {{item.mTime}}<br>
-						End Time:  {{item.mEndTime}}<br>
-						Total Length: {{item.mLength}}<br>
+						End Time:  {{item.mEndTime}}min<br>
+						Total Length: {{item.mLength}}min<br>
 					</h5>
 				</div>
 
@@ -43,7 +43,7 @@
 					<div ng-repeat="(listName, list) in models.lists">
 						<div class="panel-body">
 				            <ul dnd-list="list[$parent.$index]"
-				            	dnd-inserted="insertactivity(item, $parent.$index)"
+				            	dnd-inserted="insertactivity(item, $parent.$index, index)"
 				            >
 				            
 
