@@ -56,6 +56,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       $scope.meeting.push(meetings[i]);
       $scope.meeting[i].mLength = $scope.getMeetingLength(i);
 
+      $scope.meeting[i].mEndTime = $scope.getEndTime($scope.meeting[i].mTime, $scope.meeting[i].mLength);
+      $scope.showPercentage(i);
+
+
+      // console.log($scope.ActivityType[1].value);
 
     }
 
@@ -131,7 +136,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.getActLength = function (id) {
 
-    for (key in activities) {
+    for (var key in activities) {
       // console.log(activities[key].$id);
         if(activities[key].$id == id){
 
@@ -140,60 +145,57 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
 
   }
-  $scope.addActType = function(index){
-    var actlist = meetings[index].activities;
 
-    for (key in actlist) {
-      console.log(actlist[key].type);
-      // if (actlist[key].type == 'Break') {
-      //   $scope.ActivityType[0].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Introduction'){
-      //   $scope.ActivityType[1].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Presentation'){
-      //   $scope.ActivityType[2].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Group Work'){
-      //   $scope.ActivityType[3].value += $scope.testAct[i].length;
-      // };
-
-        };
-
-  };
 
   $scope.getMeetingLength = function (index) {
     var actlist = meetings[index].activities;
     var meetL = 0;
-
-    $scope.meeting[index].mLength = 0;
     
-    for (key in actlist) {
+    for (var key in actlist) {
       meetL += $scope.getActLength(actlist[key]);
 
     };
-    $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + meetL;
-    $scope.meeting[index].mLength = meetL;
-        console.log(activities);
+
     return meetL;
   }
 
+  $scope.getEndTime = function(startTime, length){
+    var hour = startTime.slice(0, 2);
+    var minute = startTime.slice(3, 5);
+    var newMinute = (parseInt(minute) + parseInt(length)) % 60;
+    var carry = Math.floor((parseInt(minute) + parseInt(length))/60);
+    var newHour = (parseInt(hour) + carry) % 24;
+    var endMinute = newMinute.toString();
+    var endHour = newHour.toString();
+    if (newMinute < 10) {
+      endMinute = "0" + endMinute;
+    }
+    if (newHour < 10) {
+      endHour = "0" + endHour;
+    }
+    return endHour + ":" + endMinute;
+  }
+  
 
 
-  $scope.insertactivity = function(item, index){
+
+  $scope.insertactivity = function(item, meetingindex, activityindex){
     //console.log(item.$id);
     //console.log(index);
-    if (meetings[index].hasOwnProperty("activities")) {
+    if (meetings[meetingindex].hasOwnProperty("activities")) {
 
-      meetings[index].activities.push(item.$id);
-      meetings.$save(index);
+      meetings[meetingindex].activities.splice(activityindex, 0, item.$id);
+      meetings.$save(meetingindex);
       //console.log(meetings);
       //$scope.meeting[index].activities.push(item.$id);
       //console.log($scope.models.lists.Activities);
       //$scope.models.lists.Activities[index].push(item);
 
     }else{
-      meetings[index]["activities"] = [item.$id];
+      meetings[meetingindex]["activities"] = [item.$id];
      // console.log(meetings);
-      meetings.$save(index);
-      $scope.meeting[index]["activities"] = [item.$id];
+      meetings.$save(meetingindex);
+      //$scope.meeting[meetingindex]["activities"] = [item.$id];
     }
 
     for (var i = 0; i < activities.length; i++) {
@@ -204,10 +206,16 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         
     }
     // console.log($scope.models.lists.Activities[index]);
-    console.log("meetings[index].activities"+meetings[index].activities);
-    $scope.getMeetingLength(index);
 
-    // $scope.getEndTime(index,item.length,1);
+    //console.log("meetings[index].activities"+meetings[index].activities);
+
+    var meetL = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mLength = meetL;
+
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
+    $scope.showPercentage(meetingindex);
+
+
 
 
   }
@@ -220,7 +228,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings.$save(meetingindex);
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
-    $scope.getMeetingLength(activityindex);
+
+    
+
+    var meetL = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mLength = meetL;
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
+    $scope.showPercentage(meetingindex);
+
 
 
   }
@@ -242,7 +257,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.eMeeting = {};
     $scope.eMeeting.mName = editMeeting.mName;
     $scope.eMeeting.place = editMeeting.MPlace;
-    // $scope.eMeeting.mTime = editMeeting.mTime;
+    $scope.eMeeting.date = new Date(editMeeting.mDate);
+
+    var dt = editMeeting.mDateTime;
+    var date = new Date(dt);    
+    $scope.eMeeting.mtime = new Date(date);
+    
     $scope.eMeeting.tag = editMeeting.mTag;
     $scope.eMeeting.members = editMeeting.mMembers;
     $scope.eMeeting.descript = editMeeting.mDescript;
@@ -250,18 +270,61 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   }
 
   $scope.saveEditM = function(index){
+
+   var dt = $scope.eMeeting.date;
+   var mytime = $scope.eMeeting.mtime;
+   var date = dt.getDate();
+   var year = dt.getFullYear();
+   var month = dt.getMonth();
+   var hours = mytime.getHours();
+   var min = mytime.getMinutes();
+
+   var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    var m = month[dt.getMonth()];
+    var M_date = date + "-" + m + "-" + year;
+
+    // Set the start time
+    var M_hours = mytime.getHours();
+    var M_min = mytime.getMinutes();
+
+    if (hours < 10) {
+        M_hours = "0" + hours;
+    };
+    if (min < 10) {
+        M_min = "0" + min;
+    };
+    
+    var M_time = M_hours + ':' + M_min;
+
+    var M_DateTime = M_date + " " + M_time;
+    //console.log(M_DateTime);
+ 
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
     
     meetings[index].mName = $scope.eMeeting.mName;
     meetings[index].MPlace = $scope.eMeeting.place;
-    meetings[index].mTime = $scope.dt;
+    meetings[index].mDateTime = M_DateTime;
+    meetings[index].mDate = M_date;
+    meetings[index].mTime = M_time;
     meetings[index].mTag = $scope.eMeeting.tag;
     meetings[index].mMembers = $scope.eMeeting.members;
     meetings[index].mDescript = $scope.eMeeting.descript;
     meetings.$save(index);
-    //console.log(meetings[index]);
+
   }
 
   $scope.removeMeeting = function(index){
@@ -318,13 +381,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
+    
    var date = dt.getDate();
    var year = dt.getFullYear();
    var month = dt.getMonth();
    var hours = mytime.getHours();
    var min = mytime.getMinutes();
 
-   //Set the date
    var month = new Array();
     month[0] = "January";
     month[1] = "February";
@@ -340,9 +403,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     month[11] = "December";
     var m = month[dt.getMonth()];
     var M_date = date + "-" + m + "-" + year;
-    
+
     // Set the start time
-    var M_time = "";
     var M_hours = mytime.getHours();
     var M_min = mytime.getMinutes();
 
@@ -353,12 +415,15 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         M_min = "0" + min;
     };
     
-    M_time = M_hours + ':' + M_min;
-    console.log("M getMinutes" + M_time);
+    var M_time = M_hours + ':' + M_min;
 
+    var M_DateTime = M_date + " " + M_time;
+    console.log(M_DateTime);
+ 
     var new_meeting = {
       mName: name,
       MPlace: place,
+      mDateTime: M_DateTime,
       mDate: M_date,
       mTime: M_time,
       mTag: tag,
@@ -370,21 +435,15 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     };
     
-    
-   
     meetings.$add(new_meeting);
-   // console.log(meetings);
-
-
-    $scope.meeting.push(new_meeting);
-    // $scope.meeting.push(new_meeting);
 
     if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
     }else{
       $scope.meetingShow.push(false);
     }
-   
+
+    $scope.meeting.push(new_meeting);
     $scope.meetinglistshow = true;
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
@@ -392,66 +451,90 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   }
 
+  $scope.addActType = function(index,type){
+
+    var actlist = meetings[index].activities;
+    var typeLength = 0;
+    // console.log(actlist);
+    for (var key in actlist) { 
+
+      // console.log(actlist[key]);
+
+      for(var keyType in activities){
+
+        if(activities[keyType].$id == actlist[key]){
+
+          if (activities[keyType].type == type) {
+
+            typeLength += activities[keyType].length; 
+          };
 
 
-  $scope.showPercentage = function() {
-
-    $scope.ActivityType = [
-    {
-            "name" : "Break",
-            "type" : "warning",
-            "value" : 0,
-            "class" : null
-        },{
-            "name" : "Introduction",
-            "type" : "danger",
-            "value" : 0
-        },{            
-          "name" : "Presentation",
-          "type" : "info",
-            "value" : 0
-        },{
-          "name" : "Group Work",
-          "type" : "success",
-            "value" : 0
         }
-    ];
+      }
+
+    };
+    // console.log("typeLength:"+ type + typeLength);
+    return typeLength;
+
+  };
 
 
-    $scope.testAct = [];
 
-    var types = ['Break', 'Introduction', 'Presentation', 'Group Work'];
-    for (var i = 0; i < 5; i++) {
-      var index = Math.floor(Math.random() * 4);
-      var actType = $scope.ActivityType;
-      $scope.testAct.push({  
-                      name: i+6,
-                      length: 5*i+1,
-                      type: types[index],
-                      description: "yeyeye",
-                      });
 
-      if ($scope.testAct[i].type == 'Break') {
-        $scope.ActivityType[0].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Introduction'){
-        $scope.ActivityType[1].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Presentation'){
-        $scope.ActivityType[2].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Group Work'){
-        $scope.ActivityType[3].value += $scope.testAct[i].length;
-      };
+  $scope.actType = [];
+  
+  $scope.showPercentage = function(index) {
 
-    }
-    // var breakType = $scope.ActivityType[0];
-    // var breakTypeValue = breakType.value;
+    // console.log("showPercentage");
+    $scope.ActivityType = [
+      {
+              "name" : "Break",
+              "type" : "warning",
+              "value" : 0,
+              "class" : null
+          },{
+              "name" : "Discussion",
+              "type" : "success",
+              "value" : 0
+          },{            
+            "name" : "Presentation",
+            "type" : "info",
+              "value" : 0
+          },{
+            "name" : "GroupWork",
+            "type" : "danger",
+              "value" : 0
+          }
+      ];
+    
+    
 
-     if ($scope.ActivityType[0].value < 30) {     
-      $scope.ActivityType[0].class = "warningBreak";
+    $scope.ActivityType[0].value = $scope.addActType(index,"break");
+    $scope.ActivityType[1].value = $scope.addActType(index,"discussion");
+    $scope.ActivityType[2].value = $scope.addActType(index,"presentation");
+    $scope.ActivityType[3].value = $scope.addActType(index,"group-work");
+
+
+    // console.log($scope.ActivityType[0].value);
+    // console.log($scope.ActivityType[1].value);
+    // console.log($scope.ActivityType[2].value);
+    // console.log($scope.ActivityType[3].value);
+
+    // $scope.actType.push($scope.ActivityType);
+    $scope.actType[index] = $scope.ActivityType;
+    
+    
+    console.log($scope.actType[index]);
+    
+
+     if ($scope.actType[index][0].value < 30) {     
+      $scope.actType[index][0].class = "warningBreak";
      };
 
   };
 
-  $scope.showPercentage();
+  // $scope.showPercentage();
 
 
 
@@ -459,9 +542,26 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
 
-  $scope.removeActivity = function(index){
-    activities.$remove(index);
-    $scope.models.lists.Activities.splice(index,1);
+  $scope.removeActivity = function(meetingindex, activityindex){
+
+    id = meetings[meetingindex].activities[activityindex].$id;
+    for (var i = 0; i < activities.length; i++) {
+      if (activities[i].$id == id) {
+        activities.$remove(i);
+      }
+    }
+    
+    meetings[meetingindex].activities.splice(activityindex, 1);
+    //meetings[meetingindex].activities.$save(activityindex);
+    meetings.$save(meetingindex);
+
+    $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
+
+    var meetL = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mLength = meetL;
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
+
+
   }
 
 
