@@ -525,11 +525,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.actType[index] = $scope.ActivityType;
     
     
-    console.log($scope.actType);
+    console.log($scope.actType[index]);
     
 
-     if ($scope.ActivityType[0].value < 30) {     
-      $scope.ActivityType[0].class = "warningBreak";
+     if ($scope.actType[index][0].value < 30) {     
+      $scope.actType[index][0].class = "warningBreak";
      };
 
   };

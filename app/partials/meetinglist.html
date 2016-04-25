@@ -1,14 +1,13 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
 
-	<button type="button" ng-click="Back()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
-	<button type="button" ng-click="Forward()" class="btn btn-default">Forward<span class="glyphicon glyphicon-chevron-right"></span></button>
 
 <!-- 	<div ng-controller="PagerDemoCtrl">
 	  <h4>Pager</h4>
 	  <pre>You are currently on page {{currentPage}}</pre>
 	  <uib-pager total-items="totalItems" ng-model="currentPage"></uib-pager>
 	</div> -->
+	<button class="backBtn" ng-click="Back()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
 
 	<section id="cd-timeline">
 
@@ -88,7 +87,10 @@
 
 
 	<div >
-		<button class="addBtn" style="top: 45px" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus" style="color:white"></span></button>
+
+		<button class="forwardBtn" ng-click="Forward()" ><span class="glyphicon glyphicon-chevron-right"></span></button>
+		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus" style="color:white"></span></button>
+
 	</div>
 
 
