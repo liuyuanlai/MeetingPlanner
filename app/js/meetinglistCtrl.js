@@ -56,7 +56,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       $scope.meeting.push(meetings[i]);
       $scope.meeting[i].mLength = $scope.getMeetingLength(i);
       $scope.meeting[i].mEndTime = $scope.meeting[i].mStartTime + $scope.meeting[i].mLength;
-
+      $scope.showPercentage(i);
+      // console.log($scope.ActivityType[1].value);
 
     }
 
@@ -141,24 +142,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
 
   }
-  $scope.addActType = function(index){
-    var actlist = meetings[index].activities;
 
-    for (var key in actlist) {
-      console.log(actlist[key].type);
-      // if (actlist[key].type == 'Break') {
-      //   $scope.ActivityType[0].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Introduction'){
-      //   $scope.ActivityType[1].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Presentation'){
-      //   $scope.ActivityType[2].value += $scope.testAct[i].length;
-      // }else if($scope.testAct[i].type == 'Group Work'){
-      //   $scope.ActivityType[3].value += $scope.testAct[i].length;
-      // };
-
-        };
-
-  };
 
   $scope.getMeetingLength = function (index) {
     var actlist = meetings[index].activities;
@@ -168,7 +152,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       meetL += $scope.getActLength(actlist[key]);
 
     };
-    
+
     return meetL;
   }
 
@@ -206,6 +190,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     var meetL = $scope.getMeetingLength(index);
     $scope.meeting[index].mLength = meetL;
     $scope.meeting[index].mEndTime = $scope.meeting[index].mStartTime + meetL;
+    $scope.showPercentage(index);
     
 
 
@@ -222,13 +207,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings.$save(meetingindex);
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
-<<<<<<< HEAD
-    $scope.meeting[activityindex].mLength = $scope.getMeetingLength(activityindex);
-=======
+
     var meetL = $scope.getMeetingLength(meetingindex);
     $scope.meeting[meetingindex].mLength = meetL;
     $scope.meeting[meetingindex].mEndTime = $scope.meeting[meetingindex].mStartTime + meetL;
->>>>>>> master
+    $scope.showPercentage(meetingindex);
 
 
   }
@@ -413,9 +396,35 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   }
 
+  $scope.addActType = function(index,type){
+
+    var actlist = meetings[index].activities;
+    var typeLength = 0;
+    // console.log(actlist);
+    for (var key in actlist) { 
+
+      // console.log(actlist[key]);
+
+      for(var keyType in activities){
+
+        if(activities[keyType].$id == actlist[key]){
+
+          if (activities[keyType].type == type) {
+
+            typeLength += activities[keyType].length; 
+          };
 
 
-  $scope.showPercentage = function() {
+        }
+      }
+
+    };
+    // console.log("typeLength:"+ type + typeLength);
+    return typeLength;
+
+  };
+
+  $scope.showPercentage = function(index) {
 
     $scope.ActivityType = [
     {
@@ -424,7 +433,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
             "value" : 0,
             "class" : null
         },{
-            "name" : "Introduction",
+            "name" : "Discussion",
             "type" : "danger",
             "value" : 0
         },{            
@@ -432,37 +441,48 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
           "type" : "info",
             "value" : 0
         },{
-          "name" : "Group Work",
+          "name" : "GroupWork",
           "type" : "success",
             "value" : 0
         }
     ];
+    console.log("showPercentage");
 
+    
+    $scope.ActivityType[0].value = $scope.addActType(index,"break");
+    $scope.ActivityType[1].value = $scope.addActType(index,"discussion");
+    $scope.ActivityType[2].value = $scope.addActType(index,"presentation");
+    $scope.ActivityType[3].value = $scope.addActType(index,"group-work");
 
-    $scope.testAct = [];
+    // console.log($scope.ActivityType[0].value);
+    // console.log($scope.ActivityType[1].value);
+    // console.log($scope.ActivityType[2].value);
+    // console.log($scope.ActivityType[3].value);
 
-    var types = ['Break', 'Introduction', 'Presentation', 'Group Work'];
-    for (var i = 0; i < 5; i++) {
-      var index = Math.floor(Math.random() * 4);
-      var actType = $scope.ActivityType;
-      $scope.testAct.push({  
-                      name: i+6,
-                      length: 5*i+1,
-                      type: types[index],
-                      description: "yeyeye",
-                      });
+    // $scope.testAct = [];
 
-      if ($scope.testAct[i].type == 'Break') {
-        $scope.ActivityType[0].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Introduction'){
-        $scope.ActivityType[1].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Presentation'){
-        $scope.ActivityType[2].value += $scope.testAct[i].length;
-      }else if($scope.testAct[i].type == 'Group Work'){
-        $scope.ActivityType[3].value += $scope.testAct[i].length;
-      };
+    // var types = ['Break', 'Introduction', 'Presentation', 'GroupWork'];
+    // for (var i = 0; i < 5; i++) {
+    //   var index = Math.floor(Math.random() * 4);
+    //   var actType = $scope.ActivityType;
+    //   $scope.testAct.push({  
+    //                   name: i+6,
+    //                   length: 5*i+1,
+    //                   type: types[index],
+    //                   description: "yeyeye",
+    //                   });
 
-    }
+    //   if ($scope.testAct[i].type == 'Break') {
+    //     $scope.ActivityType[0].value += $scope.testAct[i].length;
+    //   }else if($scope.testAct[i].type == 'Introduction'){
+    //     $scope.ActivityType[1].value += $scope.testAct[i].length;
+    //   }else if($scope.testAct[i].type == 'Presentation'){
+    //     $scope.ActivityType[2].value += $scope.testAct[i].length;
+    //   }else if($scope.testAct[i].type == 'GroupWork'){
+    //     $scope.ActivityType[3].value += $scope.testAct[i].length;
+    //   };
+
+    // }
     // var breakType = $scope.ActivityType[0];
     // var breakTypeValue = breakType.value;
 
@@ -472,7 +492,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   };
 
-  $scope.showPercentage();
+  // $scope.showPercentage();
 
 
 
