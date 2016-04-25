@@ -55,7 +55,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
       $scope.meeting[i].mLength = $scope.getMeetingLength(i);
-      $scope.meeting[i].mEndTime = $scope.meeting[i].mStartTime + $scope.meeting[i].mLength;
+      $scope.meeting[i].mEndTime = $scope.getEndTime($scope.meeting[i].mTime, $scope.meeting[i].mLength);
 
 
     }
@@ -172,6 +172,24 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     return meetL;
   }
 
+  $scope.getEndTime = function(startTime, length){
+    var hour = startTime.slice(0, 2);
+    var minute = startTime.slice(3, 5);
+    var newMinute = (parseInt(minute) + parseInt(length)) % 60;
+    var carry = Math.floor((parseInt(minute) + parseInt(length))/60);
+    var newHour = (parseInt(hour) + carry) % 24;
+    var endMinute = newMinute.toString();
+    var endHour = newHour.toString();
+    if (newMinute < 10) {
+      endMinute = "0" + endMinute;
+    }
+    if (newHour < 10) {
+      endHour = "0" + endHour;
+    }
+    return endHour + ":" + endMinute;
+  }
+  
+
 
 
   $scope.insertactivity = function(item, meetingindex, activityindex){
@@ -204,10 +222,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     //console.log("meetings[index].activities"+meetings[index].activities);
     var meetL = $scope.getMeetingLength(meetingindex);
     $scope.meeting[meetingindex].mLength = meetL;
-    $scope.meeting[meetingindex].mEndTime = $scope.meeting[meetingindex].mStartTime + meetL;
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
     
 
-    // $scope.getEndTime(index,item.length,1);
 
 
   }
@@ -221,8 +238,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
     
-    $scope.meeting[meetingindex].mLength = $scope.getMeetingLength(meetingindex);
-    $scope.meeting[meetingindex].mEndTime = $scope.meeting[meetingindex].mStartTime + $scope.meeting[meetingindex].mLength;
+    var meetL = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mLength = meetL;
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
 
 
   }
@@ -489,8 +507,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     $scope.models.lists.Activities[meetingindex].splice(activityindex,1);
 
-    $scope.meeting[meetingindex].mLength = $scope.getMeetingLength(meetingindex);
-    $scope.meeting[meetingindex].mEndTime = $scope.meeting[meetingindex].mStartTime + $scope.meeting[meetingindex].mLength;
+    var meetL = $scope.getMeetingLength(meetingindex);
+    $scope.meeting[meetingindex].mLength = meetL;
+    $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
 
 
   }
