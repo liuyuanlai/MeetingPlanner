@@ -1,0 +1,28 @@
+.weather-search {
+	color: white;
+}
+
+.weather-search-query {
+	border: 0;
+	border-radius: 8px;
+	display: inline;
+}
+
+.weather-search-query-input {
+	border: 0;
+	border-radius: 6px;
+	color: #000;
+}
+
+.weather-search-btn {
+}
+
+.forecast-panel {
+	margin-top: 10px;
+}
+
+.weather-panel {
+	width: 500px;
+	min-height: 150px;
+}
+

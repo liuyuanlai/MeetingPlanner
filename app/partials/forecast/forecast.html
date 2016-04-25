@@ -1,0 +1,39 @@
+<div class="row">
+	<form class="weather-search">  
+		<p class="weather-search-query">
+			<label for="query">Enter Location:</label>&nbsp;&nbsp;
+			<input id="query" class="weather-search-query-input" ng-model="weather_query" type="text"/>
+		</p>  
+		<button class="btn btn-default btn-sm weather-search-btn" ng-click="runQuery(weather_query, handler)">Check Weather</button>
+		</form>  
+	<div id="results" ng-show="forecast" class="forecast-panel">
+		<!-- <p>Results: <pre>{{forecast | json}}</pre></p> -->
+		<div class="panel panel-info weather-panel">
+			<div class="panel-heading">
+				Three Days Weather Forecast in <span>{{weather_query}}</span>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Day</th>
+							<th>Description</th>
+							<th>High(F)</th>
+							<th>Low(F)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in forecast">
+							<td>{{item.date}}</td>
+							<td>{{item.day}}</td>
+							<td>{{item.text}}</td>
+							<td>{{item.high}}</td>
+							<td>{{item.low}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
