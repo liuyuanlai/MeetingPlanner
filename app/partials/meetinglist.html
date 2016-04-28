@@ -31,10 +31,11 @@
 						End   &nbsp;Time:  {{item.mEndTime}}<br>
 						Total Length: {{item.mLength}}min<br>
 					</h5>
+					<div class="triangleDown"></div>
 				</div>
 
 				<div>
-					<uib-progress >
+					<uib-progress style="margin-bottom:0px">
 
 						<uib-bar ng-repeat="bar in actType[$index]" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span>{{bar.value}}%</span>
 
@@ -45,12 +46,11 @@
 
 				<div class="row simpleDemo meeting-panel-body" style="text-align: center">
 					<div ng-repeat="(listName, list) in models.lists">
-						<div class="panel-body">
+						<div class="panel-body" style="padding-top:5px">
 				            <ul dnd-list="list[$parent.$index]"
 				            	dnd-inserted="insertactivity(item, $parent.$index, index)"
 				            >
 				            
-
 				                <li ng-repeat="item in list[$parent.$index]"
 				                    dnd-draggable="item"
 				                    dnd-moved="dragactivity($index, $parent.$parent.$index)"
