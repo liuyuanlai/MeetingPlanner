@@ -226,7 +226,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.meeting[meetingindex].mLength = meetL;
     $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
     $scope.showPercentage(meetingindex);
-    console.log("$scope.dragactivity");
 
 
 
@@ -501,7 +500,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
     
     var totalLength = $scope.getMeetingLength(index);
-    console.log(totalLength);
+    //console.log(totalLength);
     if (totalLength != 0) {
         $scope.ActivityType[0].value = Math.round($scope.addActType(index,"break")/totalLength*100);
         $scope.ActivityType[1].value = Math.round($scope.addActType(index,"discussion")/totalLength*100);
