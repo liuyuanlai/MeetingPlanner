@@ -31,6 +31,12 @@
   width: 220px;
 	overflow: hidden;
 }
+
+.meeting-panel-body {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .actList{
 	margin: 10px;
 }

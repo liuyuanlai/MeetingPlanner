@@ -41,7 +41,7 @@ meetingPlannerApp.controller('ForecastCtrl',
 				console.log(response.status);
 				console.log(response.data);
 				$scope.status = response.status;
-				$scope.results = response.data.query.results.channel;
+				$scope.results = response.data.query.results.channel.item.description;
 				$scope.forecast = response.data.query.results.channel.item.forecast.slice(0,3);
 			}, function(response) {
 				console.log("errrrror");
