@@ -249,10 +249,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.eMeeting.mName = editMeeting.mName;
     $scope.eMeeting.place = editMeeting.MPlace;
     $scope.eMeeting.date = new Date(editMeeting.mDate);
+    console.log($scope.eMeeting.date);
 
     var dt = editMeeting.mDateTime;
     var date = new Date(dt);    
     $scope.eMeeting.mtime = new Date(date);
+    console.log($scope.eMeeting.mtime);
     
     $scope.eMeeting.tag = editMeeting.mTag;
     $scope.eMeeting.members = editMeeting.mMembers;
@@ -409,12 +411,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     var M_time = M_hours + ':' + M_min;
 
     var M_DateTime = M_date + " " + M_time;
-    // console.log(M_DateTime);
+
  
     var new_meeting = {
       mName: name,
       MPlace: place,
-      mDateTime: M_DateTime,
+      ou: M_DateTime,
       mDate: M_date,
       mTime: M_time,
       mTag: tag,
