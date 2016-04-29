@@ -28,10 +28,10 @@
 .meetingPanel{
 	border: 1px solid #ddd; 
   border-radius: 5px;
-
+  overflow: hidden;
 	height: 450px;
   width: 220px;
-	overflow: hidden;
+
 }
 
 .meeting-panel-body {
@@ -40,7 +40,10 @@
 }
 
 .listPanel{
-  overflow:scroll;
+  position: relative;
+  overflow-y: scroll;
+
+
 }
 
 .actList{
