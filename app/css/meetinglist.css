@@ -33,22 +33,18 @@
   width: 220px;
 
 }
+
+.meeting-panel-body {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .listPanel{
   position: relative;
   overflow-y: scroll;
 
 
 }
-
-/*.listPanel ::-webkit-scrollbar{
-    background: transparent;
-
-}
-.listPanel ::scrollbar{
-    background: transparent;
-
-}
-*/
 
 .actList{
 	margin: 10px;

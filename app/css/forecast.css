@@ -15,6 +15,7 @@
 }
 
 .weather-search-btn {
+	border-radius: 6px;
 }
 
 .forecast-panel {
