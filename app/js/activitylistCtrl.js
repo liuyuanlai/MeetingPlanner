@@ -1,6 +1,9 @@
 meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $location, $firebaseAuth, $firebaseArray, $routeParams,User) {
 
 
+
+
+
 	var activityRef = Ref.child("activities");
 
 		// get the auth info about the current user
@@ -96,9 +99,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
         lists: {"Activities": []}
     };
 
-	
 
-	
 	
 
     // Generate initial model
@@ -129,7 +130,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 			//
 			$scope.activitylistshow = true;
 			$scope.addactivityshow = false;
-		}
+	}
 
 	$scope.createActivitycancel = function(){
 		$scope.activitylistshow = true;
@@ -137,6 +138,8 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.editactivityshow = false;
 	}
 
+
+   $scope.isCollapsed = false;
 
 
 });
