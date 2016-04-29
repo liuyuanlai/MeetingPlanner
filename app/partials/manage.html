@@ -1,8 +1,8 @@
 <div class="container" >
   <div class="row">
-    <div class="panel panel-info nav-bar" >
+    <div class="panel heading nav-bar" >
       <div class="panel-heading">
-        <h3 class="nav-bar-h3"><strong>MEETING AGENDA</strong></h3>
+        <h3 class="nav-bar-h3 headingFont"><strong>MEETING AGENDA</strong></h3>
         <div class="nav-bar-profile">
           <span class="glyphicon glyphicon-user"></span>
           <span class="nav-bar-profile-username">{{userUsername}}</span>
@@ -15,10 +15,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-3 panel panel-info" style="height:550px;">
+    <div class="col-xs-3 panel panel-info actContainer" style="height:550px;width:270px">
       <ng-include src="'partials/activitylist.html'" ng-controller='ActivitylistCtrl'></ng-include>
     </div>
-    <div class="col-xs-9 panel panel-default" style="height:550px;">
+    <div class="col-xs-9 panel panel-default meetingContainer" style="height:550px;">
       <ng-include src="'partials/meetinglist.html'" ng-controller='MeetinglistCtrl'></ng-include>
     </div>
   </div>

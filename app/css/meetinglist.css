@@ -1,50 +1,59 @@
+.meetingContainer{
+  background-color: #e7e5d8;
+}
+
 .meetinglist{
   padding: 20px;
   height:550px;
-/*  overflow: hidden;*/
+
 }
-.mlContainer{
-	height:500px;
-/*	border: 1px solid #00cc99; */
-	padding: 0px;
-}
+
 .meetingInfo{
-/*	border-bottom: 1px solid #00cc99;*/
+
 	padding: 10px; 
-  background-color: #fff7e6;
+  background-color: #f5f3e5;
   position: relative;
+
 }
 .meetingInfo h5{
 	margin: 10px;
-  color:#31708f;
+/*  color:#31708f;*/
+
   
 }
 .editMeeting{
-  float: right;
-  margin-right: 5%;
-  margin-top: 3%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
 }
 
 .meetingPanel{
-	border: 1px solid #ddd; 
+	border: 0px solid #ddd; 
   border-radius: 5px;
   overflow: hidden;
 	height: 450px;
-  width: 220px;
+  width: 230px;
 
-}
 
-.meeting-panel-body {
-  padding-left: 8px;
-  padding-right: 8px;
 }
 
 .listPanel{
   position: relative;
   overflow-y: scroll;
-
+  background-color: white;
+  text-align: center; 
+  height: 320px;
 
 }
+.mlPanel{
+  margin-left: 0px;
+  margin-right: -15px; 
+
+  padding:0px 5px 15px 5px;
+}
+
+
 
 .actList{
 	margin: 10px;
@@ -52,8 +61,6 @@
 #cd-timeline { 
   position: relative; 
   padding: 0 2em; 
-/*  margin-left: 2em; 
-  margin-right: 2em; */
 }
 #cd-timeline::before { 
   content: ''; 
@@ -62,23 +69,9 @@
   left: 0px; 
   height: 4px; 
   width: 98%; 
-  background: #00cc99; 
+  background: #444a6f; 
 } 
-.addBtn{
-   position: absolute;
-   right:40px;
-   top: 12px;
-   width: 40px;
-   height: 40px;
-   background: #00cc99;
-   padding: 6px 6px 6px 7px;
-   border:5px solid #cef4ea;
-   -moz-border-radius: 100px;
-   -webkit-border-radius: 100px;
-   border-radius: 100px;
 
-
-}
 
 .addBtn{
    position: absolute;
@@ -86,9 +79,10 @@
    top: 8px;
    width: 50px;
    height: 50px;
-   background: #00cc99;
+   background: #4bd6e9;
+   color:white;
    padding: 6px 6px 6px 7px;
-   border:5px solid #cef4ea;
+   border:5px solid #444a6f;
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
    border-radius: 100px;
@@ -102,9 +96,10 @@
    top: 12px;
    width: 40px;
    height: 40px;
-   background: #cef4ea;
+   background: #444a6f;
+   color:white;
    padding: 6px 6px 6px 7px;
-   border:1px solid #cef4ea;
+   border:1px solid #444a6f;
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
    border-radius: 100px;
@@ -117,71 +112,23 @@
    top: 12px;
    width: 40px;
    height: 40px;
-   background: #cef4ea;
+   background: #444a6f;
+   color:white;
    padding: 6px 6px 6px 7px;
-   border:1px solid #cef4ea;
+   border:1px solid #444a6f;
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
    border-radius: 100px;
 
 
 }
-
-.addBtn{
-   position: absolute;
-   right:30px;
-   top: 8px;
-   width: 50px;
-   height: 50px;
-   background: #00cc99;
-   padding: 6px 6px 6px 7px;
-   border:5px solid #cef4ea;
-   -moz-border-radius: 100px;
-   -webkit-border-radius: 100px;
-   border-radius: 100px;
-
-}
-
-
-.backBtn{
-   position: absolute;
-   left:20px;
-   top: 12px;
-   width: 40px;
-   height: 40px;
-   background: #cef4ea;
-   padding: 6px 6px 6px 7px;
-   border:1px solid #cef4ea;
-   -moz-border-radius: 100px;
-   -webkit-border-radius: 100px;
-   border-radius: 100px;
-   z-index:1;
-
-}
-.forwardBtn{
-   position: absolute;
-   right:100px;
-   top: 12px;
-   width: 40px;
-   height: 40px;
-   background: #cef4ea;
-   padding: 6px 6px 6px 7px;
-   border:1px solid #cef4ea;
-   -moz-border-radius: 100px;
-   -webkit-border-radius: 100px;
-   border-radius: 100px;
-
-}
-
-
-
 
 
 
 .circle {
      width: 20px;
      height: 20px;
-     background: #00cc99;
+     background: #444a6f;
      -moz-border-radius: 50px;
      -webkit-border-radius: 50px;
      border-radius: 50px;
@@ -190,7 +137,7 @@
      width: 5px;
      height: 20px;
      margin: 0px 7.5px ; 
-     background: #00cc99;
+     background: #444a6f;
  }
 
 .triangleDown {
@@ -198,7 +145,7 @@
      height: 0;
      border-left: 5px solid transparent;
      border-right: 5px solid transparent;
-     border-top: 10px solid #ffd9b3;
+     border-top: 10px solid #f0ad4e;
      position: absolute;
      bottom: 0px;
      left: 30%;
