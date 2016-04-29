@@ -1,18 +1,44 @@
+.actContainer{
+	margin-right: 20px;
+	margin-bottom: 0px;
+	border-color: #373c5f;
+	padding-left:0px;
+	padding-right:0px
+
+}
+.actPanel{
+	height:550px;
+	background-color: #373c5f;
+}
+.actHeading{
+	color:#4bd6e9;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+
+
+
+
+
 .activityPanel{
 	overflow-y:scroll;
-	height:450px;
-	width:305px;
+	height:480px;
+	width:285px;
+	background-color: #373c5f;
+	padding-top: 0px;
 }
 .activity-item {
 	margin-top: 6px;
 	margin-bottom: 6px;
+	border-width: 0px!important;
 	border-radius: 8px!important;
 	background-clip: padding-box!important;
 	box-sizing: border-box;
 }
 
 .presentation {
-	background-color: #5bc0de!important;
+	background-color: #73bbd0!important;
 	background-clip: padding-box;
 /*	  filter:alpha(opacity=60);
    CSS3 standard 
@@ -20,21 +46,21 @@
 }
 
 .group-work {
-	background: #d9534f!important;
+	background: #fcada0!important;
 /*  filter:alpha(opacity=60);
    CSS3 standard 
   opacity:0.6;*/
 }
 
 .discussion {
-	background: #5cb85c!important;
+	background: #c2dd94!important;
 /*	  filter:alpha(opacity=60);
    CSS3 standard 
   opacity:0.6;*/
 }
 
 .break {
-	background: #f0ad4e!important;
+	background: #feea85!important;
 /*	  filter:alpha(opacity=60);
    CSS3 standard 
   opacity:0.6;*/
@@ -43,13 +69,46 @@
 .addActBtn{
 	position: absolute;
 	margin: auto; 
-	bottom: 10px;
-	width: 50%;
+	bottom: 0px;
+	width: 100%;
 	left: 0;  right: 0;  
-	  transform: translate(-5px,0px);
-      -ms-transform: translate(-5px,0px);   /* IE 9 */
-      -webkit-transform: translate(-5px,0px); /* Safari and Chrome */
-      -o-transform: translate(-5px,0px);    /* Opera */
-      -moz-transform: translate(-5px,0px);  
 
+}
+.addActBtn .btnStyle{
+	background-color: #4bd6e9;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.addActBtn h3{
+/*	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;*/
+	font-size: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #373c5f;
+}
+
+.addHeading{
+	width: 100%;
+	background-color: #f5f3e5;
+	text-align: center;
+	padding:0px;
+	margin-bottom: 0px;
+
+}
+.addHeading h3{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.form-horizontal div{
+	margin:5px 15px;
+}
+.addActPanel{
+	padding:0px; 
+}
+.addActPanel div{
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+	padding: 0px;
+/*	width: 100%;*/
 }
