@@ -44,9 +44,9 @@
 				</div>
 
 
-				<div class="row simpleDemo" style="text-align: center ">
+				<div class="row listPanel" style="text-align: center; height: 320px;">
 					<div ng-repeat="(listName, list) in models.lists">
-						<div class="panel-body" style="padding-top:5px">
+						<div class="panel-body" style="padding-top:5px; padding-right:0px">
 				            <ul dnd-list="list[$parent.$index]"
 				            	dnd-inserted="insertactivity(item, $parent.$index, index)"
 				            >

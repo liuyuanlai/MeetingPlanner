@@ -26,3 +26,10 @@
   	margin-left: 5px;
   	margin-right: 5px;
   }
+  .heading{
+    background-color: #4bd6e9;
+    width: 100%;
+  }
+  .headingFont{
+    font-color:#444a6f;
+  }
