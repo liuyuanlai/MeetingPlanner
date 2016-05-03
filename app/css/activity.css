@@ -112,3 +112,11 @@
 	padding: 0px;
 /*	width: 100%;*/
 }
+
+
+.actDescrption{
+	margin:10px -15px -10px -15px; 
+	border-bottom-right-radius:8px;
+	border-bottom-left-radius:8px;
+	background-color:#f5f3e5;
+}

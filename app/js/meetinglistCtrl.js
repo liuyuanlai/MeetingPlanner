@@ -372,7 +372,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   //   console.log(id);
   // }
 
-    
+  $scope.isCollapsed = false;
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
     
