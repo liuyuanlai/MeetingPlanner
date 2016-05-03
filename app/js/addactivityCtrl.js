@@ -5,7 +5,7 @@ meetingPlannerApp.controller('AddactivityCtrl',
 		var activityRef = Ref.child("activities");
 
 		// get the auth info about the current user
-		var user_data = Auth.$getAuth();
+		var user_data = Auth.getAuthdata();
 
 		var activities = $firebaseArray(activityRef.child(user_data.uid));
 
