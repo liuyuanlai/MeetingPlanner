@@ -375,12 +375,36 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   $scope.isCollapsed = false;
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
-    
+   console.log(dt);
+   console.log(mytime);
+    if (name == null || name == "") {
+      $scope.alertM = "Meeting name is required";
+    }else{
+      $scope.alertM = "";
+    };
+    if (description == null || description == "") {
+      $scope.alertP = "Meeting location is required";
+     // console.log("no description");
+    }else{
+      $scope.alertP = "";
+    };
+    if (tag == null) {
+      tag = "";
+    };
+    if (members == null) {
+      members = "";
+    };
+
    var date = dt.getDate();
    var year = dt.getFullYear();
    var month = dt.getMonth();
    var hours = mytime.getHours();
    var min = mytime.getMinutes();
+
+   if (date == null) {
+    $scope.dt = "";
+    $scope.alertD = "Please verify the date"
+   };
 
    var month = new Array();
     month[0] = "January";
@@ -430,6 +454,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     };
     
     meetings.$add(new_meeting);
+    if (meetings) {
+      alert("you have success createMeeting");
+    };
 
     if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
@@ -442,6 +469,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
 
+    $scope.mName = "";
+    $scope.MPlace = "";
+    $scope.tags = "";
+    $scope.Mmembers = "";
+    $scope.Mdescript = "";
+    $scope.alertP = "";
+    $scope.alertM = "";
+    
 
   }
 
@@ -503,7 +538,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     
     
     var totalLength = $scope.getMeetingLength(index);
-    console.log(totalLength);
+    //console.log(totalLength);
     if (totalLength != 0) {
         $scope.ActivityType[0].value = Math.round($scope.addActType(index,"break")/totalLength*100);
         $scope.ActivityType[1].value = Math.round($scope.addActType(index,"discussion")/totalLength*100);
