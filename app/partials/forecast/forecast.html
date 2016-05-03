@@ -2,13 +2,15 @@
 	<form class="weather-search">  
 		<p class="weather-search-query">
 			<label for="query">Enter Location:</label>&nbsp;&nbsp;
-			<input id="query" class="weather-search-query-input" ng-model="weather_query" type="text"/>
+			<input id="query" class="weather-search-query-input" ng-model="weather_query" type="text" placeholder="Enter the city you live in"/>
 		</p>  
-		<button class="btn btn-default btn-sm weather-search-btn" ng-click="runQuery(weather_query, handler)">Check Weather</button>
-		</form>  
-	<div id="results" ng-show="forecast" class="forecast-panel">
-		<!-- <p>Results: <pre>{{forecast | json}}</pre></p> -->
-		<div class="panel panel-info weather-panel">
+		<button class="btn btn-default btn-sm weather-search-btn" ng-click="runQuery(weather_query)">Check Weather</button>
+	</form>  
+	<div id="results" class="forecast-panel">
+		<div ng-show="error" class="weather-warning">
+			<h3>{{error}}</h3>
+		</div>
+		<div ng-show="forecast" class="panel panel-info weather-panel">
 			<div class="panel-heading">
 				Three Days Weather Forecast in <span>{{weather_query}}</span>
 			</div>

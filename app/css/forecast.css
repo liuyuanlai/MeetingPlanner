@@ -15,6 +15,7 @@
 }
 
 .weather-search-btn {
+	border-radius: 6px;
 }
 
 .forecast-panel {
@@ -24,5 +25,11 @@
 .weather-panel {
 	width: 500px;
 	min-height: 150px;
+}
+
+.weather-warning {
+	width: 500px;
+	min-height: 50px;
+	color: white;
 }
 

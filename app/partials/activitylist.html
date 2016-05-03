@@ -1,31 +1,14 @@
 
-<!-- <div class="panel-heading">
-		<p class="text-center">Activity List</p>
-</div>
-<div class="panel-body">
-	<div>
-		<button class="btn btn-default btn-block"> 120 min Make the prototype</button>    
-	</div>
-	<div>
-		<button class="btn btn-default btn-block"> 20 min Assign the work</button>
-	</div>
-	<div>
-		<button class="btn btn-default btn-block">60 min Get down to work</button>
-	</div>
-	<div style="position: relative;bottom:-300px">
-		<button class="btn btn-info btn-block" >Add Activity</button>
-	</div>
-</div> -->
+<div ng-show="activitylistshow" style="padding-left:15px;padding-right:15px">
+	<div class="row listPanel" style="height:550px;  padding:0px;position: relative ;text-align: center; overflow:hidden">
 
-<div ng-show="activitylistshow">
-	<div class="row simpleDemo" style="text-align: center;">
 		<div ng-repeat="(listName, list) in models.lists">
-		    <div class="panel panel-info" ng-class="listName.type" style="height:550px;">
+		    <div class="actPanel" ng-class="listName.type">
 		        <div class="panel-heading">
-		            <h3 class="panel-title">{{listName}}</h3>
+		            <h3 class="actHeading">{{listName}}</h3>
 		        </div>
 
-		        <div class="panel-body">
+		        <div class="panel-body activityPanel">
 		            <ul dnd-list="list"
 		            	dnd-inserted="insertactivity(item, index)"
 		            	>
@@ -40,14 +23,11 @@
 		                    ng-class="{'background-clip: ,'selected': models.selected === item}"
 		                   
 		                    >
-		                    <div class="row" ng-class="item.type">
-                                <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">
-                                	<div class="col-xs-4" style="border-right:1px solid #ddd; padding:0px 10px 0px 5px">{{item.length}}min
-                                	</div>
-			                         <div class="col-xs-8">{{item.name}}</div>
-                                </div>
-                              <!--   <div class="col-xs-10" uib-popover={{item.description}} popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" style="cursor: hand;cursor: pointer;">{{item.name}}</div> -->
-
+		                    <div class="row" ng-class="item.type" ng-click="isCollapsed = !isCollapsed">
+                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;">
+		                        	<div class="col-xs-4 actItem">{{item.length}}min</div>
+			                        <div class="col-xs-8">{{item.name}}</div>
+								</div>
 		                    	<div class="cos-xs-2">
 		                    		<!-- <button type="button" class="btn btn-default btn-sm"> -->
 		                    			<span class="glyphicon glyphicon-pencil" ng-click="editActivity($index)" style="cursor: hand;cursor: pointer;"></span>
@@ -55,9 +35,14 @@
 		                    		<button type="button" class="btn btn-default"> -->
 		                    			<span class="glyphicon glyphicon-remove" ng-click="removeActivity($index)" style="cursor: hand;cursor: pointer;"></span>
 		                    	<!-- 	</button> -->
-		                       </div>
-		                  
-		                    </div>
+		                        
+		                    	</div>
+                            </div>
+
+		                   <div ng-show="isCollapsed" class="actDescrption">
+								<div class="panel-body">{{item.description}}</div>
+								</div>
+		                   </div>
 		                    
 		                    
 		                   <!--  <div class="cos-xs-3"></div> -->
@@ -65,8 +50,8 @@
 		            </ul>
 		        </div>
 		    </div>
-		    <div style="position: absolute;bottom:10px; margin-left:22.5%; margin-bottom: 10%;width: 50%;">
-			<button class="btn btn-info btn-block" ng-click="addactivity()">Add Activity</button>
+		    <div class="addActBtn">
+			<button class="btn btn-block btnStyle" ng-click="addactivity()"><h3>Add Activity</h3></button>
 			</div>
 		</div>
 	</div>
@@ -74,25 +59,27 @@
 </div>
 
 <div ng-show="addactivityshow">
-		<form method="post" class="form-horizontal" style="height:550px;" >
-		<div class="panel panel-heading">
-			<div class="panel-heading">Add Activity</div>
+		<div class="panel panel-heading addHeading">
+		    <h3>Add Activity</h3>
 		</div>
+
+
+		<form method="post" class="form-horizontal addActPanel" style="height:550px;" >
 		<div class="panel-body">
 			<div class="form-group">
 				<input class="form-control" placeholder="Name" ng-model="$parent.newAct_name" required>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-9" style="padding: 0px">
+				<div class="col-xs-9" style="padding: 0px;margin:0px !important">
 					<input ng-model="$parent.newAct_length" class="form-control" placeholder="Length" type="number" min="0">
 				</div>
-				<label class="col-xs-3">min</label>
+				<label class="col-xs-3" style="text-align: center; padding:10px">min</label> 
 			</div>
 	        
 	        <div class="form-group">
 			<select ng-model="$parent.newAct_type" class="form-control">
-			  <option value="presentation" select="selected">Presentation</option>
-			  <option value="group-work">Group Work</option>
+			  <option value="presentation">Presentation</option>
+			  <option value="group-work" select="selected">Group Work</option>
 			  <option value="discussion">Discussion</option>
 			  <option value="break">Break</option>
 			</select>
@@ -111,19 +98,20 @@
 </div>
 
 <div ng-show="editactivityshow">
-	<form method="post" class="form-horizontal" style="height:500px;">
-		<div class="panel panel-heading">
-			<div class="panel-heading">Edit Activity</div>
+		<div class="panel panel-heading addHeading">
+		    <h3>Edit Activity</h3>
 		</div>
+		<form method="post" class="form-horizontal" style="height:500px;">
+
 		<div class="panel-body">
 			<div class="form-group">
 				<input class="form-control" placeholder="" ng-model="eAct.name" required>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-9" style="padding: 0px">
+				<div class="col-xs-9" style="padding: 0px;margin:0px !important">
 					<input ng-model="eAct.length" class="form-control" placeholder="Length" type="number" min="0">
 				</div>
-				<label class="col-xs-3">min</label>
+				<label class="col-xs-3" style="text-align: center; padding:10px">min</label>
 			</div>
 	        
 	        <div class="form-group">
