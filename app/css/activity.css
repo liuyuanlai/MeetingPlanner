@@ -17,16 +17,13 @@
 
 }
 
-
-
-
-
 .activityPanel{
 	overflow-y:scroll;
 	height:480px;
 	width:285px;
 	background-color: #373c5f;
 	padding-top: 0px;
+/*	padding: 0px 25px 15px 10px;*/
 }
 .activity-item {
 	margin-top: 6px;
