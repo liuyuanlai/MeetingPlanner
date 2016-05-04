@@ -1,5 +1,5 @@
 meetingPlannerApp.controller('HomeCtrl',
-	 function ($scope, Ref, Auth, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
+	 function ($scope, $q, Ref, Auth, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $routeParams){
 
 		var activityRef = Ref.child("activities");
 
@@ -16,12 +16,9 @@ meetingPlannerApp.controller('HomeCtrl',
 		$scope.signinError = "";
 		$scope.signupError = "";
 
-		// this part of code is responsible for displaying username
-		Auth.$onAuth(function(authdata) {
-			if(authdata) {
-				var userKey = authdata.uid;
-				var test = $firebaseObject(userRef.child(userKey)) 
-				var currentUser = $firebaseObject(userRef.child(userKey));
+		var initializeUsername = function() {
+			if(Auth.getAuthdata()) {
+				var currentUser = $firebaseObject(userRef.child(Auth.getAuthdata().uid));
 				currentUser.$loaded()
 					.then(function(data){
 						$scope.userUsername = data.username;
@@ -30,39 +27,31 @@ meetingPlannerApp.controller('HomeCtrl',
 						$scope.error = error;
 						console.log("Error: ", error);
 					});
-				//console.log($firebaseObject(userRef.child(userKey)));
-				//console.log("haha");
-			} else {
-				console.log("Logged out");
 			}
-		});
-
-
-
-		$scope.authWithPassword = function(){
-			console.log($scope.signinEmail);
-			console.log($scope.signinPassword);
-
-			Auth.$authWithPassword({
-				email: $scope.signinEmail,
-				password: $scope.signinPassword
-			}).then(function(authData){
-				console.log("Logged in as: ", authData.uid);
-				$location.path("/manage");
-			}).catch(function(error) {
-				$scope.signinError = error;
-				console.log("Authentication failed: ", error);
-			})
 		}
 
-		$scope.createUser = function(){
-			console.log($scope.signupEmail);
-			console.log($scope.signupPassword);
+		initializeUsername();
 
-			Auth.$createUser({
-				email: $scope.signupEmail,
-				password: $scope.signupPassword
-			}).then(function(userdata) {
+
+		$scope.authWithPassword = function() {
+			var promise = Auth.authWithPassword($scope.signinEmail, $scope.signinPassword);
+
+			promise.then(function(authdata) {
+				console.log("Logged in as: ", authdata.uid);
+				// Auth.authdata = authdata;
+				Auth.setAuthdata(authdata);
+				$scope.uid = authdata.uid;
+				$location.path("/manage");
+			}).catch(function(error) {
+				console.log("Authentication failed: ", error);
+				$scope.signinError = error;
+			});
+		}
+
+		$scope.createUser = function() {
+			var promise = Auth.createUser($scope.signupEmail, $scope.signupPassword);
+			
+			promise.then(function(userdata) {
 				var userObj = $firebaseObject(userRef.child(userdata.uid));
 				userObj.email = $scope.signupEmail;
 				userObj.username = $scope.signupUsername;
@@ -70,30 +59,20 @@ meetingPlannerApp.controller('HomeCtrl',
 
 				userObj.$save();
 
-				// users.$add({email: $scope.signupEmail, password: $scope.signupPassword});
-				$scope.message = "user created with uid " + userdata.uid;
-				console.log("Signed up as: ", userdata.uid);
-
-				// log in to the system after succeeding signing up
-				Auth.$authWithPassword({
-					email: $scope.signupEmail,
-					password: $scope.signupPassword
-				}).then(function(authData){
-					console.log("Logged in as: ", authData.uid);
-					$location.path("/manage");
-				}).catch(function(error){
-					$scope.signinError = error;
-					console.log("Authentication failed: ", error);
-				})
-			}).catch(function(error){
+				return Auth.authWithPassword(userObj.email, userObj.password);
+			}).then(function(authdata) {
+				console.log("Logged in as: ", authdata.uid);
+				$location.path("/manage");
+			}).catch(function(error) {
 				$scope.signupError = error;
-				console.log("Failed signing up: ", error);
-			});
-		};
+				console.log("Failed to create new user: ", error);
+			})
+		}
+
 
 
 		$scope.logoutUser = function() {
-			Auth.$unauth();
+			Auth.logoutUser();
 			$location.path("/home");
 		}
 

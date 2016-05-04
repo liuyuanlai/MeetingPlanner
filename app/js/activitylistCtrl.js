@@ -1,13 +1,9 @@
-meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $location, $firebaseAuth, $firebaseArray, $routeParams,User) {
-
-
-
-
+meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $location, $firebaseAuth, $firebaseArray, $routeParams) {
 
 	var activityRef = Ref.child("activities");
 
-		// get the auth info about the current user
-	var user_data = Auth.$getAuth();
+	// get the auth info about the current user
+	var user_data = Auth.getAuthdata();
 
 	var activities = $firebaseArray(activityRef.child(user_data.uid));
 

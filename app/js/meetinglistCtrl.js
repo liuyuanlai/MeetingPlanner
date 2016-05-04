@@ -1,10 +1,10 @@
-meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams,User) {
+meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams) {
   $scope.meetinglistshow = true;
   $scope.addmeetingshow = false;
   $scope.editmeetingshow = false;
 
   // get the auth infomation about the current user
-  var user_data = Auth.$getAuth();
+  var user_data = Auth.getAuthdata();
 
   var meetingRef = Ref.child("meetings");
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
@@ -374,12 +374,36 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   $scope.isCollapsed = false;
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
-    
+   console.log(dt);
+   console.log(mytime);
+    if (name == null || name == "") {
+      $scope.alertM = "Meeting name is required";
+    }else{
+      $scope.alertM = "";
+    };
+    if (description == null || description == "") {
+      $scope.alertP = "Meeting location is required";
+     // console.log("no description");
+    }else{
+      $scope.alertP = "";
+    };
+    if (tag == null) {
+      tag = "";
+    };
+    if (members == null) {
+      members = "";
+    };
+
    var date = dt.getDate();
    var year = dt.getFullYear();
    var month = dt.getMonth();
    var hours = mytime.getHours();
    var min = mytime.getMinutes();
+
+   if (date == null) {
+    $scope.dt = "";
+    $scope.alertD = "Please verify the date"
+   };
 
    var month = new Array();
     month[0] = "January";
@@ -429,6 +453,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     };
     
     meetings.$add(new_meeting);
+    if (meetings) {
+      alert("you have success createMeeting");
+    };
 
     if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
@@ -441,6 +468,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.addmeetingshow = false;
     $scope.editmeetingshow = false;
 
+    $scope.mName = "";
+    $scope.MPlace = "";
+    $scope.tags = "";
+    $scope.Mmembers = "";
+    $scope.Mdescript = "";
+    $scope.alertP = "";
+    $scope.alertM = "";
+    
 
   }
 
