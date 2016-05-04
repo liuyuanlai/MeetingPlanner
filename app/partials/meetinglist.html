@@ -11,15 +11,13 @@
 
 	<section id="cd-timeline">
 
-		<div ng-repeat="item in meeting" class="col-md-4 col-xs-6" ng-show="meetingShow[$index]">
+		<div ng-repeat="item in meeting" class="col-lg-4 col-md-6 col-sm-12 col-xs-12 " ng-show="meetingShow[$index]">
 			<!-- <button ng-click="Forward($index)">Forward</button> -->
 			<div class="circle" uib-popover={{item.mDate}} popover-trigger="mouseenter" style="cursor: hand;cursor: pointer;">
 			</div>
 			<div class="square"></div>
 			<div class="meetingPanel">
- 
 
-	    	
 				<div class="meetingInfo">
 					<div class="editMeeting">
 		            	<span class="glyphicon glyphicon-pencil" ng-click="editMeeting($index)" style="cursor: hand;cursor: pointer;"></span>
@@ -76,8 +74,8 @@
 				                    </div>
 				                    <div ng-show="isCollapsed" class="actDescrption">
 										<div class="panel-body">{{item.description}}</div>
-										</div>
-				                   </div>
+									</div>
+				                   
 				                </li>
 				            </ul>
 
@@ -95,6 +93,7 @@
 		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus"></span></button>
 
 	</div>
+
 
 
 </div>
