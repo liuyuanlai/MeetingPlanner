@@ -27,3 +27,9 @@
 	min-height: 150px;
 }
 
+.weather-warning {
+	width: 500px;
+	min-height: 50px;
+	color: white;
+}
+

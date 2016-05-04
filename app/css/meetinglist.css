@@ -1,3 +1,4 @@
+
 .meetingContainer{
   background-color: #e7e5d8;
 }
@@ -212,4 +213,11 @@ to {
 to {
     background-position: 0 0;
 }
+
+@media (max-width: 600px) { 
+  .meetingContainer{
+    width: 300px;
+    background-color: white;
+  }
+ }
 
