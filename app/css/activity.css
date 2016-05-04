@@ -20,7 +20,6 @@
 .activityPanel{
 	overflow-y:scroll;
 	height:480px;
-	/*width:285px;*/
 	background-color: #373c5f;
 	padding-top: 0px;
 	margin-right: -15px;
@@ -38,30 +37,23 @@
 .presentation {
 	background-color: #73bbd0!important;
 	background-clip: padding-box;
-/*	  filter:alpha(opacity=60);
-   CSS3 standard 
-  opacity:0.6;*/
+
 }
 
 .group-work {
 	background: #fcada0!important;
-/*  filter:alpha(opacity=60);
-   CSS3 standard 
-  opacity:0.6;*/
+
 }
 
 .discussion {
 	background: #c2dd94!important;
-/*	  filter:alpha(opacity=60);
-   CSS3 standard 
-  opacity:0.6;*/
+
 }
 
 .break {
 	background: #feea85!important;
-/*	  filter:alpha(opacity=60);
-   CSS3 standard 
-  opacity:0.6;*/
+
+
 }
 
 .addActBtn{
@@ -78,8 +70,7 @@
 	padding-bottom: 12px;
 }
 .addActBtn h3{
-/*	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 700;*/
+
 	font-size: 20px;
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -108,7 +99,7 @@
 	margin-left: 10px !important;
 	margin-right: 10px !important;
 	padding: 0px;
-/*	width: 100%;*/
+
 }
 
 
