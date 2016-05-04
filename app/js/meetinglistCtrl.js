@@ -567,7 +567,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.removeActivity = function(meetingindex, activityindex){
 
-    id = meetings[meetingindex].activities[activityindex].$id;
+    var id = meetings[meetingindex].activities[activityindex].$id;
     for (var i = 0; i < activities.length; i++) {
       if (activities[i].$id == id) {
         activities.$remove(i);

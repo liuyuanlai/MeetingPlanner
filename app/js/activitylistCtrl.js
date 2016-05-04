@@ -31,19 +31,32 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.addactivityshow = true;	
 	}
 
-	var getTrueIndex = function(index){
-		var count = 0;
+	var getTrueIndex = function(key){
+		// var count = 0;
+		// for (var i = 0; i < activities.length; i++) {
+		// 	if (activities[i].homeless == true) {
+		// 		count = count + 1;
+		// 	}
+		// 	if (count == (index + 1)) {
+		// 		return i;
+		// 	}
+		// }
+		var id = $scope.models.lists.Activities[key].$id;
 		for (var i = 0; i < activities.length; i++) {
-			if (activities[i].homeless == true) {
-				count = count + 1;
-			}
-			if (count == (index + 1)) {
-				return i;
-			}
-		}
+	      if (activities[i].$id == id) {
+	        return i;
+	      }
+	    }
+
 	}
 
 	$scope.editActivity = function(key){
+		// var id = $scope.models.lists.Activities[key].$id;
+		// for (var i = 0; i < activities.length; i++) {
+	 //      if (activities[i].$id == id) {
+	 //        var index = i;
+	 //      }
+	 //    }
 		var index = getTrueIndex(key);
 		$scope.activitylistshow = false;
 		$scope.addactivityshow = false;
@@ -63,11 +76,11 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 	$scope.removeActivity = function(key){
 		var index = getTrueIndex(key);
 		activities.$remove(index);
-		$scope.models.lists.Activities.splice(index,1);
+		$scope.models.lists.Activities.splice(key,1);
 	}
 
-	$scope.saveChange = function(key){
-		var index = getTrueIndex(key);
+	$scope.saveChange = function(index){
+		//var index = getTrueIndex(key);
         
 
 		activities[index].name = $scope.eAct.name;
@@ -127,13 +140,13 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		// activities[key].length = activity_temp.length;
 		// activities[key].type = activity_temp.type;
 		// activities[key].$id = activity_temp.$id;
-		for(var p in activities[index]){
-			var temp = activities[index][p];
-			activities[index][p] = activities[key][p];
-			activities[key][p] = temp;
-			activities.$save(index);
-			activities.$save(key);
-		}
+		// for(var p in activities[index]){
+		// 	var temp = activities[index][p];
+		// 	activities[index][p] = activities[key][p];
+		// 	activities[key][p] = temp;
+		// 	activities.$save(index);
+		// 	activities.$save(key);
+		// }
 		// activities.$save(index);
 		// activities.$save(key);
 	}
