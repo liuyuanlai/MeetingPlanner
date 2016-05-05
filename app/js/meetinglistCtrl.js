@@ -249,12 +249,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.eMeeting.mName = editMeeting.mName;
     $scope.eMeeting.place = editMeeting.MPlace;
     $scope.eMeeting.date = new Date(editMeeting.mDate);
-    console.log($scope.eMeeting.date);
+   // console.log($scope.eMeeting.date);
 
-    var dt = editMeeting.mDateTime;
-    var date = new Date(dt);    
-    $scope.eMeeting.mtime = new Date(date);
-    console.log($scope.eMeeting.mtime);
+    // var dt = editMeeting.mDateTime;
+    // var date = new Date(dt);    
+    // $scope.eMeeting.mtime = new Date(date);
+
+    $scope.eMeeting.mtime = new Date();
     
     $scope.eMeeting.tag = editMeeting.mTag;
     $scope.eMeeting.members = editMeeting.mMembers;
@@ -302,21 +303,58 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     var M_time = M_hours + ':' + M_min;
 
     var M_DateTime = M_date + " " + M_time;
+    
     //console.log(M_DateTime);
  
-    $scope.meetinglistshow = true;
-    $scope.addmeetingshow = false;
-    $scope.editmeetingshow = false;
+    if ($scope.eMeeting.mName == null || $scope.eMeeting.mName == "") {
+      $scope.alertM = "Meeting name is required";
+    } else if ($scope.eMeeting.place == null || $scope.eMeeting.place =="") {
+      $scope.alertP = "Meeting location is required";
+    } else{
+      
+      meetings[index].mName = $scope.eMeeting.mName;
+      meetings[index].MPlace = $scope.eMeeting.place;
+      meetings[index].mDateTime = M_DateTime;
+      meetings[index].mDate = M_date;
+      meetings[index].mTime = M_time;
+      
+      if ($scope.eMeeting.tag == null) {
+        meetings[index].mTag == "";
+      } else{
+        meetings[index].mTag = $scope.eMeeting.tag;
+      };
+
+      if ($scope.eMeeting.members == null) {
+        meetings[index].mMembers = "";
+      } else{
+        meetings[index].mMembers = $scope.eMeeting.members;
+      };
+
+      if ($scope.eMeeting.descript == null) {
+        meetings[index].mDescript = "";
+      } else{
+        meetings[index].mDescript = $scope.eMeeting.descript;
+      };
+      
+      // meetings[index].mTag = $scope.eMeeting.tag;
+      // meetings[index].mMembers = $scope.eMeeting.members;
+      // meetings[index].mDescript = $scope.eMeeting.descript;
+      
+      meetings.$save(index);
+
+      alert("you have successfully saved meeting");
+      $scope.alertP = "";
+      $scope.alertM = "";
+
+      $scope.meetinglistshow = true;
+      $scope.addmeetingshow = false;
+      $scope.editmeetingshow = false;
+
+
+    };
     
-    meetings[index].mName = $scope.eMeeting.mName;
-    meetings[index].MPlace = $scope.eMeeting.place;
-    meetings[index].mDateTime = M_DateTime;
-    meetings[index].mDate = M_date;
-    meetings[index].mTime = M_time;
-    meetings[index].mTag = $scope.eMeeting.tag;
-    meetings[index].mMembers = $scope.eMeeting.members;
-    meetings[index].mDescript = $scope.eMeeting.descript;
-    meetings.$save(index);
+    
+   
 
   }
 
@@ -359,39 +397,26 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
     }
   $scope.meetingShow.splice(index, 1);
-  //console.log("test");
-    // $scope.meetinglistshow = true;
-    // $scope.addmeetingshow = false;
-    // $scope.editmeetingshow = false;
   }
 
-  // //Show meetinglist test
-  // $scope.getMID = function(id){
-  //   console.log("hi");
-  //   console.log(id);
-  // }
 
   $scope.isCollapsed = false;
+
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
-   console.log(dt);
-   console.log(mytime);
     if (name == null || name == "") {
       $scope.alertM = "Meeting name is required";
-    }else{
-      $scope.alertM = "";
-    };
-    if (description == null || description == "") {
+    }else if (place == null || place == "") {
       $scope.alertP = "Meeting location is required";
-     // console.log("no description");
-    }else{
-      $scope.alertP = "";
-    };
+    }
     if (tag == null) {
       tag = "";
     };
     if (members == null) {
       members = "";
+    };
+    if (description == null) {
+      description = "";
     };
 
    var date = dt.getDate();
@@ -436,8 +461,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     var M_DateTime = M_date + " " + M_time;
 
- 
-    var new_meeting = {
+    // if ( (name != "" || name != null) && (location != "" || location != null))
+
+    if ( name != null && place != null) {
+      var new_meeting = {
       mName: name,
       MPlace: place,
       ou: M_DateTime,
@@ -449,34 +476,31 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       mStartTime: 0,
       mEndTime: 0,
       mLength: 0,
+     };
+      //console.log("success");
+      meetings.$add(new_meeting);
+      alert("you have successfully created the meeting");
 
-    };
-    
-    meetings.$add(new_meeting);
-    if (meetings) {
-      alert("you have success createMeeting");
-    };
-
-    if ($scope.meeting.length < 3) {
+      if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
-    }else{
-      $scope.meetingShow.push(false);
-    }
+      }else{
+        $scope.meetingShow.push(false);
+      }
 
-    $scope.meeting.push(new_meeting);
-    $scope.meetinglistshow = true;
-    $scope.addmeetingshow = false;
-    $scope.editmeetingshow = false;
+      $scope.meeting.push(new_meeting);
+      $scope.meetinglistshow = true;
+      $scope.addmeetingshow = false;
+      $scope.editmeetingshow = false;
 
-    $scope.mName = "";
-    $scope.MPlace = "";
-    $scope.tags = "";
-    $scope.Mmembers = "";
-    $scope.Mdescript = "";
-    $scope.alertP = "";
-    $scope.alertM = "";
-    
+      $scope.mName = "";
+      $scope.MPlace = "";
+      $scope.tags = "";
+      $scope.Mmembers = "";
+      $scope.Mdescript = "";
+      $scope.alertP = "";
+      $scope.alertM = "";
 
+    };
   }
 
   $scope.addActType = function(index,type){
