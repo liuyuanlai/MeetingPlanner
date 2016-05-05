@@ -1,9 +1,9 @@
 meetingPlannerApp.factory('Forecast', 
 	function ($resource, $http) {
 
-		var BASE_API = 'http://query.yahooapis.com/v1/yql';
+		var BASE_API = 'https://query.yahooapis.com/v1/yql';
 
-		var yql_base_api_public = "http://query.yahooapis.com/v1/public/yql";
+		var yql_base_api_public = "https://query.yahooapis.com/v1/public/yql";
 		var yql_results = "";
 		var yql_query = "SELECT * from geo.places WHERE text='stockholm'";
 

@@ -1,10 +1,10 @@
-meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams,User) {
+meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams) {
   $scope.meetinglistshow = true;
   $scope.addmeetingshow = false;
   $scope.editmeetingshow = false;
 
   // get the auth infomation about the current user
-  var user_data = Auth.$getAuth();
+  var user_data = Auth.getAuthdata();
 
   var meetingRef = Ref.child("meetings");
   var meetings = $firebaseArray(meetingRef.child(user_data.uid));
@@ -226,7 +226,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.meeting[meetingindex].mLength = meetL;
     $scope.meeting[meetingindex].mEndTime = $scope.getEndTime($scope.meeting[meetingindex].mTime, meetL);
     $scope.showPercentage(meetingindex);
-    console.log("$scope.dragactivity");
 
 
 
@@ -568,7 +567,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
   $scope.removeActivity = function(meetingindex, activityindex){
 
-    id = meetings[meetingindex].activities[activityindex].$id;
+    var id = meetings[meetingindex].activities[activityindex].$id;
     for (var i = 0; i < activities.length; i++) {
       if (activities[i].$id == id) {
         activities.$remove(i);
