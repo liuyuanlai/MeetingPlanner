@@ -21,10 +21,11 @@
 		                    class="activity-item"
 		                    ng-class="item.type"
 		                    ng-class="{'background-clip: ,'selected': models.selected === item}"
+
 		                   
 		                    >
 		                    <div class="row" ng-class="item.type" >
-                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;" ng-click="isCollapsed = !isCollapsed">
+                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;color: white;font-family: 'Sans-serif';font-size:1.05em" ng-click="isCollapsed = !isCollapsed">
 		                        	<div class="col-xs-4 actItem">{{item.length}}min</div>
 			                        <div class="col-xs-8">{{item.name}}</div>
 								</div>
