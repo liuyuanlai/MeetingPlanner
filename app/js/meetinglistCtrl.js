@@ -100,13 +100,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   };
 
 
-
-  //   for(var i = 0; i < activities.length; i++){
-  //     $scope.models.lists.Activities.push(activities[i]);
-  //   }
-  // })
-
-
   
   $scope.Forward = function(){
     if (offSet + 3 >= meetings.length) {
@@ -372,6 +365,9 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   // }
 
   $scope.isCollapsed = false;
+  $detailInfo = false;
+
+
   //Create Meeting
   $scope.createMeeting = function (name, place, dt, mytime, tag, members, description){
    console.log(dt);

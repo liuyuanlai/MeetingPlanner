@@ -1,5 +1,5 @@
 .addMeeting{
-	padding: 4%;
+	padding: 20px 0px 20px 20px;
 }
 
 .addMeeting .btn-default{
@@ -9,14 +9,21 @@
 }
 
 .backBTN{
-	margin-left: 19%;
+	margin-left: 22%;
 	float: left;
 }
 
 .creatBTN{
 	float: right;
+	margin-right: 17%;
 }
 
 .addMeeting .time{
 	margin-top: 5%;
+}
+
+@media (max-width: 680px) { 
+  .tagSize{
+  	width: 567px !important;
+  }
 }

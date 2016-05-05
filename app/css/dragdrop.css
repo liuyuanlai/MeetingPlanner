@@ -62,7 +62,10 @@
     color: #3c763d;
 }
 
-.actItem{
-    border-right:1px solid rgba(68,74,111,0.8); 
+.itemLength{
     padding:0px 10px 0px 5px;
+}
+
+.itemName{
+    border-left:1px solid rgba(68,74,111,0.8);
 }
