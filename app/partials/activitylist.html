@@ -21,10 +21,11 @@
 		                    class="activity-item"
 		                    ng-class="item.type"
 		                    ng-class="{'background-clip: ,'selected': models.selected === item}"
+
 		                   
 		                    >
 		                    <div class="row" ng-class="item.type" >
-                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;" ng-click="isCollapsed = !isCollapsed">
+                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;font-family: 'Sans-serif';font-size:1.05em" ng-click="isCollapsed = !isCollapsed">
 		                        	<div class="col-xs-4 itemLength">{{item.length}}min</div>
 			                        <div class="col-xs-8 itemName">{{item.name}}</div>
 								</div>
@@ -77,9 +78,9 @@
 			</div>
 	        
 	        <div class="form-group">
-			<select ng-model="$parent.newAct_type" class="form-control">
-			  <option value="presentation">Presentation</option>
-			  <option value="group-work" select="selected">Group Work</option>
+			<select ng-model="newAct_type" class="form-control">
+			  <option value="presentation" selected="selected">Presentation</option>
+			  <option value="group-work">Group Work</option>
 			  <option value="discussion">Discussion</option>
 			  <option value="break">Break</option>
 			</select>
@@ -115,12 +116,12 @@
 			</div>
 	        
 	        <div class="form-group">
-			<select ng-model="eAct.type" class="form-control">
-			  <option value="presentation">Presentation</option>
-			  <option value="group-work">Group Work</option>
-			  <option value="discussion">Discussion</option>
-			  <option value="break">Break</option>
-			</select>
+				<select ng-model="eAct.type" class="form-control">
+					  <option value="presentation">Presentation</option>
+					  <option value="group-work">Group Work</option>
+					  <option value="discussion">Discussion</option>
+					  <option value="break">Break</option>
+				</select>
 			</div>
 	        
 	        <div class="form-group">

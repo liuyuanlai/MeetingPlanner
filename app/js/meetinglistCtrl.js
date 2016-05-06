@@ -274,7 +274,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     // var date = new Date(dt);    
     // $scope.eMeeting.mtime = new Date(date);
 
-    $scope.eMeeting.mtime = new Date();
+    // $scope.eMeeting.mtime = new Date();
+    $scope.eMeeting.mtime = new Date(editMeeting.mDateTime);
     
     $scope.eMeeting.tag = editMeeting.mTag;
     $scope.eMeeting.members = editMeeting.mMembers;
@@ -306,7 +307,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     month[10] = "November";
     month[11] = "December";
     var m = month[dt.getMonth()];
-    var M_date = date + "-" + m + "-" + year;
+    // var M_date = date + "-" + m + "-" + year;
+    var M_date = m + " " + date + ", " + year;
 
     // Set the start time
     var M_hours = mytime.getHours();
@@ -336,6 +338,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       meetings[index].mDateTime = M_DateTime;
       meetings[index].mDate = M_date;
       meetings[index].mTime = M_time;
+      meetings[index].mEndTime = $scope.getEndTime($scope.meeting[index].mTime, $scope.getMeetingLength(index));
       
       if ($scope.eMeeting.tag == null) {
         meetings[index].mTag == "";
@@ -467,7 +470,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     month[10] = "November";
     month[11] = "December";
     var m = month[dt.getMonth()];
-    var M_date = date + "-" + m + "-" + year;
+    // var M_date = date + "-" + m + "-" + year;
+    var M_date = m + " " + date + ", " + year;
 
     // Set the start time
     var M_hours = mytime.getHours();
@@ -490,27 +494,35 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       var new_meeting = {
       mName: name,
       MPlace: place,
-      ou: M_DateTime,
+      mDateTime: M_DateTime,
       mDate: M_date,
       mTime: M_time,
       mTag: tag,
       mMembers: members,
       mDescript: description,
       mStartTime: 0,
-      mEndTime: 0,
+      mEndTime: M_time,
       mLength: 0,
      };
       //console.log("success");
-      meetings.$add(new_meeting);
+      meetings.$add(new_meeting).then(function(){
+        //console.log("test");
+      });
       alert("you have successfully created the meeting");
 
-      if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
-      }else{
-        $scope.meetingShow.push(false);
+
+      if ($scope.meetingShow.length > 3) {
+        $scope.meetingShow[$scope.meetingShow.length - 2] = true;
+        $scope.meetingShow[$scope.meetingShow.length - 3] = true;
+        for (var i = 0; i < $scope.meetingShow.length -3; i++) {
+          $scope.meetingShow[i] = false;
+          offSet = $scope.meetingShow.length - 3;
+        }
       }
 
       $scope.meeting.push(new_meeting);
+      $scope.models.lists.Activities.push([]);
       $scope.meetinglistshow = true;
       $scope.addmeetingshow = false;
       $scope.editmeetingshow = false;
@@ -636,6 +648,15 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
   $scope.addmeeting = function(){
+
+    $scope.mName = "";
+    $scope.MPlace = "";
+    $scope.tags = [];
+    $scope.Mmembers = [];
+    $scope.Mdescript = [];
+    $scope.dt = new Date();
+    $scope.mytime = new Date();
+
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = true;
     $scope.editmeetingshow = false;
@@ -767,7 +788,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   };
 
   $scope.changed = function () {
-    $log.log('Time changed to: ' + $scope.mytime);
+    // $log.log('Time changed to: ' + $scope.mytime);
   };
 
   $scope.clear = function() {

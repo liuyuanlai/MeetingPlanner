@@ -91,7 +91,7 @@
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
 				                    <div class="row" ng-click="isCollapsed = !isCollapsed">
-										<div class="col-xs-10" style="cursor: hand;cursor: pointer;">
+										<div class="col-xs-10" style="cursor: hand;cursor: pointer;font-family: 'Sans-serif';font-size:1.05em">
 				                        	<div class="col-xs-4 itemLength">{{item.length}}min</div>
 					                        <div class="col-xs-8 itemName">{{item.name}}</div>
 										</div>
@@ -176,7 +176,7 @@
 	  <div class="form-group">
 	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
 	    	<tags-input ng-model="tags" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)"></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)"></auto-complete> -->
 		    </tags-input>
 
 	  </div>
@@ -185,7 +185,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="Mmembers" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)" ></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)" ></auto-complete> -->
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>
@@ -250,7 +250,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="eMeeting.tag" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)"></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)"></auto-complete> -->
 		    </tags-input>
 		<!-- </div> -->
 	  </div>
@@ -259,7 +259,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="eMeeting.members" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8 " >
-		        <auto-complete source="loadTags($query)" ></auto-complete
+		        <!-- <auto-complete source="loadTags($query)" ></auto-complete -->
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>
