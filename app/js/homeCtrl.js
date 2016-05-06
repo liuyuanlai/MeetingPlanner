@@ -44,6 +44,7 @@ meetingPlannerApp.controller('HomeCtrl',
 				$location.path("/manage");
 			}).catch(function(error) {
 				console.log("Authentication failed: ", error);
+				console.log(error);
 				$scope.signinError = error;
 			});
 		}
