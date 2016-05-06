@@ -39,27 +39,27 @@
 }
 
 .presentation {
-	/*background-color: #73bbd0!important;*/
-	background: #0000ff!important;
+	background-color: #73bbd0!important;
+	/*background: #0000ff!important;*/
 	background-clip: padding-box;
 
 }
 
 .group-work {
-	/*background: #fcada0!important;*/
-	background:  #ff3300!important;
+	background: #fcada0!important;
+	/*background:  #ff3300!important;*/
 
 }
 
 .discussion {
-	/*background: #c2dd94!important;*/
-	background: #00ff00!important;
+	background: #c2dd94!important;
+	/*background: #00ff00!important;*/
 
 }
 
 .break {
-	/*background: #feea85!important;*/
-	background: #990099!important;
+	background: #feea85!important;
+	/*background: #990099!important;*/
 
 
 }
