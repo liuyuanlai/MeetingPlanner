@@ -1,64 +1,17 @@
 
 .meetingContainer{
   background-color: #e7e5d8;
+  height:565px;
+  overflow:hidden;
 }
 
+/*meetinglist view*/
 .meetinglist{
   padding: 20px;
-  height:550px;
 
 }
 
-.meetingInfo{
-
-	padding: 10px; 
-  background-color: #f5f3e5;
-  position: relative;
-
-}
-.meetingInfo h5{
-	margin: 10px;
-/*  color:#31708f;*/
-
-  
-}
-.editMeeting{
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 1;
-}
-
-.meetingPanel{
-	border: 0px solid #ddd; 
-  border-radius: 5px;
-  overflow: hidden;
-	height: 450px;
-  width: 230px;
-
-
-}
-
-.listPanel{
-  position: relative;
-  overflow-y: scroll;
-  background-color: white;
-  text-align: center; 
-  height: 320px;
-
-}
-.mlPanel{
-  margin-left: 0px;
-  margin-right: -15px; 
-
-  padding:0px 5px 15px 5px;
-}
-
-
-
-.actList{
-	margin: 10px;
-}
+/*components in timeline*/
 #cd-timeline { 
   position: relative; 
   padding: 0 2em; 
@@ -72,6 +25,20 @@
   width: 98%; 
   background: #444a6f; 
 } 
+.circle {
+     width: 20px;
+     height: 20px;
+     background: #444a6f;
+     -moz-border-radius: 50px;
+     -webkit-border-radius: 50px;
+     border-radius: 50px;
+ }
+.square {
+     width: 5px;
+     height: 20px;
+     margin: 0px 7.5px ; 
+     background: #444a6f;
+ }
 
 
 .addBtn{
@@ -126,21 +93,86 @@
 
 
 
-.circle {
-     width: 20px;
-     height: 20px;
-     background: #444a6f;
-     -moz-border-radius: 50px;
-     -webkit-border-radius: 50px;
-     border-radius: 50px;
- }
-.square {
-     width: 5px;
-     height: 20px;
-     margin: 0px 7.5px ; 
-     background: #444a6f;
- }
 
+.meetingPanel{
+  border: 0px solid #ddd; 
+  border-radius: 5px;
+  overflow: hidden;
+  height: 475px;
+  margin-bottom: 50px;
+  background-color: white;
+  padding-bottom: 40px;
+
+}
+
+/*meeting info panel*/
+.meetingInfo{
+  padding: 10px 10px 10px 10px; 
+  background-color: #f5f3e5;
+  position: relative;
+
+
+}
+
+.meetingInfo table tr{
+  text-align:left;
+  vertical-align: text-top;
+}
+
+.meetingInfo table tr th{
+  width: 95px;
+}
+
+
+/*edit button*/
+.editMeeting{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}
+
+
+/*CSS for scroll bar if overflow, only effective when using Safari and Chrome*/
+.detailInfo{
+  margin: 10px -10px 0px 10px;
+  padding-right:10px;
+  height:90px;
+  overflow-y:auto;
+
+}
+
+.detailInfo::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.05);
+  background-color: #e5e1d9;
+}
+
+.detailInfo::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #CAC4BB;
+}
+
+.detailInfo::-webkit-scrollbar-thumb
+{
+  background-color: #CAC4BB;
+}
+
+
+.moreInfo{
+
+  font-size:12px;
+  color: #5D2712;
+  cursor: hand;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+}
+
+
+/*triangle to mark the 30% requirement for break*/
 .triangleDown {
      width: 0;
      height: 0;
@@ -160,6 +192,7 @@
 
 
 
+/*warning animation style for break time in type bar*/
 .warningBreak {
   float: left;
   width: 0;
@@ -190,33 +223,110 @@
 
 
 @-webkit-keyframes barberpole {
- from {
- background-position: 40px 0;
-}
-to {
-    background-position: 0 0;
-}
+   from {
+   background-position: 40px 0;
+  }
+  to {
+      background-position: 0 0;
+  }
 }
 @-moz-keyframes barberpole {
- from {
- background-position: 40px 0;
-}
-to {
-    background-position: 0 0;
-}
+   from {
+   background-position: 40px 0;
+  }
+  to {
+      background-position: 0 0;
+  }
 }
 @keyframes barberpole {
- from {
- background-position: 40px 0;
-}
-to {
-    background-position: 0 0;
-}
-
-@media (max-width: 600px) { 
-  .meetingContainer{
-    width: 300px;
-    background-color: white;
+   from {
+   background-position: 40px 0;
   }
- }
+  to {
+      background-position: 0 0;
+  }
+}
 
+
+
+
+/*activities container for meeting*/
+.listPanel{
+  position: relative;
+  overflow-y: scroll;
+  overflow-x:hidden; 
+  background-color: white;
+  text-align: center; 
+
+
+}
+.mlPanel{
+  margin-left: 0px;
+  margin-right: -15px; 
+  padding:0px 5px 0px 5px;
+  height: 305px;
+/*  padding:0px 15px 15px 5px;*/
+}
+
+
+
+.actList{
+	margin: 10px;
+}
+
+
+
+.meetingTags{
+  height: 20px;
+  background-color: #f5f3e5;
+  color:#000;
+  font-size: 12px;
+  padding: 3px 8px 3px 8px;
+  position: relative; 
+  top: 5px;
+/*  left: 15px;*/
+  margin-left: 12px;
+  margin-bottom: 20px;
+
+  -moz-border-radius-bottomright:4px;
+  -webkit-border-bottom-right-radius:4px; 
+  border-bottom-right-radius:4px;
+  -moz-border-radius-topright:4px;
+  -webkit-border-top-right-radius:4px;  
+  border-top-right-radius:4px;  
+
+
+    -moz-box-shadow:1px 1px 1px #CAC4BB;
+  -webkit-box-shadow:1px 1px 1px #CAC4BB;
+  box-shadow:1px 1px 1px #CAC4BB;
+
+  } 
+.meetingTags:before{
+  content:"";
+  float:left;
+  position:absolute;
+  top:0px;
+  left:-8px;
+  width:0;
+  height:0;
+  border-color:transparent #f5f3e5 transparent transparent;
+  border-style:solid;
+  border-width:10px 8px 10px 0;    
+  }
+
+.meetingTags:after{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:0;
+  float:left;
+  width:4px;
+  height:4px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:2px;
+  background:#fff;
+  -moz-box-shadow:-1px -1px 2px #5D2712;
+  -webkit-box-shadow:-1px -1px 2px #5D2712;
+  box-shadow:-1px -1px 2px #5D2712;
+  }

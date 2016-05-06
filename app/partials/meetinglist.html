@@ -1,42 +1,70 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
 
-
-<!-- 	<div ng-controller="PagerDemoCtrl">
-	  <h4>Pager</h4>
-	  <pre>You are currently on page {{currentPage}}</pre>
-	  <uib-pager total-items="totalItems" ng-model="currentPage"></uib-pager>
-	</div> -->
 	<button class="backBtn" ng-click="Back()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
 
 	<section id="cd-timeline">
 
-		<div ng-repeat="item in meeting" class="col-md-4 col-xs-6" ng-show="meetingShow[$index]">
+		<div ng-repeat="item in meeting" class="col-lg-4 col-md-6 col-sm-12 col-xs-12 " ng-show="meetingShow[$index]">
 			<!-- <button ng-click="Forward($index)">Forward</button> -->
-			<div class="circle" uib-popover={{item.mDate}} popover-trigger="mouseenter" style="cursor: hand;cursor: pointer;">
+			<div class="circle" uib-popover={{item.mDate}} popover-trigger="mouseenter" popover-placement="right" style="cursor: hand;cursor: pointer;">
 			</div>
 			<div class="square"></div>
 			<div class="meetingPanel">
- 
 
-	    	
 				<div class="meetingInfo">
 					<div class="editMeeting">
 		            	<span class="glyphicon glyphicon-pencil" ng-click="editMeeting($index)" style="cursor: hand;cursor: pointer;"></span>
 		            	<span class="glyphicon glyphicon-trash" ng-click="removeMeeting($index)" style="cursor: hand;cursor: pointer;"></span>
 		            	<!-- 	<span class="glyphicon glyphicon-trash" ng-click="getMID($id)" style="cursor: hand;cursor: pointer;"></span> -->
 	            	</div>
-					<h5>Meeting: {{item.mName}}<br>
+					<!-- basic info for meeting -->
+					<div class="detailInfo" ng-show="!detailInfo">
+						<table>
+							<tr>
+								<th>Meeting:</th><td>{{item.mName}}</td>
+							</tr>
+							<tr>
+								<th>Location:</th><td>{{item.MPlace}}</td>
+							</tr>
+							<tr>
+								<th>Start Time:</th><td>{{item.mTime}}</td>
+							</tr>
+							<tr>
+								<th>End Time:</th><td>{{item.mEndTime}}</td>
+							</tr>
+							<tr>
+								<th>Total Length: &nbsp;</th><td>{{item.mLength}}min</td>
+							</tr>
+							
+						</table>
+<!-- 						Meeting: {{item.mName}}<br>
 						Location: {{item.MPlace}}<br>
 						Start Time: {{item.mTime}}<br>
 						End   &nbsp;Time:  {{item.mEndTime}}<br>
-						Total Length: {{item.mLength}}min<br>
-					</h5>
+						Total Length: {{item.mLength}}min<br> -->
+					</div>
+
+					<!-- detail info for meeting -->
+					<div  class="detailInfo" ng-show="detailInfo">
+						<table>
+						<tr><th>Participants:</th></tr>
+						<tr ng-repeat="member in item.mMembers">
+							<td >{{member.text}}</td>
+						</tr>
+						<tr><th>Description:</th></tr>
+						<tr><td>{{item.mDescript}}</td></tr>
+						</table>
+					</div>			
+	
+					<div class="moreInfo" ng-show="!detailInfo" ng-click="detailInfo = !detailInfo">Detail</div>
+					<div class="moreInfo" ng-show="detailInfo" ng-click="detailInfo = !detailInfo">Basic</div>
 					<div class="triangleDown"></div>
 				</div>
 
+				<!-- type bar -->
 				<div>
-					<uib-progress style="margin-bottom:0px">
+					<uib-progress style="margin-bottom:0px;margin-top:0px">
 
 						<uib-bar ng-repeat="bar in actType[$index]" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span>{{bar.value}}%</span>
 
@@ -64,8 +92,8 @@
 				                    >
 				                    <div class="row" ng-click="isCollapsed = !isCollapsed">
 										<div class="col-xs-10" style="cursor: hand;cursor: pointer;">
-				                        	<div class="col-xs-4 actItem">{{item.length}}min</div>
-					                        <div class="col-xs-8">{{item.name}}</div>
+				                        	<div class="col-xs-4 itemLength">{{item.length}}min</div>
+					                        <div class="col-xs-8 itemName">{{item.name}}</div>
 										</div>
 
 				                    	<div class="cos-xs-2">
@@ -76,14 +104,21 @@
 				                    </div>
 				                    <div ng-show="isCollapsed" class="actDescrption">
 										<div class="panel-body">{{item.description}}</div>
-										</div>
-				                   </div>
+									</div>
+				                   
 				                </li>
 				            </ul>
 
 				        </div>
 			        </div>
 		        </div>
+		        <div style="height:50px;width:260px;overflow-x:auto; overflow-y:hidden;margin-bottom:-15px">
+		        <div style="width:300px;">
+		        <span ng-repeat="tags in item.mTag" class="meetingTags" >{{tags.text}}</span>
+		        </div>
+		        
+		        </div>
+		        
 			</div>
 		</div>
 	</section>
@@ -97,69 +132,72 @@
 	</div>
 
 
+
 </div>
 <!-- meetinglist view -->
 
 
 <!-- add meeting view -->
 <div ng-show="addmeetingshow" class="addMeeting">
-	<form class="form-horizontal panel-body">
+	<form class="form-horizontal panel-body" style="padding-right:0px">
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Name*</label>
-	    <div class="col-sm-8"><input class="form-control" id="" placeholder="" ng-model="mName" required>
+	    <label class="col-xs-3 col-sm-2 control-label">Name*</label>
+	    <div class="col-xs-7 col-sm-8"><input class="form-control" id="" placeholder="" ng-model="mName" required>
 	    	<span>{{alertM}}</span>
 	    </div>
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label time">Date*</label>
-		    <div class="col-sm-3 time">
-		        <p class="input-group">
-		          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-click="open1()" style="cursor: hand;cursor: pointer;" ng-disabled="disabled"/>
-		          <span class="input-group-btn">
-		            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-		          </span>
-		        </p>
-			 </div>
-
-        <label class="col-sm-2 control-label time">Start Time*</label>
-	    <div class="col-sm-4">
+	  <!-- Date Picker -->
+	    <label class="col-xs-3 col-sm-2 col-md-2 control-label time">Date*</label>
+	    <div class="col-xs-7 col-sm-8 col-md-4 time" style="margin-right:0px">
+	        <p class="input-group">
+	          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-click="open1()" style="cursor: hand;cursor: pointer;" ng-disabled="disabled"/>
+	          <span class="input-group-btn">
+	            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+	          </span>
+	        </p>
+		 </div>
+		<!-- Time Setting -->
+        <label class="col-xs-3 col-sm-2 col-md-2 control-label time" >Start Time*</label>
+	    <div class="col-xs-7 col-sm-8 col-md-2" style="height:80px" >
 	    	<uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 	    </div>
 	   </div>
 
 	   <div class="form-group">
-	    <label class="col-sm-2 control-label">Location*</label>
-	    <div class="col-sm-8"><input class="form-control" ng-model="MPlace">
+	    <label class="col-xs-3 col-sm-2 control-label">Location*</label>
+	    <div class="col-xs-7 col-sm-8"><input class="form-control" ng-model="MPlace">
 	    	<span>{{alertP}}</span>
 	    </div>
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Tag</label>
-	    <!-- <div class="col-sm-8"> -->
-	    	<tags-input ng-model="tags" class="col-sm-8">
+	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
+	    	<tags-input ng-model="tags" class="col-xs-8 col-sm-9 col-md-8">
 		        <auto-complete source="loadTags($query)"></auto-complete>
 		    </tags-input>
-		<!-- </div> -->
+
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Participants</label>
+	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
-	    	<tags-input ng-model="Mmembers" placeholder="Add Email Address of Participants" class="col-sm-8">
+	    	<tags-input ng-model="Mmembers" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8">
 		        <auto-complete source="loadTags($query)" ></auto-complete>
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Description</label>
-	    <div class="col-sm-8"><textarea class="form-control" rows="3" ng-model="Mdescript"></textarea></div>
+	    <label class="col-xs-3 col-sm-2 control-label">Description</label>
+	    <div class="col-xs-7 col-sm-8"><textarea class="form-control" rows="3" ng-model="Mdescript"></textarea></div>
 	  </div>
+
+
 	  <div class="form-group">
-	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
-	  	<button type="submit" class="btn btn-default creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="createMeeting(mName,MPlace,dt, mytime, tags,Mmembers,Mdescript)">Create</button>
+	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN" style="margin-top: 0px !important;"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
+	  	<button type="submit" class="btn btn-success creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="createMeeting(mName,MPlace,dt, mytime, tags,Mmembers,Mdescript)">Create</button>
 	  </div>
 
 	</form>
@@ -168,15 +206,19 @@
 
 <!-- edit meeting view -->
 <div ng-show="editmeetingshow" class="addMeeting">
-	<form class="form-horizontal panel-body">
+	<form class="form-horizontal panel-body" style="padding-right:0px">
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Name</label>
-	    <div class="col-sm-8"><input class="form-control" id="" placeholder="" ng-model="eMeeting.mName" required></div>
+
+	    <label class="col-xs-3 col-sm-2 control-label">Name*</label>
+	    <div class="col-xs-7 col-sm-8"><input class="form-control" id="" placeholder="" ng-model="eMeeting.mName" required>
+	    	<span>{{alertM}}</span>
+	    </div>
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label time">Date</label>
-		    <div class="col-sm-3 time">
+	    <label class="col-xs-3 col-sm-2 col-md-2 control-label time">Date*</label>
+		    <div class="col-xs-7 col-sm-8 col-md-4 time">
+
 		        <p class="input-group">
 		          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="eMeeting.date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
 		          <span class="input-group-btn">
@@ -185,45 +227,52 @@
 		        </p>
 			 </div>
 
-        <label class="col-sm-2 control-label time">Start Time</label>
-	    <div class="col-sm-4">
+
+        <label class="col-xs-3 col-sm-2 col-md-2 control-label time">Start Time*</label>
+	    <div class="col-xs-7 col-sm-8 col-md-2"  style="height:80px">
+
 	    	<uib-timepicker ng-model="eMeeting.mtime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 	    </div>
 	   </div>
 
 	   <div class="form-group">
-	    <label class="col-sm-2 control-label">Location</label>
-	    <div class="col-sm-8"><input class="form-control" ng-model="eMeeting.place"></div>
+
+	    <label class="col-xs-3 col-sm-2 control-label">Location*</label>
+	    <div class="col-xs-7 col-sm-8"><input class="form-control" ng-model="eMeeting.place">
+			<span>{{alertP}}</span>
+	    </div>
+	   
+
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Tag</label>
+	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
 	    <!-- <div class="col-sm-8"> -->
-	    	<tags-input ng-model="eMeeting.tag" class="col-sm-8">
+	    	<tags-input ng-model="eMeeting.tag" class="col-xs-8 col-sm-9 col-md-8">
 		        <auto-complete source="loadTags($query)"></auto-complete>
 		    </tags-input>
 		<!-- </div> -->
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Participants</label>
+	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
-	    	<tags-input ng-model="eMeeting.members" placeholder="Add Email Address of Participants" class="col-sm-8">
+	    	<tags-input ng-model="eMeeting.members" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8 " >
 		        <auto-complete source="loadTags($query)" ></auto-complete
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>
 
 	  <div class="form-group">
-	    <label class="col-sm-2 control-label">Description</label>
-	    <div class="col-sm-8">
+	    <label class="col-xs-3 col-sm-2 control-label">Description</label>
+	    <div class="col-xs-7 col-sm-8">
 	    	<textarea class="form-control" rows="3" ng-model="eMeeting.descript"></textarea>
 	    </div>
 	  </div>
 
 	  <div class="form-group">
-	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
-	  	<button type="submit" class="btn btn-default creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="saveEditM(eMindex)">Save</button>
+	  	<button ng-click="goback()" type="submit" class="btn btn-default backBTN" style="margin-top: 0px !important;"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
+	  	<button type="submit" class="btn btn-success creatBTN" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="saveEditM(eMindex)">Save</button>
 	  </div>
 
 	</form>
