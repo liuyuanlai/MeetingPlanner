@@ -80,7 +80,8 @@ input {
 	background: white;
 	box-shadow: none;
 	border-radius: 4px;
-	height: 146px;
+	/*height: 146px;*/
+	min-height: 150px;
 	float: right;
 	margin-bottom: 11px;
 	width: 300px;
@@ -91,7 +92,7 @@ input {
 	background: white;
 	box-shadow: none;
 	border-radius: 4px;
-	height: 210px;
+	min-height: 210px;
 	float: right;
 	width: 300px;
 }
@@ -178,4 +179,8 @@ input {
 
 .flew-table {
 	width: 100%;
+}
+
+.btn-signin, .btn-signup {
+	margin-bottom: 5px;
 }
