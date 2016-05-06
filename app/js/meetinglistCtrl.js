@@ -65,6 +65,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     if (meetings.length <= 3) {
       for (var i = 0; i < meetings.length; i++) {
         $scope.meetingShow.push(true);
+        document.getElementById("forwardBtn").disabled=true;
+        $scope.forwardBtn = "BtnDisabled";
       }
     }else{
       for (var i = 0; i < 3; i++) {
@@ -73,6 +75,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       for (var i = 3; i < meetings.length; i++) {
         $scope.meetingShow.push(false);
       }
+      document.getElementById("forwardBtn").disabled=false;
+      $scope.forwardBtn = "null";
     }
 
 
@@ -100,10 +104,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   };
 
 
-
-
-
-  $scope.forwardBtn = "null";
+  
 
   $scope.backBtn = "BtnDisabled";
 
@@ -384,34 +385,60 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     meetings.$remove(index);
     $scope.models.lists.Activities.splice(index, 1);
     $scope.meeting.splice(index, 1);
+    console.log($scope.meetingShow);
     var flag = true;
-    if (index + 1 < $scope.meetingShow.length) {
-      for (var i = index + 1; i < $scope.meetingShow.length; i++) {
-        if ($scope.meetingShow[i] == false) {
-          $scope.meetingShow[i] = true;
-          flag = false;
+    if (index + 1 < $scope.meetingShow.length) {//如果删除的这个不是最后一项
+      for (var i = index + 1; i < $scope.meetingShow.length; i++) {//对于它的后项遍历
+        if ($scope.meetingShow[i] == false) {//如果后面的项未显示
+          $scope.meetingShow[i] = true;//就让后面的项显示
+          flag = false;//已经进行了操作
+
+          if (i + 1 < $scope.meetingShow.length) {//如果后面还有panel
+              document.getElementById("forwardBtn").disabled=false;
+              $scope.forwardBtn = "null";
+          }else{//后面没有panel了
+              document.getElementById("forwardBtn").disabled=true;
+              $scope.forwardBtn = "BtnDisabled";
+          };
+
           break;
         }
       }
-      if (flag && index > 0) {
-        for (var i = index - 1; i >= 0; i--) {
+      if (flag && index > 0) {//还未进行操作且删除的项不是第一项
+        for (var i = index - 1; i >= 0; i--) {//对于它的前项遍历
           if ($scope.meetingShow[i] == false) {
           $scope.meetingShow[i] = true;
-          flag = false;
-          if (offSet > 0) {
+          flag = false;//已经进行了操作
+          if (offSet > 0) {//如果不是第一页，就等于向前翻了一页
             offSet = offSet -1;
+
+            if (offSet == 0) {
+              document.getElementById("backBtn").disabled=true;
+              $scope.backBtn = "BtnDisabled";
+            }else{
+              document.getElementById("backBtn").disabled=false;
+              $scope.backBtn = "null";
+            };
           }
           break;
           }
         }
       }
-    }else if (index > 0) {
+    }else if (index > 0) {//如果删除的是最后一项
       for (var i = index - 1; i >= 0; i--) {
           if ($scope.meetingShow[i] == false) {
           $scope.meetingShow[i] = true;
           flag = false;
           if (offSet > 0) {
             offSet = offSet -1;
+
+            if (offSet == 0) {
+              document.getElementById("backBtn").disabled=true;
+              $scope.backBtn = "BtnDisabled";
+            }else{
+              document.getElementById("backBtn").disabled=false;
+              $scope.backBtn = "null";
+            };
           }
           break;
           }
@@ -518,6 +545,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
           $scope.meetingShow[i] = false;
           offSet = $scope.meetingShow.length - 3;
         }
+        document.getElementById("backBtn").disabled=false;
+        $scope.backBtn = "null";
+        document.getElementById("forwardBtn").disabled=true;
+        $scope.forwardBtn = "BtnDisabled";
       }
 
       $scope.meeting.push(new_meeting);
