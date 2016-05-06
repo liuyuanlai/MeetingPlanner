@@ -647,18 +647,19 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
   $scope.addmeeting = function(){
-
-    $scope.mName = "";
-    $scope.MPlace = "";
-    $scope.tags = [];
-    $scope.Mmembers = [];
-    $scope.Mdescript = [];
-    $scope.dt = new Date();
-    $scope.mytime = new Date();
-
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = true;
     $scope.editmeetingshow = false;
+
+    this.mName = "";
+    this.MPlace = "";
+    this.tags = [];
+    this.Mmembers = [];
+    this.Mdescript = [];
+    this.dt = new Date();
+    this.mytime = new Date();
+
+    
   }
 
   $scope.goback = function(){
