@@ -28,7 +28,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 	$scope.addactivity = function(){
 		$scope.newAct_name = "";
 		$scope.newAct_length = "";
-		$scope.newAct_type = "";
+		$scope.newAct_type = "presentation";
 		$scope.newAct_description = "";
 		$scope.activitylistshow = false;
 		$scope.editactivityshow = false;
