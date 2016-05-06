@@ -47,13 +47,21 @@
    top: 8px;
    width: 50px;
    height: 50px;
-   background: #4bd6e9;
+   background-color: #4bd6e9;
    color:white;
    padding: 6px 6px 6px 7px;
    border:5px solid #444a6f;
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
    border-radius: 100px;
+
+     -moz-box-shadow:inset 1px 1px 3px #fff;
+  -webkit-box-shadow:inset 1px 1px 3px #fff;
+  box-shadow:20px 20px 3px blue inset ;
+
+     -moz-box-shadow:1px 1px 3px #373c5f;
+  -webkit-box-shadow:1px 1px 3px #373c5f;
+  box-shadow:1px 1px 3px #373c5f;
 
 }
 
@@ -74,6 +82,8 @@
    z-index:1;
 
 }
+
+
 .forwardBtn{
    position: absolute;
    right:100px;
@@ -91,6 +101,11 @@
 
 }
 
+.BtnDisabled{
+   background: #d2cdc6;
+   border:1px solid #d2cdc6;
+}
+
 
 
 
@@ -98,16 +113,21 @@
   border: 0px solid #ddd; 
   border-radius: 5px;
   overflow: hidden;
-  height: 475px;
+  height: 485px;
   margin-bottom: 50px;
   background-color: white;
   padding-bottom: 40px;
+
+      -moz-box-shadow:1px 1px 2px #CAC4BB;
+  -webkit-box-shadow:1px 1px 2px #CAC4BB;
+  box-shadow:1px 1px 2px #CAC4BB;
+
 
 }
 
 /*meeting info panel*/
 .meetingInfo{
-  padding: 10px 10px 10px 10px; 
+  padding: 15px 10px 15px 10px; 
   background-color: #f5f3e5;
   position: relative;
 
@@ -266,6 +286,7 @@
   padding:0px 5px 0px 5px;
   height: 305px;
 /*  padding:0px 15px 15px 5px;*/
+
 }
 
 

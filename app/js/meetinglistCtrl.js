@@ -100,13 +100,30 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   };
 
 
-  
+
+
+
+  $scope.forwardBtn = "null";
+
+  $scope.backBtn = "BtnDisabled";
+
+  // document.getElementById("backBtn").disabled=true;          
+
   $scope.Forward = function(){
+
     if (offSet + 3 >= meetings.length) {
       return;
     }else{
       offSet = offSet + 1;
       $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
+
+      $scope.backBtn = "null";
+      document.getElementById("backBtn").disabled=false;
+      if (offSet + 3 >= meetings.length) {
+        $scope.forwardBtn = "BtnDisabled";
+        document.getElementById("forwardBtn").disabled=true;
+
+      };
      // console.log($scope.meetingShow);
     }
   }
@@ -117,6 +134,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     }else{
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
+
+      $scope.forwardBtn = "null";
+      document.getElementById("forwardBtn").disabled=false;
+      if (offSet == 0) {
+          $scope.backBtn = "BtnDisabled";
+          document.getElementById("backBtn").disabled=true;
+
+      };
      // console.log($scope.meetingShow);
     }
   }
