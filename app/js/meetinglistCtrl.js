@@ -65,6 +65,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     if (meetings.length <= 3) {
       for (var i = 0; i < meetings.length; i++) {
         $scope.meetingShow.push(true);
+        document.getElementById("forwardBtn").disabled=true;
+        $scope.forwardBtn = "BtnDisabled";
       }
     }else{
       for (var i = 0; i < 3; i++) {
@@ -73,6 +75,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       for (var i = 3; i < meetings.length; i++) {
         $scope.meetingShow.push(false);
       }
+      document.getElementById("forwardBtn").disabled=false;
+      $scope.forwardBtn = "null";
     }
 
 
@@ -100,10 +104,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   };
 
 
-
-
-
-  $scope.forwardBtn = "null";
+  
 
   $scope.backBtn = "BtnDisabled";
 
