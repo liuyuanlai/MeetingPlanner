@@ -480,14 +480,19 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
      };
       //console.log("success");
       meetings.$add(new_meeting).then(function(){
-        console.log("test");
+        //console.log("test");
       });
       alert("you have successfully created the meeting");
 
-      if ($scope.meeting.length < 3) {
       $scope.meetingShow.push(true);
-      }else{
-        $scope.meetingShow.push(false);
+
+      if ($scope.meetingShow.length > 3) {
+        $scope.meetingShow[$scope.meetingShow.length - 2] = true;
+        $scope.meetingShow[$scope.meetingShow.length - 3] = true;
+        for (var i = 0; i < $scope.meetingShow.length -3; i++) {
+          $scope.meetingShow[i] = false;
+          offSet = $scope.meetingShow.length - 3;
+        }
       }
 
       $scope.meeting.push(new_meeting);
@@ -617,6 +622,15 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
 
   $scope.addmeeting = function(){
+
+    $scope.mName = "";
+    $scope.MPlace = "";
+    $scope.tags = [];
+    $scope.Mmembers = [];
+    $scope.Mdescript = [];
+    $scope.dt = new Date();
+    $scope.mytime = new Date();
+
     $scope.meetinglistshow = false;
     $scope.addmeetingshow = true;
     $scope.editmeetingshow = false;
