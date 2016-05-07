@@ -138,6 +138,38 @@
 <!-- meetinglist view -->
 
 
+
+
+<!-- meetinglistInit view -->
+<div ng-show="meetinglistshowInit" class="meetinglist">
+
+	<button class="{{backBtn}} backBtn" ng-click="Back()" id="backBtn" ng-disabled="true"><span class="glyphicon glyphicon-chevron-left"></span></button>
+
+	<section id="cd-timeline"></section>
+
+	<div >
+		<button class="{{forwardBtn}} forwardBtn" ng-click="Forward()" id="forwardBtn" ng-disabled="true"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus"></span></button>
+	</div>
+
+	<div class="initContent" >
+	Create Your First Meeting Here
+<!-- 	<p style="font-size:20px;color:#d2cdc6;">by clicking the add button</p> -->
+	</div>
+
+
+
+
+
+</div>
+<!-- meetinglistInit view -->
+
+
+
+
+
+
+
 <!-- add meeting view -->
 <div ng-show="addmeetingshow" class="addMeeting">
 	<form class="form-horizontal panel-body" style="padding-right:0px">

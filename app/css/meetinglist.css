@@ -7,6 +7,7 @@
 
 /*meetinglist view*/
 .meetinglist{
+
   padding: 20px;
 
 }
@@ -22,8 +23,11 @@
   top: 10px; 
   left: 0px; 
   height: 4px; 
-  width: 98%; 
+  width: 96%; 
   background: #444a6f; 
+            -moz-box-shadow:1px 1px 2px #373c5f;
+  -webkit-box-shadow:1px 1px 2px #373c5f;
+  box-shadow:1px 1px 2px #373c5f;
 } 
 .circle {
      width: 20px;
@@ -32,12 +36,18 @@
      -moz-border-radius: 50px;
      -webkit-border-radius: 50px;
      border-radius: 50px;
+               -moz-box-shadow:1px 1px 1px #373c5f;
+  -webkit-box-shadow:1px 1px 1px #373c5f;
+  box-shadow:1px 1px 1px #373c5f;
  }
 .square {
      width: 5px;
      height: 20px;
      margin: 0px 7.5px ; 
      background: #444a6f;
+          -moz-box-shadow:1px 1px 1px #373c5f;
+  -webkit-box-shadow:1px 1px 1px #373c5f;
+  box-shadow:1px 1px 1px #373c5f;
  }
 
 
@@ -55,9 +65,6 @@
    -webkit-border-radius: 100px;
    border-radius: 100px;
 
-     -moz-box-shadow:inset 1px 1px 3px #fff;
-  -webkit-box-shadow:inset 1px 1px 3px #fff;
-  box-shadow:20px 20px 3px blue inset ;
 
      -moz-box-shadow:1px 1px 3px #373c5f;
   -webkit-box-shadow:1px 1px 3px #373c5f;
@@ -81,6 +88,10 @@
    border-radius: 100px;
    z-index:1;
 
+     -moz-box-shadow:1px 1px 3px #555;
+  -webkit-box-shadow:1px 1px 3px #555;
+  box-shadow:1px 1px 3px #555;
+
 }
 
 
@@ -97,7 +108,9 @@
    -moz-border-radius: 100px;
    -webkit-border-radius: 100px;
    border-radius: 100px;
-
+     -moz-box-shadow:1px 1px 3px #555;
+  -webkit-box-shadow:1px 1px 3px #555;
+  box-shadow:1px 1px 3px #555;
 
 }
 
@@ -108,7 +121,30 @@
 
 
 
+.initContent{
+  font-size: 3em;
+  font-family: 'Lobster', cursive;
+  
+  color: #B1ABA0;
 
+  position: absolute;
+  margin:auto; 
+  top: 0; left: 0; bottom: 0; right: 0;  
+  height: 80px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+
+  -moz-text-shadow:1px 1px 1px #5A382A;
+  -webkit-text-shadow:1px 1px 1px #5A382A;
+  text-shadow:1px 1px 1px #5A382A;
+
+
+}
+
+
+
+/*every meeting panel*/
 .meetingPanel{
   border: 0px solid #ddd; 
   border-radius: 5px;
@@ -159,6 +195,7 @@
   padding-right:10px;
   height:90px;
   overflow-y:auto;
+  overflow-x:hidden; 
 
 }
 

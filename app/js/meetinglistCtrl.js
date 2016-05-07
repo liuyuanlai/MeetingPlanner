@@ -1,7 +1,6 @@
 meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $firebaseArray, $routeParams) {
-  $scope.meetinglistshow = true;
-  $scope.addmeetingshow = false;
-  $scope.editmeetingshow = false;
+
+
 
   // get the auth infomation about the current user
   var user_data = Auth.getAuthdata();
@@ -12,18 +11,78 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   var activityRef = Ref.child("activities");
   var activities = $firebaseArray(activityRef.child(user_data.uid));
 
-  // var index = 0;
-  // var slideWindowSize = 3;
-  // var First_M_Pos = 0; // initial the position of the first retrive meeting
-  // var Max_M_Pos = 0;
-  //var meetingLength = 0;
-  //var slideLength = 0;
   var offSet = 0;
-  $scope.meetingShow = [];
+  var windowSize;
+  $scope.meetingShow = [];//to decide which ones to show in the view
+  $scope.meeting = [];//all the information for every meetings except for the activities
 
-  $scope.meeting = [];
+
+  var mqlSm = window.matchMedia("screen and (max-width: 992px)");
+  var mqlMd = window.matchMedia("screen and (max-width: 1200px)");
+  // var mqlLg = window.matchMedia("screen and (min-width: 1201px)");
+  
+  if (mqlSm.matches) {
+    windowSize = 1;
+    console.log(windowSize);
+
+  }else if (mqlMd.matches) {
+
+    windowSize = 2;
+        console.log(windowSize);
+  }else{
+
+    windowSize = 3;
+        console.log(windowSize);
+  };
+
+  mqlSm.addListener(function(mqlSm) {
+     if (mqlSm.matches) { //in
+        windowSize = 1;
+        syncMeetingShow();
+        if (offSet+windowSize < meetings.length) {
+
+              document.getElementById("forwardBtn").disabled=false;
+              $scope.forwardBtn = "null";
+
+        };
+
+     }else{//out
+        windowSize = 2;
+        syncMeetingShow();
+
+        if (offSet+windowSize >= meetings.length) {
+              document.getElementById("forwardBtn").disabled=true;
+              $scope.forwardBtn = "BtnDisabled";
+        };
+     }
+  });
+  mqlMd.addListener(function(mqlMd) {
+     if (mqlMd.matches) {//in
+        windowSize = 2;
+        syncMeetingShow();
+
+        if (offSet+windowSize < meetings.length) {
+
+              document.getElementById("forwardBtn").disabled=false;
+              $scope.forwardBtn = "null";
+
+        };
+     }else{//out
+        windowSize = 3;
+        syncMeetingShow();
+        if (offSet+windowSize >= meetings.length) {
+              document.getElementById("forwardBtn").disabled=true;
+              $scope.forwardBtn = "BtnDisabled";
+        };
+
+     }
+  });
 
 
+
+
+
+//load function start
   meetings.$loaded(function(){
 
 
@@ -49,8 +108,6 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       }
     })
 
-    // meetingLength = meetings.length;
-    //slideLength = Math.min(meetingLength, 3);
 
     for(var i = 0; i < meetings.length; i++){
       $scope.meeting.push(meetings[i]);
@@ -61,41 +118,43 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
     }
 
-    
-    if (meetings.length <= 3) {
+    syncMeetingShow();
+
+
+    if ($scope.meeting.length == 0 ) {
+      $scope.meetinglistshowInit = true;
+      $scope.meetinglistshow = false;
+
+    }else{
+      $scope.meetinglistshowInit = false;
+      $scope.meetinglistshow = true;
+
+    };
+
+  })
+// end of loaded function
+
+
+  function syncMeetingShow(){
+
+    if (meetings.length <= windowSize) {
+      document.getElementById("forwardBtn").disabled=true;
+      $scope.forwardBtn = "BtnDisabled";
+
       for (var i = 0; i < meetings.length; i++) {
         $scope.meetingShow.push(true);
-        document.getElementById("forwardBtn").disabled=true;
-        $scope.forwardBtn = "BtnDisabled";
       }
     }else{
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < windowSize; i++) {
         $scope.meetingShow.push(true);
       }
-      for (var i = 3; i < meetings.length; i++) {
+      for (var i = windowSize; i < meetings.length; i++) {
         $scope.meetingShow.push(false);
       }
       document.getElementById("forwardBtn").disabled=false;
       $scope.forwardBtn = "null";
     }
-
-
-
-    
-    // console.log("the num of meetings" + meetings.length);
-    // if (meetings.length <= 3) {
-    //    for(var i = 0; i < meetings.length; i++){
-    //      $scope.meeting.push(meetings[index + i]);
-    //    }
-    //    Max_M_Pos = 0;
-    // }else {
-    //   for(var i = 0; i < slideWindowSize; i++){
-    //   $scope.meeting.push(meetings[index + i]);
-    //   }      
-    //    Max_M_Pos = meetings.length - 3;
-    // };
-  })
-// end of loaded function
+  }
 
 
   $scope.models = {
@@ -103,16 +162,18 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         lists: {"Activities": []} 
   };
 
-
-  
-
   $scope.backBtn = "BtnDisabled";
 
-  // document.getElementById("backBtn").disabled=true;          
+
+// $scope.meetinglistshow = true;
+  $scope.addmeetingshow = false;
+  $scope.editmeetingshow = false;
+
+        
 
   $scope.Forward = function(){
 
-    if (offSet + 3 >= meetings.length) {
+    if (offSet + windowSize >= meetings.length) {
       return;
     }else{
       offSet = offSet + 1;
@@ -120,13 +181,14 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
       $scope.backBtn = "null";
       document.getElementById("backBtn").disabled=false;
-      if (offSet + 3 >= meetings.length) {
+      if (offSet + windowSize >= meetings.length) {
         $scope.forwardBtn = "BtnDisabled";
         document.getElementById("forwardBtn").disabled=true;
 
       };
-     // console.log($scope.meetingShow);
+
     }
+
   }
 
   $scope.Back = function(){
@@ -136,14 +198,21 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
 
-      $scope.forwardBtn = "null";
-      document.getElementById("forwardBtn").disabled=false;
+      if (offSet + windowSize >= meetings.length) {
+        $scope.forwardBtn = "BtnDisabled";
+        document.getElementById("forwardBtn").disabled=true;
+
+      }else{
+        $scope.forwardBtn = "null";
+        document.getElementById("forwardBtn").disabled=false;
+      };
+
       if (offSet == 0) {
           $scope.backBtn = "BtnDisabled";
           document.getElementById("backBtn").disabled=true;
 
       };
-     // console.log($scope.meetingShow);
+
     }
   }
 
@@ -447,6 +516,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
             }
           }
           $scope.meetingShow.splice(index, 1);
+          if ($scope.meetingShow.length == 0) {
+              $scope.meetinglistshowInit = true;
+              $scope.meetinglistshow = false;
+          };
     }else{
       return;
     };
@@ -544,12 +617,12 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
 
       $scope.meetingShow.push(true);
 
-      if ($scope.meetingShow.length > 3) {
-        $scope.meetingShow[$scope.meetingShow.length - 2] = true;
-        $scope.meetingShow[$scope.meetingShow.length - 3] = true;
-        for (var i = 0; i < $scope.meetingShow.length -3; i++) {
+      if ($scope.meetingShow.length > windowSize) {
+        $scope.meetingShow[$scope.meetingShow.length - windowSize + 1 ] = true;
+        $scope.meetingShow[$scope.meetingShow.length - windowSize] = true;
+        for (var i = 0; i < $scope.meetingShow.length -windowSize; i++) {
           $scope.meetingShow[i] = false;
-          offSet = $scope.meetingShow.length - 3;
+          offSet = $scope.meetingShow.length - windowSize;
         }
         document.getElementById("backBtn").disabled=false;
         $scope.backBtn = "null";
@@ -572,6 +645,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       $scope.alertM = "";
 
     };
+
+
   }
 
   $scope.addActType = function(index,type){
@@ -694,8 +769,11 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
     $scope.mytime = new Date();
 
     $scope.meetinglistshow = false;
+    $scope.meetinglistshowInit = false;
     $scope.addmeetingshow = true;
     $scope.editmeetingshow = false;
+
+
   }
 
   $scope.goback = function(){

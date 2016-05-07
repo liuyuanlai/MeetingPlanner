@@ -16,11 +16,22 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
     		
     	}
 
+	    if (activities.length == 0) {
+			$scope.activitylistshowInit = true;
+			$scope.activitylistshow = false;
+		}else{
+			return;
+		};
 	});
+
+	$scope.models = {
+        selected: null,
+        lists: {"Activities": []}
+    };
+
 
 
 	// only for printing out the array data from firebas
-
 	$scope.activitylistshow = true;
 	$scope.addactivityshow = false;
 	$scope.editactivityshow = false;
@@ -30,6 +41,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.newAct_length = "";
 		$scope.newAct_type = "presentation";
 		$scope.newAct_description = "";
+		$scope.activitylistshowInit = false;
 		$scope.activitylistshow = false;
 		$scope.editactivityshow = false;
 		$scope.addactivityshow = true;	
@@ -62,6 +74,7 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 	 //      }
 	 //    }
 		var index = getTrueIndex(key);
+		$scope.activitylistshowInit = false;
 		$scope.activitylistshow = false;
 		$scope.addactivityshow = false;
 		$scope.editactivityshow = true;
@@ -81,6 +94,12 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		var index = getTrueIndex(key);
 		activities.$remove(index);
 		$scope.models.lists.Activities.splice(key,1);
+		if (activities.length == 0) {
+			$scope.activitylistshowInit = true;
+			$scope.activitylistshow = false;
+		}else{
+			return;
+		};
 	}
 
 	$scope.saveChange = function(index){
@@ -92,9 +111,13 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		activities[index].type = $scope.eAct.type;
 		activities[index].description = $scope.eAct.description;
 		activities.$save(index);
+		$scope.activitylistshowInit = false;
 		$scope.activitylistshow = true;
 		$scope.addactivityshow = false;
 		$scope.editactivityshow = false;
+		console.log(activities);
+		console.log($scope.models.lists.Activities);
+
 	}
 
 	
@@ -110,6 +133,8 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		$scope.models.lists.Activities.splice(index, 1);
 		//$scope.list.splice($index, 1);
 		//console.log($scope.models);
+		console.log(activities);
+		console.log($scope.models.lists.Activities.length);
 	}
 
 	$scope.insertactivity = function(item, index){
@@ -128,6 +153,8 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 
 			}
 		}
+				console.log(activities);
+		console.log($scope.models.lists.Activities.length);
 
 		// var activity_temp = {}
 		// activities[index];
@@ -155,10 +182,6 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 		// activities.$save(key);
 	}
 
-	$scope.models = {
-        selected: null,
-        lists: {"Activities": []}
-    };
 
 
 	
