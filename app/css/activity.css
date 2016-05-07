@@ -20,6 +20,28 @@
 
 }
 
+
+.initActContent{
+  font-size: 2em;
+  font-family: 'Lobster', cursive;
+  
+  color: #444a6f;
+
+  position: absolute;
+  margin:auto; 
+  top: 0; left: 0; bottom: 0; right: 0;  
+  height: 80px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+
+  -moz-text-shadow:1px 1px 1px #000;
+  -webkit-text-shadow:1px 1px 1px #000;
+  text-shadow:1px 1px 1px #000;
+
+
+}
+
 .activityPanel{
 
 	height:480px;
