@@ -129,30 +129,6 @@ meetingPlannerApp.controller('ActivitylistCtrl', function ($scope, Ref, Auth, $l
 			}
 		}
 
-		// var activity_temp = {}
-		// activities[index];
-		// activities[index].name = activities[key].name;
-		// activities[index].description = activities[key].description;
-		// activities[index].homeless = activities[key].homeless;
-		// activities[index].length = activities[key].length;
-		// activities[index].type = activities[key].type;
-		// activities[index].$id = activities[key].$id;
-
-		// activities[key].name = activity_temp.name;
-		// activities[key].description = activity_temp.description;
-		// activities[key].homeless = activity_temp.homeless;
-		// activities[key].length = activity_temp.length;
-		// activities[key].type = activity_temp.type;
-		// activities[key].$id = activity_temp.$id;
-		// for(var p in activities[index]){
-		// 	var temp = activities[index][p];
-		// 	activities[index][p] = activities[key][p];
-		// 	activities[key][p] = temp;
-		// 	activities.$save(index);
-		// 	activities.$save(key);
-		// }
-		// activities.$save(index);
-		// activities.$save(key);
 	}
 
 	$scope.models = {
