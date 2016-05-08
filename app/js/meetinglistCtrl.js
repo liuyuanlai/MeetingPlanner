@@ -39,21 +39,21 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
      if (mqlSm.matches) { //in
         windowSize = 1;
         syncMeetingShow();
-        if (offSet+windowSize < meetings.length) {
+        // if (offSet+windowSize < meetings.length) {
 
-              document.getElementById("forwardBtn").disabled=false;
-              $scope.forwardBtn = "null";
+        //       document.getElementById("forwardBtn").disabled=false;
+        //       $scope.forwardBtn = "null";
 
-        };
+        // };
 
      }else{//out
         windowSize = 2;
         syncMeetingShow();
 
-        if (offSet+windowSize >= meetings.length) {
-              document.getElementById("forwardBtn").disabled=true;
-              $scope.forwardBtn = "BtnDisabled";
-        };
+        // if (offSet+windowSize >= meetings.length) {
+        //       document.getElementById("forwardBtn").disabled=true;
+        //       $scope.forwardBtn = "BtnDisabled";
+        // };
      }
   });
   mqlMd.addListener(function(mqlMd) {
@@ -61,19 +61,19 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         windowSize = 2;
         syncMeetingShow();
 
-        if (offSet+windowSize < meetings.length) {
+        // if (offSet+windowSize < meetings.length) {
 
-              document.getElementById("forwardBtn").disabled=false;
-              $scope.forwardBtn = "null";
+        //       document.getElementById("forwardBtn").disabled=false;
+        //       $scope.forwardBtn = "null";
 
-        };
+        // };
      }else{//out
         windowSize = 3;
         syncMeetingShow();
-        if (offSet+windowSize >= meetings.length) {
-              document.getElementById("forwardBtn").disabled=true;
-              $scope.forwardBtn = "BtnDisabled";
-        };
+        // if (offSet+windowSize >= meetings.length) {
+        //       document.getElementById("forwardBtn").disabled=true;
+        //       $scope.forwardBtn = "BtnDisabled";
+        // };
 
      }
   });
@@ -138,8 +138,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
   function syncMeetingShow(){
 
     if (meetings.length <= windowSize) {
-      document.getElementById("forwardBtn").disabled=true;
-      $scope.forwardBtn = "BtnDisabled";
+      // document.getElementById("forwardBtn").disabled=true;
+      // $scope.forwardBtn = "BtnDisabled";
 
       for (var i = 0; i < meetings.length; i++) {
         $scope.meetingShow.push(true);
@@ -151,8 +151,8 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       for (var i = windowSize; i < meetings.length; i++) {
         $scope.meetingShow.push(false);
       }
-      document.getElementById("forwardBtn").disabled=false;
-      $scope.forwardBtn = "null";
+      // document.getElementById("forwardBtn").disabled=false;
+      // $scope.forwardBtn = "null";
     }
   }
 
@@ -162,7 +162,7 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
         lists: {"Activities": []} 
   };
 
-  $scope.backBtn = "BtnDisabled";
+  // $scope.backBtn = "BtnDisabled";
 
 
 // $scope.meetinglistshow = true;
@@ -179,13 +179,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       offSet = offSet + 1;
       $scope.meetingShow.splice(0, 0, $scope.meetingShow.pop());
 
-      $scope.backBtn = "null";
-      document.getElementById("backBtn").disabled=false;
-      if (offSet + windowSize >= meetings.length) {
-        $scope.forwardBtn = "BtnDisabled";
-        document.getElementById("forwardBtn").disabled=true;
+      // $scope.backBtn = "null";
+      // document.getElementById("backBtn").disabled=false;
+      // if (offSet + windowSize >= meetings.length) {
+      //   $scope.forwardBtn = "BtnDisabled";
+      //   document.getElementById("forwardBtn").disabled=true;
 
-      };
+      // };
 
     }
 
@@ -198,20 +198,20 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
       offSet = offSet - 1;
       $scope.meetingShow.push($scope.meetingShow.shift());
 
-      if (offSet + windowSize >= meetings.length) {
-        $scope.forwardBtn = "BtnDisabled";
-        document.getElementById("forwardBtn").disabled=true;
+      // if (offSet + windowSize >= meetings.length) {
+      //   $scope.forwardBtn = "BtnDisabled";
+      //   document.getElementById("forwardBtn").disabled=true;
 
-      }else{
-        $scope.forwardBtn = "null";
-        document.getElementById("forwardBtn").disabled=false;
-      };
+      // }else{
+      //   $scope.forwardBtn = "null";
+      //   document.getElementById("forwardBtn").disabled=false;
+      // };
 
-      if (offSet == 0) {
-          $scope.backBtn = "BtnDisabled";
-          document.getElementById("backBtn").disabled=true;
+      // if (offSet == 0) {
+      //     $scope.backBtn = "BtnDisabled";
+      //     document.getElementById("backBtn").disabled=true;
 
-      };
+      // };
 
     }
   }
@@ -464,13 +464,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
                 $scope.meetingShow[i] = true;
                 flag = false;
 
-                if (i + 1 < $scope.meetingShow.length) {
-                    document.getElementById("forwardBtn").disabled=false;
-                    $scope.forwardBtn = "null";
-                }else{
-                    document.getElementById("forwardBtn").disabled=true;
-                    $scope.forwardBtn = "BtnDisabled";
-                };
+                // if (i + 1 < $scope.meetingShow.length) {
+                //     document.getElementById("forwardBtn").disabled=false;
+                //     $scope.forwardBtn = "null";
+                // }else{
+                //     document.getElementById("forwardBtn").disabled=true;
+                //     $scope.forwardBtn = "BtnDisabled";
+                // };
 
                 break;
               }
@@ -483,13 +483,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
                 if (offSet > 0) {
                   offSet = offSet -1;
 
-                  if (offSet == 0) {
-                    document.getElementById("backBtn").disabled=true;
-                    $scope.backBtn = "BtnDisabled";
-                  }else{
-                    document.getElementById("backBtn").disabled=false;
-                    $scope.backBtn = "null";
-                  };
+                  // if (offSet == 0) {
+                  //   document.getElementById("backBtn").disabled=true;
+                  //   $scope.backBtn = "BtnDisabled";
+                  // }else{
+                  //   document.getElementById("backBtn").disabled=false;
+                  //   $scope.backBtn = "null";
+                  // };
                 }
                 break;
                 }
@@ -503,13 +503,13 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
                 if (offSet > 0) {
                   offSet = offSet -1;
 
-                  if (offSet == 0) {
-                    document.getElementById("backBtn").disabled=true;
-                    $scope.backBtn = "BtnDisabled";
-                  }else{
-                    document.getElementById("backBtn").disabled=false;
-                    $scope.backBtn = "null";
-                  };
+                  // if (offSet == 0) {
+                  //   document.getElementById("backBtn").disabled=true;
+                  //   $scope.backBtn = "BtnDisabled";
+                  // }else{
+                  //   document.getElementById("backBtn").disabled=false;
+                  //   $scope.backBtn = "null";
+                  // };
                 }
                 break;
                 }
@@ -624,10 +624,10 @@ meetingPlannerApp.controller('MeetinglistCtrl', function ($scope, Ref, Auth, $fi
           $scope.meetingShow[i] = false;
           offSet = $scope.meetingShow.length - windowSize;
         }
-        document.getElementById("backBtn").disabled=false;
-        $scope.backBtn = "null";
-        document.getElementById("forwardBtn").disabled=true;
-        $scope.forwardBtn = "BtnDisabled";
+        // document.getElementById("backBtn").disabled=false;
+        // $scope.backBtn = "null";
+        // document.getElementById("forwardBtn").disabled=true;
+        // $scope.forwardBtn = "BtnDisabled";
       }
 
       $scope.meeting.push(new_meeting);
