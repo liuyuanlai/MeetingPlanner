@@ -36,8 +36,8 @@ meetingPlannerApp.factory('Auth', function ($firebase, $q, $firebaseAuth, $resou
 	// }
 
 	this.createUser = function (signupEmail, signupPassword) {
-		authdata = null;
-		autherror = null;
+		// authdata = null;
+		// autherror = null;
 
 		return auth.$createUser({
 			email: signupEmail,
@@ -48,8 +48,8 @@ meetingPlannerApp.factory('Auth', function ($firebase, $q, $firebaseAuth, $resou
 
 
 	this.authWithPassword = function (signinEmail, signinPassword) {
-		authdata = null;
-		autherror = null;
+		// authdata = null;
+		// autherror = null;
 
 		return auth.$authWithPassword({
 			email: signinEmail,
@@ -75,9 +75,8 @@ meetingPlannerApp.factory('Auth', function ($firebase, $q, $firebaseAuth, $resou
 	}
 
 	this.logoutUser = function() {
+		var authdata = th.getAuthdata();
 		console.log("Logged out as: ", authdata.uid);
-		authdata = null;
-		autherror = null;
 
 		auth.$unauth();
 	}
