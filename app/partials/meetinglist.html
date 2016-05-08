@@ -1,7 +1,7 @@
 <!-- meetinglist view -->
 <div ng-show="meetinglistshow" class="meetinglist">
 
-	<button class="backBtn" ng-click="Back()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
+	<button class="{{backBtn}} backBtn" ng-click="Back()" id="backBtn" ng-disabled="true"><span class="glyphicon glyphicon-chevron-left"></span></button>
 
 	<section id="cd-timeline">
 
@@ -63,8 +63,8 @@
 				</div>
 
 				<!-- type bar -->
-				<div>
-					<uib-progress style="margin-bottom:0px;margin-top:0px">
+				<div >
+					<uib-progress style="margin-bottom:0px;margin-top:0px" >
 
 						<uib-bar ng-repeat="bar in actType[$index]" class="{{bar.class}}" value="bar.value" type="{{bar.type}}"><span>{{bar.value}}%</span>
 
@@ -91,7 +91,7 @@
 				                    ng-class="{'selected': models.selected === item}"
 				                    >
 				                    <div class="row" ng-click="isCollapsed = !isCollapsed">
-										<div class="col-xs-10" style="cursor: hand;cursor: pointer;">
+										<div class="col-xs-10" style="cursor: hand;cursor: pointer;font-family: 'Sans-serif';font-size:1.05em">
 				                        	<div class="col-xs-4 itemLength">{{item.length}}min</div>
 					                        <div class="col-xs-8 itemName">{{item.name}}</div>
 										</div>
@@ -112,9 +112,10 @@
 				        </div>
 			        </div>
 		        </div>
+		        <!-- tags -->
 		        <div style="height:50px;width:260px;overflow-x:auto; overflow-y:hidden;margin-bottom:-15px">
-		        <div style="width:300px;">
-		        <span ng-repeat="tags in item.mTag" class="meetingTags" >{{tags.text}}</span>
+			        <div style="width:300px;">
+			        <span ng-repeat="tags in item.mTag" class="meetingTags" >{{tags.text}}</span>
 		        </div>
 		        
 		        </div>
@@ -126,7 +127,7 @@
 
 	<div >
 
-		<button class="forwardBtn" ng-click="Forward()" ><span class="glyphicon glyphicon-chevron-right"></span></button>
+		<button class="{{forwardBtn}} forwardBtn" ng-click="Forward()" id="forwardBtn"><span class="glyphicon glyphicon-chevron-right"></span></button>
 		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus"></span></button>
 
 	</div>
@@ -135,6 +136,38 @@
 
 </div>
 <!-- meetinglist view -->
+
+
+
+
+<!-- meetinglistInit view -->
+<div ng-show="meetinglistshowInit" class="meetinglist">
+
+	<button class="{{backBtn}} backBtn" ng-click="Back()" id="backBtn" ng-disabled="true"><span class="glyphicon glyphicon-chevron-left"></span></button>
+
+	<section id="cd-timeline"></section>
+
+	<div >
+		<button class="{{forwardBtn}} forwardBtn" ng-click="Forward()" id="forwardBtn" ng-disabled="true"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		<button class="addBtn" ng-click="addmeeting()"><span class="glyphicon glyphicon-plus"></span></button>
+	</div>
+
+	<div class="initContent" >
+	Create Your First Meeting Here
+<!-- 	<p style="font-size:20px;color:#d2cdc6;">by clicking the add button</p> -->
+	</div>
+
+
+
+
+
+</div>
+<!-- meetinglistInit view -->
+
+
+
+
+
 
 
 <!-- add meeting view -->
@@ -175,7 +208,7 @@
 	  <div class="form-group">
 	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
 	    	<tags-input ng-model="tags" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)"></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)"></auto-complete> -->
 		    </tags-input>
 
 	  </div>
@@ -184,7 +217,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="Mmembers" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)" ></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)" ></auto-complete> -->
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>
@@ -249,7 +282,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Tag</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="eMeeting.tag" class="col-xs-8 col-sm-9 col-md-8">
-		        <auto-complete source="loadTags($query)"></auto-complete>
+		        <!-- <auto-complete source="loadTags($query)"></auto-complete> -->
 		    </tags-input>
 		<!-- </div> -->
 	  </div>
@@ -258,7 +291,7 @@
 	    <label class="col-xs-3 col-sm-2 control-label">Participants</label>
 	    <!-- <div class="col-sm-8"> -->
 	    	<tags-input ng-model="eMeeting.members" placeholder="Add Email Address of Participants" class="col-xs-8 col-sm-9 col-md-8 " >
-		        <auto-complete source="loadTags($query)" ></auto-complete
+		        <!-- <auto-complete source="loadTags($query)" ></auto-complete -->
 		    </tags-input>
 	    <!-- </div> -->
 	  </div>

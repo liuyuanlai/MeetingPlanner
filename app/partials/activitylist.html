@@ -1,4 +1,3 @@
-
 <div ng-show="activitylistshow" style="padding-left:15px;padding-right:15px">
 	<div class="row" style="height:565px;  padding:0px;position: relative ;text-align: center; overflow:hidden">
 
@@ -21,10 +20,11 @@
 		                    class="activity-item"
 		                    ng-class="item.type"
 		                    ng-class="{'background-clip: ,'selected': models.selected === item}"
+
 		                   
 		                    >
 		                    <div class="row" ng-class="item.type" >
-                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;" ng-click="isCollapsed = !isCollapsed">
+                                <div class="col-xs-10" style="cursor: hand;cursor: pointer;font-family: 'Sans-serif';font-size:1.05em" ng-click="isCollapsed = !isCollapsed">
 		                        	<div class="col-xs-4 itemLength">{{item.length}}min</div>
 			                        <div class="col-xs-8 itemName">{{item.name}}</div>
 								</div>
@@ -58,6 +58,37 @@
 
 </div>
 
+
+
+<div ng-show="activitylistshowInit" style="padding-left:15px;padding-right:15px">
+	<div class="row" style="height:565px;  padding:0px;position: relative ;text-align: center; overflow:hidden">
+
+		<div ng-repeat="(listName, list) in models.lists">
+		    <div class="actPanel" ng-class="listName.type">
+		        <div class="panel-heading">
+		            <h3 class="actHeading">{{listName}}</h3>
+		        </div>
+		        
+	<div class="initActContent" >
+	Add Your First Activity Here
+<!-- 	<p style="font-size:20px;color:#d2cdc6;">by clicking the add button</p> -->
+	</div>
+
+		    </div>
+		    <div class="addActBtn">
+				<button class="btn btn-block btnStyle" ng-click="addactivity()"><h3>Add Activity</h3></button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
 <div ng-show="addactivityshow">
 		<div class="panel panel-heading addHeading">
 		    <h3>Add Activity</h3>
@@ -78,8 +109,8 @@
 	        
 	        <div class="form-group">
 			<select ng-model="$parent.newAct_type" class="form-control">
-			  <option value="presentation">Presentation</option>
-			  <option value="group-work" select="selected">Group Work</option>
+			  <option value="presentation" selected="selected">Presentation</option>
+			  <option value="group-work">Group Work</option>
 			  <option value="discussion">Discussion</option>
 			  <option value="break">Break</option>
 			</select>
@@ -115,12 +146,12 @@
 			</div>
 	        
 	        <div class="form-group">
-			<select ng-model="eAct.type" class="form-control">
-			  <option value="presentation">Presentation</option>
-			  <option value="group-work">Group Work</option>
-			  <option value="discussion">Discussion</option>
-			  <option value="break">Break</option>
-			</select>
+				<select ng-model="eAct.type" class="form-control">
+					  <option value="presentation">Presentation</option>
+					  <option value="group-work">Group Work</option>
+					  <option value="discussion">Discussion</option>
+					  <option value="break">Break</option>
+				</select>
 			</div>
 	        
 	        <div class="form-group">

@@ -22,8 +22,3 @@
 	margin-top: 5%;
 }
 
-@media (max-width: 680px) { 
-  .tagSize{
-  	width: 567px !important;
-  }
-}

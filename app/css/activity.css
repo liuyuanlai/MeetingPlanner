@@ -20,6 +20,28 @@
 
 }
 
+
+.initActContent{
+  font-size: 2em;
+  font-family: 'Lobster', cursive;
+  
+  color: #444a6f;
+
+  position: absolute;
+  margin:auto; 
+  top: 0; left: 0; bottom: 0; right: 0;  
+  height: 80px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+
+  -moz-text-shadow:1px 1px 1px #000;
+  -webkit-text-shadow:1px 1px 1px #000;
+  text-shadow:1px 1px 1px #000;
+
+
+}
+
 .activityPanel{
 
 	height:480px;
@@ -40,22 +62,26 @@
 
 .presentation {
 	background-color: #73bbd0!important;
+	/*background: #0000ff!important;*/
 	background-clip: padding-box;
 
 }
 
 .group-work {
 	background: #fcada0!important;
+	/*background:  #ff3300!important;*/
 
 }
 
 .discussion {
 	background: #c2dd94!important;
+	/*background: #00ff00!important;*/
 
 }
 
 .break {
 	background: #feea85!important;
+	/*background: #990099!important;*/
 
 
 }
@@ -66,6 +92,7 @@
 	bottom: 0px;
 	width: 100%;
 	left: 0;  right: 0;  
+
 
 }
 .addActBtn .btnStyle{
